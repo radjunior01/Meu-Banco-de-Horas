@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <title>Meu Banco de Horas V1.2</title>
 
 <style>
@@ -32,7 +33,8 @@
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   font-family:Arial,Helvetica,sans-serif;
@@ -45,7 +47,9 @@ body{
   padding-bottom:85px;
 }
 
-button,input,select{
+button,
+input,
+select{
   font:inherit;
 }
 
@@ -761,11 +765,6 @@ input[type=file]{
 
 </header>
 
-
-<!-- ============================================================
-     DASHBOARD
-     ============================================================ -->
-
 <section id="page-dashboard" class="page active">
 
   <div class="cards">
@@ -792,7 +791,6 @@ input[type=file]{
 
   </div>
 
-
   <div class="section">
 
     <div class="section-title">
@@ -807,7 +805,6 @@ input[type=file]{
     <div id="todayContent"></div>
 
   </div>
-
 
   <div class="section">
 
@@ -841,7 +838,6 @@ input[type=file]{
 
   </div>
 
-
   <div class="section">
 
     <div class="section-title">
@@ -854,10 +850,6 @@ input[type=file]{
 
 </section>
 
-
-<!-- ============================================================
-     REGISTRAR
-     ============================================================ -->
 
 <section id="page-register" class="page">
 
@@ -895,7 +887,6 @@ input[type=file]{
 
     </div>
 
-
     <div style="margin-top:20px">
 
       <div class="section-title">
@@ -917,7 +908,6 @@ input[type=file]{
       <div id="periodRows"></div>
 
     </div>
-
 
     <div class="summary-box">
 
@@ -947,7 +937,6 @@ input[type=file]{
 
     </div>
 
-
     <div class="form-actions">
 
       <button class="btn btn-primary"
@@ -966,10 +955,6 @@ input[type=file]{
 
 </section>
 
-
-<!-- ============================================================
-     CALENDÁRIO
-     ============================================================ -->
 
 <section id="page-calendar" class="page">
 
@@ -1006,10 +991,6 @@ input[type=file]{
 </section>
 
 
-<!-- ============================================================
-     HISTÓRICO
-     ============================================================ -->
-
 <section id="page-history" class="page">
 
   <div class="section">
@@ -1031,10 +1012,6 @@ input[type=file]{
 
 </section>
 
-
-<!-- ============================================================
-     SERVIÇOS
-     ============================================================ -->
 
 <section id="page-services" class="page">
 
@@ -1062,10 +1039,6 @@ input[type=file]{
 
 </section>
 
-
-<!-- ============================================================
-     CONFIGURAÇÕES
-     ============================================================ -->
 
 <section id="page-settings" class="page">
 
@@ -1172,10 +1145,6 @@ input[type=file]{
 </div>
 
 
-<!-- ============================================================
-     NAVEGAÇÃO
-     ============================================================ -->
-
 <nav class="bottom-nav">
 
   <div class="nav-inner">
@@ -1227,10 +1196,6 @@ input[type=file]{
 </nav>
 
 
-<!-- ============================================================
-     MODAL DE SERVIÇO
-     ============================================================ -->
-
 <div class="modal-backdrop"
      id="serviceModal">
 
@@ -1249,10 +1214,8 @@ input[type=file]{
 
     </div>
 
-
     <input type="hidden"
            id="serviceEditId">
-
 
     <div class="form-grid">
 
@@ -1266,7 +1229,6 @@ input[type=file]{
       </div>
 
     </div>
-
 
     <div class="value-period-form">
 
@@ -1325,7 +1287,6 @@ input[type=file]{
            class="value-period-list"></div>
 
     </div>
-
 
     <div class="form-actions">
 
@@ -1958,18 +1919,12 @@ function getMonthlyStats(date){
   return {
 
     records,
-
     worked,
-
     expected,
-
     balance,
-
     money,
-
     extra:
       Math.max(0,balance),
-
     serviceCount:
       serviceIds.size
 
@@ -2370,22 +2325,6 @@ function renderDashboardServices(){
    REGISTRO
    ============================================================ */
 
-/*
-  IMPORTANTE V1.2:
-
-  A escala NÃO preenche mais automaticamente
-  entrada/saída.
-
-  Ela serve somente para calcular
-  as horas previstas.
-
-  Portanto uma sexta-feira terá:
-
-  Previsto = 4h
-
-  mas os períodos trabalhados começam vazios.
-*/
-
 function openRegister(date){
 
   showPage("register");
@@ -2405,12 +2344,6 @@ function openRegister(date){
   document.getElementById(
     "periodRows"
   ).innerHTML = "";
-
-  /*
-    Sempre começa com uma linha vazia.
-    Não importa se é sexta, sábado,
-    segunda ou dia de folga.
-  */
 
   addPeriodRow();
 
@@ -2512,11 +2445,6 @@ function addPeriodRow(data = {}){
 
   container.appendChild(row);
 
-  /*
-    Ao editar registro antigo,
-    preservamos o valor/hora salvo.
-  */
-
   if(data.valueAtTime !== undefined){
 
     const valueInput =
@@ -2528,12 +2456,6 @@ function addPeriodRow(data = {}){
       "true";
 
   }
-
-  /*
-    Se houver serviço e ainda não houver
-    valor salvo, carregamos o valor
-    automaticamente.
-  */
 
   if(
     data.serviceId &&
@@ -2594,11 +2516,6 @@ function serviceSelectionChanged(select){
       ".period-value"
     );
 
-  /*
-    Se nenhum serviço foi escolhido,
-    limpamos o valor automático.
-  */
-
   if(!select.value){
 
     valueInput.value = "";
@@ -2619,11 +2536,6 @@ function serviceSelectionChanged(select){
     return;
 
   }
-
-  /*
-    O valor pertence ao serviço selecionado,
-    e não ao horário da escala.
-  */
 
   const value =
     getServiceValue(
@@ -2694,11 +2606,6 @@ function updateRegisterPreview(){
         ".period-value"
       );
 
-    /*
-      Só contamos o período quando
-      entrada e saída estiverem preenchidas.
-    */
-
     if(start && end){
 
       const mins =
@@ -2708,12 +2615,6 @@ function updateRegisterPreview(){
         );
 
       worked += mins;
-
-      /*
-        Se o valor não foi alterado manualmente,
-        atualizamos de acordo com o serviço
-        selecionado e a data.
-      */
 
       if(
         serviceId &&
@@ -2828,10 +2729,6 @@ function saveRegister(){
         ".period-value"
       );
 
-    /*
-      Linha totalmente vazia é ignorada.
-    */
-
     if(!start && !end && !serviceId){
 
       return;
@@ -2860,12 +2757,6 @@ function saveRegister(){
       Number(
         valueInput.value || 0
       );
-
-    /*
-      Se o valor não foi alterado manualmente,
-      usamos o valor correspondente ao serviço
-      e à data do registro.
-    */
 
     if(
       valueInput.dataset.manual !== "true"
