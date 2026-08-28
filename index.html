@@ -1382,9 +1382,11 @@ function getServiceById(id){
   O valor aplicado no registro é gravado no próprio período.
 */
 
-function getServiceValue(service,dateString){
+function getServiceValue(serviceOrId, dateString){
 
-  const service = getServiceById(service?.id || service);
+  const service = getServiceById(
+    serviceOrId?.id || serviceOrId
+  );
 
   if(!service) return 0;
 
@@ -1392,22 +1394,33 @@ function getServiceValue(service,dateString){
 
   const matching = (service.valuePeriods || [])
     .filter(p => {
-      const start = inputToDate(p.start);
-      const end = p.end ? inputToDate(p.end) : null;
 
-      return date >= start && (!end || date <= end);
+      const start = inputToDate(p.start);
+      const end = p.end
+        ? inputToDate(p.end)
+        : null;
+
+      return date >= start &&
+             (!end || date <= end);
+
     })
     .sort((a,b)=>{
-      return inputToDate(b.start) - inputToDate(a.start);
+
+      return inputToDate(b.start) -
+             inputToDate(a.start);
+
     });
 
   if(matching.length){
-    return Number(matching[0].value || 0);
+
+    return Number(
+      matching[0].value || 0
+    );
+
   }
 
   return 0;
 }
-
 
 /* ============================================================
    NAVEGAÇÃO
