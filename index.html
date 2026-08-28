@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,7 +7,7 @@
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Meu Banco de Horas V1</title>
+<title>Meu Banco de Horas V1.1</title>
 
 <style>
 :root{
@@ -42,12 +43,10 @@ html,body{
 
 body{
   min-height:100vh;
-  padding-bottom:80px;
+  padding-bottom:85px;
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit;
 }
 
@@ -94,10 +93,12 @@ header{
   border:0;
   background:transparent;
   font-size:20px;
+  width:30px;
+  height:30px;
 }
 
 .month-selector span{
-  min-width:105px;
+  min-width:110px;
   text-align:center;
   font-weight:bold;
 }
@@ -206,22 +207,14 @@ header{
   font-size:13px;
 }
 
-.today-empty{
-  color:var(--muted);
-  padding:10px 0;
-}
-
-.period-row{
+.form-grid{
   display:grid;
-  grid-template-columns:1fr 1fr 1.5fr 1fr auto;
-  gap:10px;
-  align-items:end;
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 
-.period-row:last-child{
-  border-bottom:0;
+.form-grid.three{
+  grid-template-columns:repeat(3,1fr);
 }
 
 .field{
@@ -252,21 +245,25 @@ header{
   box-shadow:0 0 0 3px rgba(37,99,235,.1);
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.form-grid.three{
-  grid-template-columns:repeat(3,1fr);
-}
-
 .form-actions{
   display:flex;
   gap:10px;
   margin-top:18px;
   flex-wrap:wrap;
+}
+
+.notice{
+  padding:12px 14px;
+  border-radius:12px;
+  background:var(--blue-bg);
+  color:#1e40af;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.notice.warning{
+  background:var(--yellow-bg);
+  color:#854d0e;
 }
 
 .summary-box{
@@ -297,6 +294,19 @@ header{
 
 .summary-item strong{
   font-size:18px;
+}
+
+.period-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1.5fr 1fr auto;
+  gap:10px;
+  align-items:end;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.period-row:last-child{
+  border-bottom:0;
 }
 
 .history-item{
@@ -402,6 +412,26 @@ header{
   background:#f9fafb;
   border-radius:10px;
   font-size:13px;
+  border:1px solid var(--border);
+}
+
+.value-period-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+  margin-top:8px;
+}
+
+.value-period-form{
+  margin-top:15px;
+  padding:14px;
+  border-radius:14px;
+  background:#f9fafb;
+  border:1px solid var(--border);
+}
+
+.value-period-list{
+  margin-top:12px;
 }
 
 .calendar{
@@ -461,25 +491,37 @@ header{
   outline:2px solid var(--primary);
 }
 
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th,td{
-  padding:11px 9px;
+.kpi-line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 0;
   border-bottom:1px solid var(--border);
-  text-align:left;
-  white-space:nowrap;
 }
 
-th{
-  font-size:12px;
+.kpi-line:last-child{
+  border-bottom:0;
+}
+
+.empty{
   color:var(--muted);
+  text-align:center;
+  padding:25px 10px;
+}
+
+.danger-zone{
+  border:1px solid #fecaca;
+  background:#fffafa;
+}
+
+.file-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+input[type=file]{
+  display:none;
 }
 
 .bottom-nav{
@@ -536,7 +578,7 @@ th{
 }
 
 .modal{
-  width:min(700px,100%);
+  width:min(760px,100%);
   max-height:90vh;
   overflow:auto;
   background:#fff;
@@ -565,48 +607,6 @@ th{
   font-size:20px;
 }
 
-.notice{
-  padding:12px 14px;
-  border-radius:12px;
-  background:var(--blue-bg);
-  color:#1e40af;
-  font-size:13px;
-  margin-bottom:15px;
-}
-
-.empty{
-  color:var(--muted);
-  text-align:center;
-  padding:25px 10px;
-}
-
-.kpi-line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:9px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.kpi-line:last-child{
-  border-bottom:0;
-}
-
-.danger-zone{
-  border:1px solid #fecaca;
-  background:#fffafa;
-}
-
-.file-label{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-
-input[type=file]{
-  display:none;
-}
-
 .toast{
   position:fixed;
   left:50%;
@@ -621,6 +621,8 @@ input[type=file]{
   transition:.25s;
   z-index:200;
   font-size:14px;
+  max-width:90%;
+  text-align:center;
 }
 
 .toast.show{
@@ -629,6 +631,7 @@ input[type=file]{
 }
 
 @media(max-width:850px){
+
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
@@ -648,9 +651,11 @@ input[type=file]{
   .service-list{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
+
   .app{
     padding:12px;
   }
@@ -661,6 +666,10 @@ input[type=file]{
 
   .brand h1{
     font-size:21px;
+  }
+
+  .brand p{
+    font-size:12px;
   }
 
   .month-selector{
@@ -697,10 +706,15 @@ input[type=file]{
 
   .history-item{
     align-items:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .history-date{
+    min-width:75px;
   }
 
   .history-right{
-    min-width:95px;
+    margin-left:auto;
   }
 
   .calendar{
@@ -724,6 +738,7 @@ input[type=file]{
   .nav-btn .icon{
     font-size:19px;
   }
+
 }
 </style>
 </head>
@@ -733,6 +748,7 @@ input[type=file]{
 <div class="app">
 
 <header>
+
   <div class="brand">
     <h1>💼 Meu Banco de Horas</h1>
     <p>Controle de jornada e valores</p>
@@ -743,9 +759,13 @@ input[type=file]{
     <span id="currentMonthLabel"></span>
     <button onclick="changeMonth(1)">›</button>
   </div>
+
 </header>
 
-<!-- ================= DASHBOARD ================= -->
+
+<!-- ============================================================
+     DASHBOARD
+     ============================================================ -->
 
 <section id="page-dashboard" class="page active">
 
@@ -773,25 +793,33 @@ input[type=file]{
 
   </div>
 
+
   <div class="section">
+
     <div class="section-title">
       <h2>📅 Hoje</h2>
-      <button class="btn btn-primary btn-small" onclick="openRegister(new Date())">
+
+      <button class="btn btn-primary btn-small"
+              onclick="openRegister(new Date())">
         + Registrar
       </button>
     </div>
 
     <div id="todayContent"></div>
+
   </div>
 
+
   <div class="section">
+
     <div class="section-title">
       <h2>📊 Resumo do mês</h2>
     </div>
 
     <div class="summary-grid">
+
       <div class="summary-item">
-        <small>Dias trabalhados</small>
+        <small>Dias registrados</small>
         <strong id="dashDays">0</strong>
       </div>
 
@@ -809,28 +837,35 @@ input[type=file]{
         <small>Horas extras</small>
         <strong id="dashExtras">0h</strong>
       </div>
+
     </div>
+
   </div>
 
+
   <div class="section">
+
     <div class="section-title">
       <h2>🏢 Valores por serviço</h2>
     </div>
 
     <div id="dashboardServices"></div>
+
   </div>
 
 </section>
 
 
-<!-- ================= REGISTRAR ================= -->
+<!-- ============================================================
+     REGISTRAR
+     ============================================================ -->
 
 <section id="page-register" class="page">
 
   <div class="section">
 
     <div class="section-title">
-      <h2>➕ Registrar jornada</h2>
+      <h2 id="registerTitle">➕ Registrar jornada</h2>
     </div>
 
     <div class="notice">
@@ -838,30 +873,50 @@ input[type=file]{
     </div>
 
     <div class="form-grid">
+
       <div class="field">
         <label>Data</label>
-        <input type="date" id="registerDate" onchange="updateRegisterPreview()">
+
+        <input type="date"
+               id="registerDate"
+               onchange="updateRegisterPreview()">
       </div>
 
       <div class="field">
+
         <label>Horas previstas</label>
-        <input type="text" id="registerExpected" readonly>
+
+        <input type="text"
+               id="registerExpected"
+               readonly>
+
       </div>
+
     </div>
 
+
     <div style="margin-top:20px">
+
       <div class="section-title">
+
         <h2>Períodos trabalhados</h2>
-        <button class="btn btn-secondary btn-small" onclick="addPeriodRow()">
+
+        <button class="btn btn-secondary btn-small"
+                onclick="addPeriodRow()">
           + Adicionar período
         </button>
+
       </div>
 
       <div id="periodRows"></div>
+
     </div>
 
+
     <div class="summary-box">
+
       <div class="summary-grid">
+
         <div class="summary-item">
           <small>Realizado</small>
           <strong id="registerWorked">0h</strong>
@@ -881,17 +936,24 @@ input[type=file]{
           <small>Valor do dia</small>
           <strong id="registerMoney">R$ 0,00</strong>
         </div>
+
       </div>
+
     </div>
 
+
     <div class="form-actions">
-      <button class="btn btn-primary" onclick="saveRegister()">
+
+      <button class="btn btn-primary"
+              onclick="saveRegister()">
         💾 Salvar jornada
       </button>
 
-      <button class="btn btn-secondary" onclick="showPage('dashboard')">
+      <button class="btn btn-secondary"
+              onclick="showPage('dashboard')">
         Cancelar
       </button>
+
     </div>
 
   </div>
@@ -899,7 +961,9 @@ input[type=file]{
 </section>
 
 
-<!-- ================= CALENDÁRIO ================= -->
+<!-- ============================================================
+     CALENDÁRIO
+     ============================================================ -->
 
 <section id="page-calendar" class="page">
 
@@ -910,10 +974,23 @@ input[type=file]{
     </div>
 
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px">
-      <span class="badge badge-green">● Conforme</span>
-      <span class="badge badge-blue">● Extra</span>
-      <span class="badge badge-red">● Abaixo</span>
-      <span class="badge badge-yellow">● Trabalho em folga</span>
+
+      <span class="badge badge-green">
+        ● Conforme
+      </span>
+
+      <span class="badge badge-blue">
+        ● Extra
+      </span>
+
+      <span class="badge badge-red">
+        ● Abaixo
+      </span>
+
+      <span class="badge badge-yellow">
+        ● Trabalho em folga
+      </span>
+
     </div>
 
     <div id="calendar"></div>
@@ -923,18 +1000,23 @@ input[type=file]{
 </section>
 
 
-<!-- ================= HISTÓRICO ================= -->
+<!-- ============================================================
+     HISTÓRICO
+     ============================================================ -->
 
 <section id="page-history" class="page">
 
   <div class="section">
 
     <div class="section-title">
+
       <h2>📋 Histórico</h2>
 
-      <button class="btn btn-primary btn-small" onclick="openRegister(new Date())">
+      <button class="btn btn-primary btn-small"
+              onclick="openRegister(new Date())">
         + Novo
       </button>
+
     </div>
 
     <div id="historyList"></div>
@@ -944,18 +1026,27 @@ input[type=file]{
 </section>
 
 
-<!-- ================= SERVIÇOS ================= -->
+<!-- ============================================================
+     SERVIÇOS
+     ============================================================ -->
 
 <section id="page-services" class="page">
 
   <div class="section">
 
     <div class="section-title">
+
       <h2>🏢 Meus serviços</h2>
 
-      <button class="btn btn-primary btn-small" onclick="openServiceModal()">
+      <button class="btn btn-primary btn-small"
+              onclick="openServiceModal()">
         + Novo serviço
       </button>
+
+    </div>
+
+    <div class="notice">
+      Cadastre cada local e seus períodos de valor. O aplicativo usará automaticamente o valor correspondente à data da jornada.
     </div>
 
     <div id="serviceList" class="service-list"></div>
@@ -965,7 +1056,9 @@ input[type=file]{
 </section>
 
 
-<!-- ================= CONFIGURAÇÕES ================= -->
+<!-- ============================================================
+     CONFIGURAÇÕES
+     ============================================================ -->
 
 <section id="page-settings" class="page">
 
@@ -976,8 +1069,11 @@ input[type=file]{
     </div>
 
     <div class="notice">
-      Sua escala está configurada com segunda, quarta e sexta fixos. Os sábados alternam entre Semana A e Semana B.
-      A data-base da alternância é <strong>22/08/2026</strong>.
+
+      Sua escala está configurada com segunda, quarta e sexta fixos.
+      Os sábados alternam entre Semana A e Semana B.
+      A data-base é <strong>22/08/2026</strong>.
+
     </div>
 
     <div class="kpi-line">
@@ -1020,18 +1116,25 @@ input[type=file]{
     </div>
 
     <p style="color:var(--muted)">
-      Exporte seus dados regularmente. O arquivo contém serviços, valores e jornadas registradas.
+      Exporte seus dados regularmente. O backup contém serviços, períodos de valor e jornadas.
     </p>
 
     <div class="form-actions">
 
-      <button class="btn btn-primary" onclick="exportBackup()">
+      <button class="btn btn-primary"
+              onclick="exportBackup()">
         📤 Exportar backup
       </button>
 
       <label class="btn btn-secondary file-label">
+
         📥 Importar backup
-        <input type="file" id="importFile" accept=".json" onchange="importBackup(event)">
+
+        <input type="file"
+               id="importFile"
+               accept=".json"
+               onchange="importBackup(event)">
+
       </label>
 
     </div>
@@ -1049,7 +1152,8 @@ input[type=file]{
       Apagar todos os dados é permanente. Faça um backup antes.
     </p>
 
-    <button class="btn btn-danger" onclick="clearAllData()">
+    <button class="btn btn-danger"
+            onclick="clearAllData()">
       🗑️ Apagar todos os dados
     </button>
 
@@ -1060,80 +1164,173 @@ input[type=file]{
 </div>
 
 
-<!-- ================= NAVEGAÇÃO ================= -->
+<!-- ============================================================
+     NAVEGAÇÃO
+     ============================================================ -->
 
 <nav class="bottom-nav">
+
   <div class="nav-inner">
 
-    <button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard')">
+    <button class="nav-btn active"
+            data-page="dashboard"
+            onclick="showPage('dashboard')">
       <span class="icon">🏠</span>
       Início
     </button>
 
-    <button class="nav-btn" data-page="register" onclick="openRegister(new Date())">
+    <button class="nav-btn"
+            data-page="register"
+            onclick="openRegister(new Date())">
       <span class="icon">➕</span>
       Registrar
     </button>
 
-    <button class="nav-btn" data-page="calendar" onclick="showPage('calendar')">
+    <button class="nav-btn"
+            data-page="calendar"
+            onclick="showPage('calendar')">
       <span class="icon">📅</span>
       Calendário
     </button>
 
-    <button class="nav-btn" data-page="history" onclick="showPage('history')">
+    <button class="nav-btn"
+            data-page="history"
+            onclick="showPage('history')">
       <span class="icon">📋</span>
       Histórico
     </button>
 
-    <button class="nav-btn" data-page="services" onclick="showPage('services')">
+    <button class="nav-btn"
+            data-page="services"
+            onclick="showPage('services')">
       <span class="icon">🏢</span>
       Serviços
     </button>
 
-    <button class="nav-btn" data-page="settings" onclick="showPage('settings')">
+    <button class="nav-btn"
+            data-page="settings"
+            onclick="showPage('settings')">
       <span class="icon">⚙️</span>
       Config.
     </button>
 
   </div>
+
 </nav>
 
 
-<!-- ================= MODAL SERVIÇO ================= -->
+<!-- ============================================================
+     MODAL DE SERVIÇO
+     ============================================================ -->
 
-<div class="modal-backdrop" id="serviceModal">
+<div class="modal-backdrop"
+     id="serviceModal">
 
   <div class="modal">
 
     <div class="modal-header">
-      <h2 id="serviceModalTitle">Novo serviço</h2>
-      <button class="close" onclick="closeServiceModal()">×</button>
+
+      <h2 id="serviceModalTitle">
+        Novo serviço
+      </h2>
+
+      <button class="close"
+              onclick="closeServiceModal()">
+        ×
+      </button>
+
     </div>
 
-    <input type="hidden" id="serviceEditId">
+
+    <input type="hidden"
+           id="serviceEditId">
+
 
     <div class="form-grid">
 
       <div class="field">
-        <label>Nome do serviço/local</label>
-        <input id="serviceName" placeholder="Ex.: Clínica A">
-      </div>
 
-      <div class="field">
-        <label>Valor inicial da hora</label>
-        <input id="serviceValue" type="number" min="0" step="0.01" placeholder="20.00">
+        <label>Nome do serviço/local</label>
+
+        <input id="serviceName"
+               placeholder="Ex.: Clínica A">
+
       </div>
 
     </div>
 
+
+    <div class="value-period-form">
+
+      <div class="section-title">
+
+        <h2 style="font-size:16px">
+          💰 Período de valor
+        </h2>
+
+      </div>
+
+      <div class="form-grid three">
+
+        <div class="field">
+
+          <label>Data inicial</label>
+
+          <input type="date"
+                 id="periodStart">
+
+        </div>
+
+        <div class="field">
+
+          <label>Data final</label>
+
+          <input type="date"
+                 id="periodEnd">
+
+        </div>
+
+        <div class="field">
+
+          <label>Valor da hora</label>
+
+          <input type="number"
+                 id="periodValue"
+                 min="0"
+                 step="0.01"
+                 placeholder="20.00">
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button class="btn btn-secondary btn-small"
+                onclick="addValuePeriod()">
+          + Adicionar período
+        </button>
+
+      </div>
+
+      <div id="modalValuePeriods"
+           class="value-period-list"></div>
+
+    </div>
+
+
     <div class="form-actions">
-      <button class="btn btn-primary" onclick="saveService()">
-        💾 Salvar
+
+      <button class="btn btn-primary"
+              onclick="saveService()">
+        💾 Salvar serviço
       </button>
 
-      <button class="btn btn-secondary" onclick="closeServiceModal()">
+      <button class="btn btn-secondary"
+              onclick="closeServiceModal()">
         Cancelar
       </button>
+
     </div>
 
   </div>
@@ -1141,17 +1338,23 @@ input[type=file]{
 </div>
 
 
-<!-- ================= TOAST ================= -->
-
 <div class="toast" id="toast"></div>
 
 
 <script>
+
 /* ============================================================
-   MEU BANCO DE HORAS V1
+   CONFIGURAÇÃO
    ============================================================ */
 
 const STORAGE_KEY = "meuBancoHorasV1";
+
+const SCALE_BASE = new Date(2026,7,22);
+
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
 
 let state = {
   services: [],
@@ -1159,9 +1362,14 @@ let state = {
 };
 
 let currentMonth = new Date();
+
 currentMonth.setDate(1);
 
 let editingRecordId = null;
+
+let editingServiceId = null;
+
+let temporaryValuePeriods = [];
 
 
 /* ============================================================
@@ -1169,83 +1377,135 @@ let editingRecordId = null;
    ============================================================ */
 
 function uid(){
-  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+  return Date.now().toString(36) +
+         Math.random().toString(36).slice(2);
+
 }
 
 function pad(n){
+
   return String(n).padStart(2,"0");
+
 }
 
 function dateToInput(date){
+
   return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+
 }
 
 function inputToDate(value){
-  const [y,m,d] = value.split("-").map(Number);
+
+  const [y,m,d] =
+    value.split("-").map(Number);
+
   return new Date(y,m-1,d);
+
 }
 
 function formatDate(date){
+
   return date.toLocaleDateString("pt-BR");
+
 }
 
 function formatMoney(value){
-  return Number(value || 0).toLocaleString("pt-BR",{
-    style:"currency",
-    currency:"BRL"
-  });
+
+  return Number(value || 0).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
 }
 
 function minutesToText(minutes){
+
   minutes = Math.round(minutes || 0);
 
-  const sign = minutes < 0 ? "-" : "";
-  const abs = Math.abs(minutes);
+  const sign =
+    minutes < 0 ? "-" : "";
 
-  const h = Math.floor(abs / 60);
-  const m = abs % 60;
+  const abs =
+    Math.abs(minutes);
 
-  if(m === 0) return `${sign}${h}h`;
+  const h =
+    Math.floor(abs / 60);
+
+  const m =
+    abs % 60;
+
+  if(m === 0){
+
+    return `${sign}${h}h`;
+
+  }
+
   return `${sign}${h}h ${m}min`;
+
 }
 
 function timeToMinutes(time){
+
   if(!time) return 0;
 
-  const [h,m] = time.split(":").map(Number);
+  const [h,m] =
+    time.split(":").map(Number);
+
   return h * 60 + m;
+
 }
 
 function periodMinutes(start,end){
-  let s = timeToMinutes(start);
-  let e = timeToMinutes(end);
 
-  /* permite atravessar meia-noite */
+  let s =
+    timeToMinutes(start);
+
+  let e =
+    timeToMinutes(end);
+
   if(e < s){
+
     e += 24 * 60;
+
   }
 
   return e - s;
+
 }
 
 function monthKey(date){
+
   return `${date.getFullYear()}-${pad(date.getMonth()+1)}`;
+
 }
 
 function sameDay(a,b){
-  return dateToInput(a) === dateToInput(b);
+
+  return dateToInput(a) ===
+         dateToInput(b);
+
 }
 
 function showToast(message){
-  const toast = document.getElementById("toast");
+
+  const toast =
+    document.getElementById("toast");
+
   toast.textContent = message;
+
   toast.classList.add("show");
 
   clearTimeout(window.toastTimer);
 
-  window.toastTimer = setTimeout(()=>{
-    toast.classList.remove("show");
-  },2500);
+  window.toastTimer =
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2500);
+
 }
 
 
@@ -1254,27 +1514,60 @@ function showToast(message){
    ============================================================ */
 
 function saveState(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
+
 }
 
 function loadState(){
+
   try{
-    const saved = localStorage.getItem(STORAGE_KEY);
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
 
     if(saved){
-      state = JSON.parse(saved);
+
+      state =
+        JSON.parse(saved);
+
     }
-  }catch(e){
-    console.error(e);
+
+  }catch(error){
+
+    console.error(error);
+
   }
 
   if(!Array.isArray(state.services)){
+
     state.services = [];
+
   }
 
   if(!Array.isArray(state.records)){
+
     state.records = [];
+
   }
+
+  /*
+    Compatibilidade com versões anteriores.
+  */
+
+  state.services.forEach(service=>{
+
+    if(!Array.isArray(service.valuePeriods)){
+
+      service.valuePeriods = [];
+
+    }
+
+  });
+
 }
 
 
@@ -1282,145 +1575,189 @@ function loadState(){
    ESCALA
    ============================================================ */
 
-/*
-  22/08/2026 = sábado A.
-
-  A cada 7 dias:
-  A, B, A, B...
-
-  A = 8h
-  B = 4h
-*/
-
-const SCALE_BASE = new Date(2026,7,22);
-
 function saturdayType(date){
 
-  const diffMs = date - SCALE_BASE;
-  const diffDays = Math.round(diffMs / 86400000);
+  const diffMs =
+    date - SCALE_BASE;
 
-  const weeks = Math.floor(diffDays / 7);
+  const diffDays =
+    Math.round(
+      diffMs / 86400000
+    );
 
-  return weeks % 2 === 0 ? "A" : "B";
+  const weeks =
+    Math.floor(diffDays / 7);
+
+  /*
+    Normaliza também datas anteriores
+    à data-base.
+  */
+
+  const normalized =
+    ((weeks % 2) + 2) % 2;
+
+  return normalized === 0
+    ? "A"
+    : "B";
+
 }
 
 function getExpectedMinutes(date){
 
-  const day = date.getDay();
+  const day =
+    date.getDay();
 
-  /* Domingo */
   if(day === 0) return 0;
 
-  /* Segunda */
   if(day === 1) return 8 * 60;
 
-  /* Terça */
   if(day === 2) return 0;
 
-  /* Quarta */
   if(day === 3) return 8 * 60;
 
-  /* Quinta */
   if(day === 4) return 0;
 
-  /* Sexta */
   if(day === 5) return 4 * 60;
 
-  /* Sábado */
   if(day === 6){
+
     return saturdayType(date) === "A"
       ? 8 * 60
       : 4 * 60;
+
   }
 
   return 0;
+
 }
 
 function getScaleDescription(date){
 
-  const day = date.getDay();
+  const day =
+    date.getDay();
 
   if(day === 1){
+
     return "08:00–18:00 • 2h almoço";
+
   }
 
   if(day === 3){
+
     return "08:00–18:00 • 2h almoço";
+
   }
 
   if(day === 5){
+
     return "14:00–18:00";
+
   }
 
   if(day === 6){
+
     return saturdayType(date) === "A"
       ? "Sábado A • 08:00–18:00 • 2h almoço"
       : "Sábado B • 08:00–12:00";
+
   }
 
   return "Folga";
+
 }
 
 
 /* ============================================================
-   SERVIÇOS E VALORES
+   SERVIÇOS
    ============================================================ */
 
 function getServiceById(id){
-  return state.services.find(s => s.id === id);
-}
 
-/*
-  Cada serviço possui períodos:
-
-  {
-    start: "2026-08-01",
-    end: "2026-08-31",
-    value: 20
-  }
-
-  O valor aplicado no registro é gravado no próprio período.
-*/
-
-function getServiceValue(serviceOrId, dateString){
-
-  const service = getServiceById(
-    serviceOrId?.id || serviceOrId
+  return state.services.find(
+    s => s.id === id
   );
 
-  if(!service) return 0;
+}
 
-  const date = inputToDate(dateString);
 
-  const matching = (service.valuePeriods || [])
-    .filter(p => {
+/*
+  Retorna o período de valor aplicável
+  à data informada.
+*/
 
-      const start = inputToDate(p.start);
-      const end = p.end
-        ? inputToDate(p.end)
-        : null;
+function getMatchingValuePeriod(
+  serviceOrId,
+  dateString
+){
 
-      return date >= start &&
-             (!end || date <= end);
-
-    })
-    .sort((a,b)=>{
-
-      return inputToDate(b.start) -
-             inputToDate(a.start);
-
-    });
-
-  if(matching.length){
-
-    return Number(
-      matching[0].value || 0
+  const service =
+    getServiceById(
+      serviceOrId?.id ||
+      serviceOrId
     );
+
+  if(!service){
+
+    return null;
 
   }
 
-  return 0;
+  const date =
+    inputToDate(dateString);
+
+  const periods =
+    Array.isArray(service.valuePeriods)
+      ? service.valuePeriods
+      : [];
+
+  const matching =
+    periods
+      .filter(p=>{
+
+        if(!p.start) return false;
+
+        const start =
+          inputToDate(p.start);
+
+        const end =
+          p.end
+            ? inputToDate(p.end)
+            : null;
+
+        return date >= start &&
+               (!end || date <= end);
+
+      })
+      .sort((a,b)=>{
+
+        return inputToDate(b.start) -
+               inputToDate(a.start);
+
+      });
+
+  return matching.length
+    ? matching[0]
+    : null;
+
 }
+
+function getServiceValue(
+  serviceOrId,
+  dateString
+){
+
+  const period =
+    getMatchingValuePeriod(
+      serviceOrId,
+      dateString
+    );
+
+  return period
+    ? Number(period.value || 0)
+    : 0;
+
+}
+
 
 /* ============================================================
    NAVEGAÇÃO
@@ -1428,27 +1765,56 @@ function getServiceValue(serviceOrId, dateString){
 
 function showPage(page){
 
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
+  document.querySelectorAll(".page")
+    .forEach(p=>{
+      p.classList.remove("active");
+    });
 
-  const target = document.getElementById("page-" + page);
+  const target =
+    document.getElementById(
+      "page-" + page
+    );
 
   if(target){
+
     target.classList.add("active");
+
   }
 
-  document.querySelectorAll(".nav-btn").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page === page
-    );
-  });
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn=>{
 
-  if(page === "dashboard") renderDashboard();
-  if(page === "calendar") renderCalendar();
-  if(page === "history") renderHistory();
-  if(page === "services") renderServices();
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+
+    });
+
+  if(page === "dashboard"){
+
+    renderDashboard();
+
+  }
+
+  if(page === "calendar"){
+
+    renderCalendar();
+
+  }
+
+  if(page === "history"){
+
+    renderHistory();
+
+  }
+
+  if(page === "services"){
+
+    renderServices();
+
+  }
+
 }
 
 
@@ -1458,110 +1824,164 @@ function showPage(page){
 
 function updateMonthLabel(){
 
-  const text = currentMonth.toLocaleDateString(
-    "pt-BR",
-    {
-      month:"long",
-      year:"numeric"
-    }
-  );
+  const text =
+    currentMonth.toLocaleDateString(
+      "pt-BR",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
 
-  document.getElementById("currentMonthLabel")
-    .textContent = text.charAt(0).toUpperCase() + text.slice(1);
+  document.getElementById(
+    "currentMonthLabel"
+  ).textContent =
+    text.charAt(0).toUpperCase() +
+    text.slice(1);
+
 }
 
 function changeMonth(delta){
 
   currentMonth.setMonth(
-    currentMonth.getMonth() + delta
+    currentMonth.getMonth() +
+    delta
   );
 
   updateMonthLabel();
+
   renderDashboard();
+
   renderCalendar();
+
   renderHistory();
+
 }
 
 
 /* ============================================================
-   CÁLCULOS DOS REGISTROS
+   CÁLCULO DOS REGISTROS
    ============================================================ */
 
 function calculateRecord(record){
 
   let worked = 0;
+
   let money = 0;
 
   for(const p of record.periods || []){
 
-    const mins = periodMinutes(p.start,p.end);
+    const mins =
+      periodMinutes(
+        p.start,
+        p.end
+      );
 
     worked += mins;
 
-    const value = Number(p.valueAtTime ?? p.value ?? 0);
+    const value =
+      Number(
+        p.valueAtTime ??
+        p.value ??
+        0
+      );
 
-    money += (mins / 60) * value;
+    money +=
+      mins / 60 * value;
+
   }
 
-  const expected = getExpectedMinutes(
-    inputToDate(record.date)
-  );
+  const expected =
+    getExpectedMinutes(
+      inputToDate(record.date)
+    );
 
   return {
+
     worked,
+
     expected,
-    balance: worked - expected,
+
+    balance:
+      worked - expected,
+
     money
+
   };
+
 }
 
 function getRecordsForMonth(date){
 
-  const key = monthKey(date);
+  const key =
+    monthKey(date);
 
   return state.records.filter(
     r => r.date.startsWith(key)
   );
+
 }
 
 function getMonthlyStats(date){
 
-  const records = getRecordsForMonth(date);
+  const records =
+    getRecordsForMonth(date);
 
   let worked = 0;
   let expected = 0;
   let balance = 0;
   let money = 0;
 
-  const serviceIds = new Set();
+  const serviceIds =
+    new Set();
 
   records.forEach(r=>{
 
-    const c = calculateRecord(r);
+    const c =
+      calculateRecord(r);
 
     worked += c.worked;
+
     expected += c.expected;
+
     balance += c.balance;
+
     money += c.money;
 
     (r.periods || []).forEach(p=>{
+
       if(p.serviceId){
-        serviceIds.add(p.serviceId);
+
+        serviceIds.add(
+          p.serviceId
+        );
+
       }
+
     });
+
   });
 
-  const extra = Math.max(0,balance);
-
   return {
+
     records,
+
     worked,
+
     expected,
+
     balance,
+
     money,
-    extra,
-    serviceCount:serviceIds.size
+
+    extra:
+      Math.max(0,balance),
+
+    serviceCount:
+      serviceIds.size
+
   };
+
 }
 
 
@@ -1573,78 +1993,130 @@ function renderDashboard(){
 
   updateMonthLabel();
 
-  const stats = getMonthlyStats(currentMonth);
+  const stats =
+    getMonthlyStats(
+      currentMonth
+    );
 
-  document.getElementById("dashWorked")
-    .textContent = minutesToText(stats.worked);
+  document.getElementById(
+    "dashWorked"
+  ).textContent =
+    minutesToText(
+      stats.worked
+    );
 
-  document.getElementById("dashExpected")
-    .textContent = minutesToText(stats.expected);
+  document.getElementById(
+    "dashExpected"
+  ).textContent =
+    minutesToText(
+      stats.expected
+    );
 
-  const balanceEl = document.getElementById("dashBalance");
+  const balanceEl =
+    document.getElementById(
+      "dashBalance"
+    );
 
   balanceEl.textContent =
     (stats.balance >= 0 ? "+" : "") +
-    minutesToText(stats.balance);
+    minutesToText(
+      stats.balance
+    );
 
-  document.getElementById("dashMoney")
-    .textContent = formatMoney(stats.money);
+  document.getElementById(
+    "dashMoney"
+  ).textContent =
+    formatMoney(
+      stats.money
+    );
 
-  document.getElementById("dashDays")
-    .textContent = stats.records.length;
+  document.getElementById(
+    "dashDays"
+  ).textContent =
+    stats.records.length;
 
-  document.getElementById("dashAverage")
-    .textContent = formatMoney(
+  document.getElementById(
+    "dashAverage"
+  ).textContent =
+    formatMoney(
       stats.records.length
-        ? stats.money / stats.records.length
+        ? stats.money /
+          stats.records.length
         : 0
     );
 
-  document.getElementById("dashServices")
-    .textContent = stats.serviceCount;
+  document.getElementById(
+    "dashServices"
+  ).textContent =
+    stats.serviceCount;
 
-  document.getElementById("dashExtras")
-    .textContent = minutesToText(stats.extra);
+  document.getElementById(
+    "dashExtras"
+  ).textContent =
+    minutesToText(
+      stats.extra
+    );
 
-  const balanceCard = document.getElementById("balanceCard");
+  const balanceCard =
+    document.getElementById(
+      "balanceCard"
+    );
 
-  balanceCard.classList.remove("green","red");
+  balanceCard.classList.remove(
+    "green",
+    "red"
+  );
 
-  if(stats.balance >= 0){
-    balanceCard.classList.add("green");
-  }else{
-    balanceCard.classList.add("red");
-  }
+  balanceCard.classList.add(
+    stats.balance >= 0
+      ? "green"
+      : "red"
+  );
 
   renderToday();
+
   renderDashboardServices();
+
 }
 
 function renderToday(){
 
-  const container = document.getElementById("todayContent");
+  const container =
+    document.getElementById(
+      "todayContent"
+    );
 
-  const today = new Date();
-  const todayString = dateToInput(today);
+  const today =
+    new Date();
 
-  const record = state.records.find(
-    r => r.date === todayString
-  );
+  const todayString =
+    dateToInput(today);
 
-  const expected = getExpectedMinutes(today);
+  const record =
+    state.records.find(
+      r => r.date === todayString
+    );
+
+  const expected =
+    getExpectedMinutes(today);
 
   if(!record){
 
     container.innerHTML = `
+
       <div class="today-empty">
 
         <div style="margin-bottom:10px">
-          <strong>Hoje, ${formatDate(today)}</strong>
+          <strong>
+            Hoje, ${formatDate(today)}
+          </strong>
         </div>
 
         <div style="margin-bottom:8px">
           📋 Previsto:
-          <strong>${minutesToText(expected)}</strong>
+          <strong>
+            ${minutesToText(expected)}
+          </strong>
         </div>
 
         <div style="color:var(--muted)">
@@ -1652,64 +2124,135 @@ function renderToday(){
         </div>
 
         <div style="margin-top:15px">
+
           <button class="btn btn-primary btn-small"
                   onclick="openRegister(new Date())">
             ➕ Registrar jornada de hoje
           </button>
+
         </div>
 
       </div>
+
     `;
 
     return;
+
   }
 
-  const calc = calculateRecord(record);
+  const calc =
+    calculateRecord(record);
 
   const serviceNames = [
     ...new Set(
-      (record.periods || []).map(p=>{
-        return getServiceById(p.serviceId)?.name || "Serviço";
-      })
+      (record.periods || [])
+        .map(p =>
+          getServiceById(
+            p.serviceId
+          )?.name ||
+          "Serviço"
+        )
     )
   ];
 
   container.innerHTML = `
 
     <div style="margin-bottom:12px">
-      <strong>${formatDate(today)}</strong>
-      <span class="badge ${calc.balance >= 0 ? "badge-green" : "badge-red"}">
-        ${calc.balance >= 0 ? "+" : ""}${minutesToText(calc.balance)}
+
+      <strong>
+        ${formatDate(today)}
+      </strong>
+
+      <span class="badge ${
+        calc.balance >= 0
+          ? "badge-green"
+          : "badge-red"
+      }">
+
+        ${calc.balance >= 0 ? "+" : ""}
+        ${minutesToText(calc.balance)}
+
       </span>
+
     </div>
 
-    ${(record.periods || []).map(p=>{
+    ${(record.periods || [])
+      .map(p=>{
 
-      const mins = periodMinutes(p.start,p.end);
-      const value = Number(p.valueAtTime || 0);
-      const money = mins / 60 * value;
+        const mins =
+          periodMinutes(
+            p.start,
+            p.end
+          );
 
-      return `
-        <div class="kpi-line">
-          <span>
-            ${p.start} → ${p.end}
-            <small style="color:var(--muted)">
-              ${getServiceById(p.serviceId)?.name || "Serviço"}
-            </small>
-          </span>
-          <strong>${minutesToText(mins)} • ${formatMoney(money)}</strong>
-        </div>
-      `;
+        const value =
+          Number(
+            p.valueAtTime || 0
+          );
 
-    }).join("")}
+        const money =
+          mins / 60 * value;
 
-    <div style="margin-top:14px;color:var(--muted);font-size:13px">
-      Previsto: ${minutesToText(calc.expected)}
-      • Realizado: ${minutesToText(calc.worked)}
-      • Serviços: ${serviceNames.join(", ")}
+        const service =
+          getServiceById(
+            p.serviceId
+          );
+
+        return `
+
+          <div class="kpi-line">
+
+            <span>
+
+              ${p.start} → ${p.end}
+
+              <small style="
+                display:block;
+                color:var(--muted)
+              ">
+
+                ${
+                  service?.name ||
+                  "Serviço"
+                }
+
+              </small>
+
+            </span>
+
+            <strong>
+
+              ${minutesToText(mins)}
+              •
+              ${formatMoney(money)}
+
+            </strong>
+
+          </div>
+
+        `;
+
+      }).join("")}
+
+    <div style="
+      margin-top:14px;
+      color:var(--muted);
+      font-size:13px
+    ">
+
+      Previsto:
+      ${minutesToText(calc.expected)}
+
+      • Realizado:
+      ${minutesToText(calc.worked)}
+
+      • Serviços:
+      ${serviceNames.join(", ")}
+
     </div>
 
     <div class="form-actions">
+
       <button class="btn btn-secondary btn-small"
               onclick="editRecord('${record.id}')">
         ✏️ Editar
@@ -1719,14 +2262,24 @@ function renderToday(){
               onclick="deleteRecord('${record.id}')">
         🗑️ Excluir
       </button>
+
     </div>
+
   `;
+
 }
 
 function renderDashboardServices(){
 
-  const container = document.getElementById("dashboardServices");
-  const records = getRecordsForMonth(currentMonth);
+  const container =
+    document.getElementById(
+      "dashboardServices"
+    );
+
+  const records =
+    getRecordsForMonth(
+      currentMonth
+    );
 
   const totals = {};
 
@@ -1734,48 +2287,89 @@ function renderDashboardServices(){
 
     (r.periods || []).forEach(p=>{
 
-      const service = getServiceById(p.serviceId);
+      const service =
+        getServiceById(
+          p.serviceId
+        );
 
       if(!service) return;
 
       if(!totals[service.id]){
+
         totals[service.id] = {
-          name:service.name,
+
+          name:
+            service.name,
+
           minutes:0,
+
           money:0
+
         };
+
       }
 
-      const mins = periodMinutes(p.start,p.end);
+      const mins =
+        periodMinutes(
+          p.start,
+          p.end
+        );
 
-      totals[service.id].minutes += mins;
+      totals[service.id].minutes +=
+        mins;
+
       totals[service.id].money +=
-        mins / 60 * Number(p.valueAtTime || 0);
+        mins / 60 *
+        Number(
+          p.valueAtTime || 0
+        );
+
     });
+
   });
 
-  const values = Object.values(totals);
+  const values =
+    Object.values(totals);
 
   if(!values.length){
+
     container.innerHTML =
-      `<div class="empty">Nenhum serviço registrado neste mês.</div>`;
+      `<div class="empty">
+        Nenhum serviço registrado neste mês.
+      </div>`;
+
     return;
+
   }
 
-  container.innerHTML = values.map(item=>`
+  container.innerHTML =
+    values.map(item=>`
 
-    <div class="kpi-line">
-      <span>
-        🏢 ${item.name}
-        <small style="display:block;color:var(--muted)">
-          ${minutesToText(item.minutes)}
-        </small>
-      </span>
+      <div class="kpi-line">
 
-      <strong>${formatMoney(item.money)}</strong>
-    </div>
+        <span>
 
-  `).join("");
+          🏢 ${item.name}
+
+          <small style="
+            display:block;
+            color:var(--muted)
+          ">
+
+            ${minutesToText(item.minutes)}
+
+          </small>
+
+        </span>
+
+        <strong>
+          ${formatMoney(item.money)}
+        </strong>
+
+      </div>
+
+    `).join("");
+
 }
 
 
@@ -1789,73 +2383,113 @@ function openRegister(date){
 
   editingRecordId = null;
 
-  const input = document.getElementById("registerDate");
+  document.getElementById(
+    "registerTitle"
+  ).textContent =
+    "➕ Registrar jornada";
 
-  input.value = dateToInput(date);
+  document.getElementById(
+    "registerDate"
+  ).value =
+    dateToInput(date);
 
-  document.getElementById("periodRows").innerHTML = "";
+  document.getElementById(
+    "periodRows"
+  ).innerHTML = "";
 
   addPeriodRow();
 
   updateRegisterPreview();
+
 }
 
 function addPeriodRow(data = {}){
 
-  const container = document.getElementById("periodRows");
+  const container =
+    document.getElementById(
+      "periodRows"
+    );
 
-  const row = document.createElement("div");
+  const row =
+    document.createElement("div");
 
-  row.className = "period-row";
+  row.className =
+    "period-row";
 
   row.innerHTML = `
 
     <div class="field">
+
       <label>Entrada</label>
+
       <input type="time"
              class="period-start"
              value="${data.start || ""}"
              onchange="updateRegisterPreview()">
+
     </div>
 
     <div class="field">
+
       <label>Saída</label>
+
       <input type="time"
              class="period-end"
              value="${data.end || ""}"
              onchange="updateRegisterPreview()">
+
     </div>
 
     <div class="field service-field">
-      <label>Serviço</label>
-      <select class="period-service"
-              onchange="updateRegisterPreview()">
 
-        <option value="">Selecione...</option>
+      <label>Serviço</label>
+
+      <select class="period-service"
+              onchange="serviceSelectionChanged(this)">
+
+        <option value="">
+          Selecione...
+        </option>
 
         ${state.services.map(s=>`
+
           <option value="${s.id}"
-            ${s.id === data.serviceId ? "selected" : ""}>
+            ${s.id === data.serviceId
+              ? "selected"
+              : ""}>
+
             ${s.name}
+
           </option>
+
         `).join("")}
 
       </select>
+
     </div>
 
     <div class="field">
+
       <label>Valor/h</label>
+
       <input type="number"
              class="period-value"
              min="0"
              step="0.01"
-             value="${data.valueAtTime ?? ""}"
+             value="${
+               data.valueAtTime ??
+               ""
+             }"
              placeholder="Automático"
-             onchange="updateRegisterPreview()">
+             onchange="markValueManual(this)">
+
     </div>
 
     <button class="btn btn-danger btn-small"
-            onclick="this.closest('.period-row').remove();updateRegisterPreview()">
+            onclick="
+              this.closest('.period-row').remove();
+              updateRegisterPreview();
+            ">
       🗑️
     </button>
 
@@ -1863,71 +2497,189 @@ function addPeriodRow(data = {}){
 
   container.appendChild(row);
 
+  /*
+    Quando editamos um registro antigo,
+    o valor já vem gravado e não deve
+    ser substituído.
+  */
+
+  if(data.valueAtTime !== undefined){
+
+    const valueInput =
+      row.querySelector(
+        ".period-value"
+      );
+
+    valueInput.dataset.manual =
+      "true";
+
+  }
+
   updateRegisterPreview();
+
+}
+
+function markValueManual(input){
+
+  input.dataset.manual =
+    "true";
+
+  updateRegisterPreview();
+
+}
+
+function serviceSelectionChanged(select){
+
+  const row =
+    select.closest(
+      ".period-row"
+    );
+
+  const date =
+    document.getElementById(
+      "registerDate"
+    ).value;
+
+  const valueInput =
+    row.querySelector(
+      ".period-value"
+    );
+
+  if(!date){
+
+    updateRegisterPreview();
+
+    return;
+
+  }
+
+  const value =
+    getServiceValue(
+      select.value,
+      date
+    );
+
+  /*
+    Ao trocar de serviço,
+    buscamos novamente o valor
+    daquele serviço/data.
+  */
+
+  valueInput.value =
+    value || "";
+
+  valueInput.dataset.manual =
+    "false";
+
+  updateRegisterPreview();
+
 }
 
 function updateRegisterPreview(){
 
   const dateValue =
-    document.getElementById("registerDate").value;
+    document.getElementById(
+      "registerDate"
+    ).value;
 
   if(!dateValue) return;
 
-  const date = inputToDate(dateValue);
+  const date =
+    inputToDate(dateValue);
 
-  const expected = getExpectedMinutes(date);
+  const expected =
+    getExpectedMinutes(date);
 
-  document.getElementById("registerExpected").value =
+  document.getElementById(
+    "registerExpected"
+  ).value =
     minutesToText(expected);
 
-  document.getElementById("registerExpected2")
-    .textContent = minutesToText(expected);
+  document.getElementById(
+    "registerExpected2"
+  ).textContent =
+    minutesToText(expected);
 
   let worked = 0;
+
   let money = 0;
 
-  document.querySelectorAll(".period-row").forEach(row=>{
+  document.querySelectorAll(
+    ".period-row"
+  ).forEach(row=>{
 
-    const start = row.querySelector(".period-start").value;
-    const end = row.querySelector(".period-end").value;
-    const serviceId = row.querySelector(".period-service").value;
-    const valueInput = row.querySelector(".period-value");
+    const start =
+      row.querySelector(
+        ".period-start"
+      ).value;
+
+    const end =
+      row.querySelector(
+        ".period-end"
+      ).value;
+
+    const serviceId =
+      row.querySelector(
+        ".period-service"
+      ).value;
+
+    const valueInput =
+      row.querySelector(
+        ".period-value"
+      );
 
     if(start && end){
 
-      const mins = periodMinutes(start,end);
+      const mins =
+        periodMinutes(
+          start,
+          end
+        );
 
       worked += mins;
 
-      if(serviceId){
+      if(
+        serviceId &&
+        valueInput.dataset.manual !== "true"
+      ){
 
         const autoValue =
-          getServiceValue(serviceId,dateValue);
+          getServiceValue(
+            serviceId,
+            dateValue
+          );
 
-        if(
-          valueInput.value === "" ||
-          valueInput.dataset.auto === "true"
-        ){
-          valueInput.value =
-            autoValue ? autoValue : "";
+        valueInput.value =
+          autoValue
+            ? autoValue
+            : "";
 
-          valueInput.dataset.auto = "true";
-        }
       }
 
-      const value = Number(valueInput.value || 0);
+      const value =
+        Number(
+          valueInput.value || 0
+        );
 
-      money += mins / 60 * value;
+      money +=
+        mins / 60 * value;
+
     }
+
   });
 
-  const balance = worked - expected;
+  const balance =
+    worked - expected;
 
-  document.getElementById("registerWorked")
-    .textContent = minutesToText(worked);
+  document.getElementById(
+    "registerWorked"
+  ).textContent =
+    minutesToText(worked);
 
   const balanceEl =
-    document.getElementById("registerBalance");
+    document.getElementById(
+      "registerBalance"
+    );
 
   balanceEl.textContent =
     (balance >= 0 ? "+" : "") +
@@ -1940,139 +2692,285 @@ function updateRegisterPreview(){
         ? "var(--red)"
         : "var(--muted)";
 
-  document.getElementById("registerMoney")
-    .textContent = formatMoney(money);
+  document.getElementById(
+    "registerMoney"
+  ).textContent =
+    formatMoney(money);
+
 }
+
+
+/* ============================================================
+   SALVAR REGISTRO
+   ============================================================ */
 
 function saveRegister(){
 
   const date =
-    document.getElementById("registerDate").value;
+    document.getElementById(
+      "registerDate"
+    ).value;
 
   if(!date){
-    showToast("Informe a data.");
+
+    showToast(
+      "Informe a data."
+    );
+
     return;
+
   }
 
   const periods = [];
 
-  document.querySelectorAll(".period-row").forEach(row=>{
+  let validationError = "";
+
+  document.querySelectorAll(
+    ".period-row"
+  ).forEach(row=>{
+
+    if(validationError) return;
 
     const start =
-      row.querySelector(".period-start").value;
+      row.querySelector(
+        ".period-start"
+      ).value;
 
     const end =
-      row.querySelector(".period-end").value;
+      row.querySelector(
+        ".period-end"
+      ).value;
 
     const serviceId =
-      row.querySelector(".period-service").value;
+      row.querySelector(
+        ".period-service"
+      ).value;
 
     const valueInput =
-      row.querySelector(".period-value");
+      row.querySelector(
+        ".period-value"
+      );
 
-    if(!start || !end) return;
+    if(!start && !end && !serviceId){
 
-    if(!serviceId){
-      showToast("Selecione o serviço de todos os períodos.");
-      throw new Error("Serviço não selecionado");
+      return;
+
     }
 
-    let value = Number(valueInput.value || 0);
+    if(!start || !end){
 
-    if(!value){
-      value = getServiceValue(serviceId,date);
+      validationError =
+        "Preencha entrada e saída de todos os períodos.";
+
+      return;
+
+    }
+
+    if(!serviceId){
+
+      validationError =
+        "Selecione o serviço de todos os períodos.";
+
+      return;
+
+    }
+
+    let value =
+      Number(
+        valueInput.value || 0
+      );
+
+    /*
+      Se o usuário não informou manualmente,
+      usamos o valor correspondente ao período.
+    */
+
+    if(
+      valueInput.dataset.manual !== "true"
+    ){
+
+      value =
+        getServiceValue(
+          serviceId,
+          date
+        );
+
+    }
+
+    if(value <= 0){
+
+      validationError =
+        "O serviço selecionado não possui valor/hora definido para esta data.";
+
+      return;
+
     }
 
     periods.push({
+
       start,
+
       end,
+
       serviceId,
+
       valueAtTime:value
+
     });
+
   });
 
-  if(!periods.length){
-    showToast("Adicione pelo menos um período.");
+  if(validationError){
+
+    showToast(validationError);
+
     return;
+
+  }
+
+  if(!periods.length){
+
+    showToast(
+      "Adicione pelo menos um período."
+    );
+
+    return;
+
   }
 
   const record = {
-    id: editingRecordId || uid(),
+
+    id:
+      editingRecordId ||
+      uid(),
+
     date,
+
     periods,
-    updatedAt:new Date().toISOString()
+
+    updatedAt:
+      new Date().toISOString()
+
   };
 
   const existingIndex =
-    state.records.findIndex(r=>r.id === record.id);
+    state.records.findIndex(
+      r => r.id === record.id
+    );
 
   if(existingIndex >= 0){
-    state.records[existingIndex] = record;
-    showToast("Jornada atualizada!");
+
+    state.records[
+      existingIndex
+    ] = record;
+
+    showToast(
+      "Jornada atualizada!"
+    );
+
   }else{
-    state.records.push(record);
-    showToast("Jornada salva!");
+
+    state.records.push(
+      record
+    );
+
+    showToast(
+      "Jornada salva!"
+    );
+
   }
 
-  state.records.sort((a,b)=>{
-    return a.date.localeCompare(b.date);
-  });
+  state.records.sort(
+    (a,b)=>
+      a.date.localeCompare(
+        b.date
+      )
+  );
 
   saveState();
 
   editingRecordId = null;
 
   renderDashboard();
+
   renderHistory();
+
   renderCalendar();
 
   showPage("dashboard");
+
 }
 
 
 /* ============================================================
-   EDITAR / EXCLUIR
+   EDITAR / EXCLUIR REGISTRO
    ============================================================ */
 
 function editRecord(id){
 
   const record =
-    state.records.find(r=>r.id === id);
+    state.records.find(
+      r => r.id === id
+    );
 
   if(!record) return;
 
-  editingRecordId = id;
+  editingRecordId =
+    id;
 
   showPage("register");
 
-  document.getElementById("registerDate").value =
+  document.getElementById(
+    "registerTitle"
+  ).textContent =
+    "✏️ Editar jornada";
+
+  document.getElementById(
+    "registerDate"
+  ).value =
     record.date;
 
-  document.getElementById("periodRows").innerHTML = "";
+  document.getElementById(
+    "periodRows"
+  ).innerHTML = "";
 
   record.periods.forEach(p=>{
+
     addPeriodRow(p);
+
   });
 
   updateRegisterPreview();
+
 }
 
 function deleteRecord(id){
 
-  if(!confirm("Excluir esta jornada?")){
+  if(!confirm(
+    "Excluir esta jornada?"
+  )){
+
     return;
+
   }
 
   state.records =
-    state.records.filter(r=>r.id !== id);
+    state.records.filter(
+      r => r.id !== id
+    );
 
   saveState();
 
   renderDashboard();
+
   renderHistory();
+
   renderCalendar();
 
-  showToast("Jornada excluída.");
+  showToast(
+    "Jornada excluída."
+  );
+
 }
 
 
@@ -2083,12 +2981,21 @@ function deleteRecord(id){
 function renderHistory(){
 
   const container =
-    document.getElementById("historyList");
+    document.getElementById(
+      "historyList"
+    );
 
   const records =
-    getRecordsForMonth(currentMonth)
+    getRecordsForMonth(
+      currentMonth
+    )
       .slice()
-      .sort((a,b)=>b.date.localeCompare(a.date));
+      .sort(
+        (a,b)=>
+          b.date.localeCompare(
+            a.date
+          )
+      );
 
   if(!records.length){
 
@@ -2098,78 +3005,115 @@ function renderHistory(){
       </div>`;
 
     return;
+
   }
 
-  container.innerHTML = records.map(record=>{
+  container.innerHTML =
+    records.map(record=>{
 
-    const calc = calculateRecord(record);
+      const calc =
+        calculateRecord(
+          record
+        );
 
-    const services = [
-      ...new Set(
-        record.periods.map(p =>
-          getServiceById(p.serviceId)?.name || "Serviço"
+      const services = [
+        ...new Set(
+          record.periods.map(
+            p =>
+              getServiceById(
+                p.serviceId
+              )?.name ||
+              "Serviço"
+          )
         )
-      )
-    ];
+      ];
 
-    const balanceClass =
-      calc.balance > 0
-        ? "balance-positive"
-        : calc.balance < 0
-          ? "balance-negative"
-          : "balance-zero";
+      const balanceClass =
+        calc.balance > 0
+          ? "balance-positive"
+          : calc.balance < 0
+            ? "balance-negative"
+            : "balance-zero";
 
-    return `
+      return `
 
-      <div class="history-item">
+        <div class="history-item">
 
-        <div class="history-date">
-          ${formatDate(inputToDate(record.date))}
-        </div>
+          <div class="history-date">
 
-        <div class="history-main">
+            ${formatDate(
+              inputToDate(
+                record.date
+              )
+            )}
 
-          <strong>
-            ${minutesToText(calc.worked)}
-          </strong>
+          </div>
 
-          <div class="services">
-            ${services.join(" • ")}
+          <div class="history-main">
+
+            <strong>
+              ${minutesToText(
+                calc.worked
+              )}
+            </strong>
+
+            <div class="services">
+              ${services.join(" • ")}
+            </div>
+
+          </div>
+
+          <div class="history-right">
+
+            <div class="${balanceClass}">
+
+              ${
+                calc.balance >= 0
+                  ? "+"
+                  : ""
+              }
+
+              ${minutesToText(
+                calc.balance
+              )}
+
+            </div>
+
+            <strong>
+              ${formatMoney(
+                calc.money
+              )}
+            </strong>
+
+          </div>
+
+          <div style="
+            display:flex;
+            gap:5px
+          ">
+
+            <button class="btn btn-secondary btn-small"
+                    onclick="
+                      editRecord('${record.id}')
+                    ">
+              ✏️
+            </button>
+
+            <button class="btn btn-danger btn-small"
+                    onclick="
+                      deleteRecord('${record.id}')
+                    ">
+              🗑️
+            </button>
+
           </div>
 
         </div>
 
-        <div class="history-right">
+      `;
 
-          <div class="${balanceClass}">
-            ${calc.balance >= 0 ? "+" : ""}
-            ${minutesToText(calc.balance)}
-          </div>
+    }).join("");
 
-          <strong>
-            ${formatMoney(calc.money)}
-          </strong>
-
-        </div>
-
-        <div style="display:flex;gap:5px">
-
-          <button class="btn btn-secondary btn-small"
-                  onclick="editRecord('${record.id}')">
-            ✏️
-          </button>
-
-          <button class="btn btn-danger btn-small"
-                  onclick="deleteRecord('${record.id}')">
-            🗑️
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
 }
 
 
@@ -2180,112 +3124,196 @@ function renderHistory(){
 function renderCalendar(){
 
   const container =
-    document.getElementById("calendar");
+    document.getElementById(
+      "calendar"
+    );
 
-  const year = currentMonth.getFullYear();
-  const month = currentMonth.getMonth();
+  const year =
+    currentMonth.getFullYear();
+
+  const month =
+    currentMonth.getMonth();
 
   const firstDay =
-    new Date(year,month,1);
+    new Date(
+      year,
+      month,
+      1
+    );
 
   const lastDay =
-    new Date(year,month+1,0);
+    new Date(
+      year,
+      month + 1,
+      0
+    );
 
   const startWeekDay =
     firstDay.getDay();
 
-  let html = `<div class="calendar">`;
+  let html =
+    `<div class="calendar">`;
 
-  const names = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+  const names = [
+    "Dom",
+    "Seg",
+    "Ter",
+    "Qua",
+    "Qui",
+    "Sex",
+    "Sáb"
+  ];
 
   names.forEach(name=>{
+
     html += `
       <div class="calendar-head">
         ${name}
       </div>
     `;
+
   });
 
-  for(let i=0;i<startWeekDay;i++){
+  for(
+    let i=0;
+    i<startWeekDay;
+    i++
+  ){
 
     const previous =
-      new Date(year,month,1);
+      new Date(
+        year,
+        month,
+        1
+      );
 
     previous.setDate(
-      previous.getDate() - (startWeekDay-i)
+      previous.getDate() -
+      (startWeekDay-i)
     );
 
     html += `
       <div class="day other">
+
         <div class="day-number">
           ${previous.getDate()}
         </div>
+
       </div>
     `;
+
   }
 
-  const today = new Date();
+  const today =
+    new Date();
 
-  for(let day=1;day<=lastDay.getDate();day++){
+  for(
+    let day=1;
+    day<=lastDay.getDate();
+    day++
+  ){
 
     const date =
-      new Date(year,month,day);
+      new Date(
+        year,
+        month,
+        day
+      );
 
     const dateString =
       dateToInput(date);
 
     const record =
-      state.records.find(r=>r.date === dateString);
+      state.records.find(
+        r => r.date === dateString
+      );
 
     const expected =
-      getExpectedMinutes(date);
+      getExpectedMinutes(
+        date
+      );
 
-    let cls = "day";
+    let cls =
+      "day";
+
     let status = "";
 
     if(sameDay(date,today)){
+
       cls += " today";
+
     }
 
     if(record){
 
       const calc =
-        calculateRecord(record);
+        calculateRecord(
+          record
+        );
 
-      if(expected === 0 && calc.worked > 0){
+      if(
+        expected === 0 &&
+        calc.worked > 0
+      ){
 
         cls += " extra";
 
         status = `
+
           <span class="badge badge-yellow">
             Extra
           </span>
+
           <br>
-          ${minutesToText(calc.worked)}
+
+          ${minutesToText(
+            calc.worked
+          )}
+
         `;
 
-      }else if(calc.balance > 0){
+      }else if(
+        calc.balance > 0
+      ){
 
         cls += " worked";
 
         status = `
+
           <span class="badge badge-blue">
-            +${minutesToText(calc.balance)}
+            +${minutesToText(
+              calc.balance
+            )}
           </span>
+
           <br>
-          ${minutesToText(calc.worked)}
+
+          ${minutesToText(
+            calc.worked
+          )}
+
         `;
 
-      }else if(calc.balance < 0){
+      }else if(
+        calc.balance < 0
+      ){
 
         cls += " negative";
 
         status = `
+
           <span class="badge badge-red">
-            ${minutesToText(calc.balance)}
+            ${minutesToText(
+              calc.balance
+            )}
           </span>
+
           <br>
-          ${minutesToText(calc.worked)}
+
+          ${minutesToText(
+            calc.worked
+          )}
+
         `;
 
       }else{
@@ -2293,35 +3321,62 @@ function renderCalendar(){
         cls += " worked";
 
         status = `
+
           <span class="badge badge-green">
             OK
           </span>
+
           <br>
-          ${minutesToText(calc.worked)}
+
+          ${minutesToText(
+            calc.worked
+          )}
+
         `;
+
       }
 
     }else if(expected > 0){
 
       status = `
-        <span style="color:var(--muted)">
-          Prev. ${minutesToText(expected)}
+
+        <span style="
+          color:var(--muted)
+        ">
+
+          Prev.
+          ${minutesToText(
+            expected
+          )}
+
         </span>
+
       `;
 
     }else{
 
       status = `
-        <span style="color:var(--muted)">
+
+        <span style="
+          color:var(--muted)
+        ">
+
           Folga
+
         </span>
+
       `;
+
     }
 
     html += `
 
       <div class="${cls}"
-           onclick="calendarDayClick('${dateString}')"
+           onclick="
+             calendarDayClick(
+               '${dateString}'
+             )
+           "
            style="cursor:pointer">
 
         <div class="day-number">
@@ -2335,40 +3390,69 @@ function renderCalendar(){
       </div>
 
     `;
+
   }
 
   const totalCells =
-    startWeekDay + lastDay.getDate();
+    startWeekDay +
+    lastDay.getDate();
 
   const remaining =
     (7 - (totalCells % 7)) % 7;
 
-  for(let i=1;i<=remaining;i++){
+  for(
+    let i=1;
+    i<=remaining;
+    i++
+  ){
 
     html += `
+
       <div class="day other">
+
         <div class="day-number">
           ${i}
         </div>
+
       </div>
+
     `;
+
   }
 
-  html += `</div>`;
+  html +=
+    `</div>`;
 
-  container.innerHTML = html;
+  container.innerHTML =
+    html;
+
 }
 
-function calendarDayClick(dateString){
+function calendarDayClick(
+  dateString
+){
 
   const record =
-    state.records.find(r=>r.date === dateString);
+    state.records.find(
+      r => r.date === dateString
+    );
 
   if(record){
-    editRecord(record.id);
+
+    editRecord(
+      record.id
+    );
+
   }else{
-    openRegister(inputToDate(dateString));
+
+    openRegister(
+      inputToDate(
+        dateString
+      )
+    );
+
   }
+
 }
 
 
@@ -2379,177 +3463,728 @@ function calendarDayClick(dateString){
 function renderServices(){
 
   const container =
-    document.getElementById("serviceList");
+    document.getElementById(
+      "serviceList"
+    );
 
   if(!state.services.length){
 
     container.innerHTML = `
-      <div class="empty" style="grid-column:1/-1">
+
+      <div class="empty"
+           style="grid-column:1/-1">
+
         Nenhum serviço cadastrado.<br>
-        Cadastre seu primeiro local para começar.
+
+        Cadastre seu primeiro local
+        para começar.
+
       </div>
+
     `;
 
     return;
+
   }
 
   container.innerHTML =
-    state.services.map(service=>{
+    state.services.map(
+      service=>{
 
-      const periods =
-        service.valuePeriods || [];
+        const periods =
+          service.valuePeriods || [];
 
-      return `
+        return `
 
-        <div class="service-card">
+          <div class="service-card">
 
-          <h3>🏢 ${service.name}</h3>
+            <h3>
+              🏢 ${service.name}
+            </h3>
 
-          ${
-            periods.length
-              ? periods.map(p=>`
+            ${
+              periods.length
+                ? periods
+                    .slice()
+                    .sort(
+                      (a,b)=>
+                        inputToDate(
+                          b.start
+                        ) -
+                        inputToDate(
+                          a.start
+                        )
+                    )
+                    .map(
+                      (p,index)=>`
 
-                <div class="value-period">
+                        <div class="value-period">
 
-                  <strong>
-                    ${formatMoney(p.value)}/h
-                  </strong>
+                          <strong>
 
-                  <div style="color:var(--muted);margin-top:4px">
-                    ${formatDate(inputToDate(p.start))}
-                    →
-                    ${
-                      p.end
-                        ? formatDate(inputToDate(p.end))
-                        : "atual"
-                    }
-                  </div>
+                            ${formatMoney(
+                              p.value
+                            )}/h
 
-                </div>
+                          </strong>
 
-              `).join("")
-              : `<p>Nenhum período de valor.</p>`
-          }
+                          <div style="
+                            color:var(--muted);
+                            margin-top:4px
+                          ">
 
-          <div class="form-actions">
+                            ${formatDate(
+                              inputToDate(
+                                p.start
+                              )
+                            )}
 
-            <button class="btn btn-secondary btn-small"
-                    onclick="editService('${service.id}')">
-              ✏️ Editar
-            </button>
+                            →
 
-            <button class="btn btn-danger btn-small"
-                    onclick="deleteService('${service.id}')">
-              🗑️ Excluir
-            </button>
+                            ${
+                              p.end
+                                ? formatDate(
+                                    inputToDate(
+                                      p.end
+                                    )
+                                  )
+                                : "atual"
+                            }
+
+                          </div>
+
+                          <div class="value-period-actions">
+
+                            <button class="
+                              btn
+                              btn-secondary
+                              btn-small
+                            "
+                            onclick="
+                              editValuePeriod(
+                                '${service.id}',
+                                '${p.id}'
+                              )
+                            ">
+                              ✏️
+                            </button>
+
+                            <button class="
+                              btn
+                              btn-danger
+                              btn-small
+                            "
+                            onclick="
+                              deleteValuePeriod(
+                                '${service.id}',
+                                '${p.id}'
+                              )
+                            ">
+                              🗑️
+                            </button>
+
+                          </div>
+
+                        </div>
+
+                      `
+                    )
+                    .join("")
+                : `
+                    <p>
+                      Nenhum período de valor cadastrado.
+                    </p>
+                  `
+            }
+
+            <div class="form-actions">
+
+              <button class="
+                btn
+                btn-secondary
+                btn-small
+              "
+              onclick="
+                editService(
+                  '${service.id}'
+                )
+              ">
+                ✏️ Editar
+              </button>
+
+              <button class="
+                btn
+                btn-danger
+                btn-small
+              "
+              onclick="
+                deleteService(
+                  '${service.id}'
+                )
+              ">
+                🗑️ Excluir
+              </button>
+
+            </div>
 
           </div>
 
-        </div>
-      `;
+        `;
 
-    }).join("");
+      }
+    ).join("");
+
 }
 
-function openServiceModal(service = null){
 
-  document.getElementById("serviceModal")
-    .classList.add("open");
+/* ============================================================
+   MODAL DE SERVIÇO
+   ============================================================ */
 
-  document.getElementById("serviceEditId").value =
+function openServiceModal(
+  service = null
+){
+
+  editingServiceId =
+    service?.id || null;
+
+  temporaryValuePeriods =
+    service
+      ? JSON.parse(
+          JSON.stringify(
+            service.valuePeriods || []
+          )
+        )
+      : [];
+
+  document.getElementById(
+    "serviceModal"
+  ).classList.add("open");
+
+  document.getElementById(
+    "serviceEditId"
+  ).value =
     service?.id || "";
 
-  document.getElementById("serviceName").value =
+  document.getElementById(
+    "serviceName"
+  ).value =
     service?.name || "";
 
-  const periods =
-    service?.valuePeriods || [];
+  clearValuePeriodInputs();
 
-  document.getElementById("serviceValue").value =
-    periods.length
-      ? periods[periods.length-1].value
-      : "";
+  document.getElementById(
+    "serviceModalTitle"
+  ).textContent =
+    service
+      ? "Editar serviço"
+      : "Novo serviço";
 
-  document.getElementById("serviceModalTitle")
-    .textContent =
-      service
-        ? "Editar serviço"
-        : "Novo serviço";
+  renderTemporaryValuePeriods();
+
 }
 
 function closeServiceModal(){
 
-  document.getElementById("serviceModal")
-    .classList.remove("open");
+  document.getElementById(
+    "serviceModal"
+  ).classList.remove("open");
+
+  editingServiceId =
+    null;
+
+  temporaryValuePeriods =
+    [];
+
+}
+
+function clearValuePeriodInputs(){
+
+  document.getElementById(
+    "periodStart"
+  ).value = "";
+
+  document.getElementById(
+    "periodEnd"
+  ).value = "";
+
+  document.getElementById(
+    "periodValue"
+  ).value = "";
+
+}
+
+function addValuePeriod(){
+
+  const start =
+    document.getElementById(
+      "periodStart"
+    ).value;
+
+  const end =
+    document.getElementById(
+      "periodEnd"
+    ).value;
+
+  const value =
+    Number(
+      document.getElementById(
+        "periodValue"
+      ).value || 0
+    );
+
+  if(!start){
+
+    showToast(
+      "Informe a data inicial."
+    );
+
+    return;
+
+  }
+
+  if(end &&
+     inputToDate(end) <
+     inputToDate(start)){
+
+    showToast(
+      "A data final não pode ser anterior à inicial."
+    );
+
+    return;
+
+  }
+
+  if(value <= 0){
+
+    showToast(
+      "Informe um valor/hora válido."
+    );
+
+    return;
+
+  }
+
+  /*
+    Se já existir um período com
+    exatamente o mesmo início,
+    substituímos.
+  */
+
+  const existingIndex =
+    temporaryValuePeriods.findIndex(
+      p => p.start === start
+    );
+
+  const newPeriod = {
+
+    id:
+      existingIndex >= 0
+        ? temporaryValuePeriods[
+            existingIndex
+          ].id
+        : uid(),
+
+    start,
+
+    end,
+
+    value
+
+  };
+
+  if(existingIndex >= 0){
+
+    temporaryValuePeriods[
+      existingIndex
+    ] = newPeriod;
+
+  }else{
+
+    temporaryValuePeriods.push(
+      newPeriod
+    );
+
+  }
+
+  temporaryValuePeriods.sort(
+    (a,b)=>
+      inputToDate(a.start) -
+      inputToDate(b.start)
+  );
+
+  clearValuePeriodInputs();
+
+  renderTemporaryValuePeriods();
+
+  showToast(
+    "Período adicionado."
+  );
+
+}
+
+function renderTemporaryValuePeriods(){
+
+  const container =
+    document.getElementById(
+      "modalValuePeriods"
+    );
+
+  if(!temporaryValuePeriods.length){
+
+    container.innerHTML = `
+
+      <div class="empty"
+           style="padding:15px">
+
+        Nenhum período adicionado ainda.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    temporaryValuePeriods
+      .slice()
+      .sort(
+        (a,b)=>
+          inputToDate(a.start) -
+          inputToDate(b.start)
+      )
+      .map(
+        p=>`
+
+          <div class="value-period">
+
+            <strong>
+              ${formatMoney(p.value)}/h
+            </strong>
+
+            <div style="
+              color:var(--muted);
+              margin-top:4px
+            ">
+
+              ${formatDate(
+                inputToDate(
+                  p.start
+                )
+              )}
+
+              →
+
+              ${
+                p.end
+                  ? formatDate(
+                      inputToDate(
+                        p.end
+                      )
+                    )
+                  : "atual"
+              }
+
+            </div>
+
+            <div class="value-period-actions">
+
+              <button class="
+                btn
+                btn-secondary
+                btn-small
+              "
+              onclick="
+                loadTemporaryPeriod(
+                  '${p.id}'
+                )
+              ">
+                ✏️ Editar
+              </button>
+
+              <button class="
+                btn
+                btn-danger
+                btn-small
+              "
+              onclick="
+                removeTemporaryPeriod(
+                  '${p.id}'
+                )
+              ">
+                🗑️ Remover
+              </button>
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+function loadTemporaryPeriod(id){
+
+  const period =
+    temporaryValuePeriods.find(
+      p => p.id === id
+    );
+
+  if(!period) return;
+
+  document.getElementById(
+    "periodStart"
+  ).value =
+    period.start;
+
+  document.getElementById(
+    "periodEnd"
+  ).value =
+    period.end || "";
+
+  document.getElementById(
+    "periodValue"
+  ).value =
+    period.value;
+
+  temporaryValuePeriods =
+    temporaryValuePeriods.filter(
+      p => p.id !== id
+    );
+
+  renderTemporaryValuePeriods();
+
+}
+
+function removeTemporaryPeriod(id){
+
+  temporaryValuePeriods =
+    temporaryValuePeriods.filter(
+      p => p.id !== id
+    );
+
+  renderTemporaryValuePeriods();
+
+}
+
+function editValuePeriod(
+  serviceId,
+  periodId
+){
+
+  const service =
+    getServiceById(
+      serviceId
+    );
+
+  if(!service) return;
+
+  openServiceModal(
+    service
+  );
+
+  setTimeout(()=>{
+
+    const period =
+      temporaryValuePeriods.find(
+        p => p.id === periodId
+      );
+
+    if(!period) return;
+
+    temporaryValuePeriods =
+      temporaryValuePeriods.filter(
+        p => p.id !== periodId
+      );
+
+    document.getElementById(
+      "periodStart"
+    ).value =
+      period.start;
+
+    document.getElementById(
+      "periodEnd"
+    ).value =
+      period.end || "";
+
+    document.getElementById(
+      "periodValue"
+    ).value =
+      period.value;
+
+    renderTemporaryValuePeriods();
+
+  },50);
+
+}
+
+function deleteValuePeriod(
+  serviceId,
+  periodId
+){
+
+  const service =
+    getServiceById(
+      serviceId
+    );
+
+  if(!service) return;
+
+  if(!confirm(
+    "Excluir este período de valor?"
+  )){
+
+    return;
+
+  }
+
+  service.valuePeriods =
+    (service.valuePeriods || [])
+      .filter(
+        p => p.id !== periodId
+      );
+
+  saveState();
+
+  renderServices();
+
+  showToast(
+    "Período de valor excluído."
+  );
+
 }
 
 function saveService(){
 
-  const id =
-    document.getElementById("serviceEditId").value;
-
   const name =
-    document.getElementById("serviceName").value.trim();
-
-  const value =
-    Number(document.getElementById("serviceValue").value || 0);
+    document.getElementById(
+      "serviceName"
+    ).value.trim();
 
   if(!name){
-    showToast("Informe o nome do serviço.");
+
+    showToast(
+      "Informe o nome do serviço."
+    );
+
     return;
+
   }
 
-  if(value < 0){
-    showToast("Valor inválido.");
+  if(!temporaryValuePeriods.length){
+
+    showToast(
+      "Adicione pelo menos um período de valor."
+    );
+
     return;
+
   }
 
-  if(id){
+  /*
+    Validação de sobreposição.
+    Dois períodos não podem se sobrepor.
+  */
 
-    const service =
-      getServiceById(id);
+  const sorted =
+    temporaryValuePeriods
+      .slice()
+      .sort(
+        (a,b)=>
+          inputToDate(a.start) -
+          inputToDate(b.start)
+      );
 
-    if(service){
+  for(
+    let i=0;
+    i<sorted.length-1;
+    i++
+  ){
 
-      service.name = name;
+    const current =
+      sorted[i];
 
-      if(service.valuePeriods?.length){
+    const next =
+      sorted[i+1];
 
-        service.valuePeriods[
-          service.valuePeriods.length - 1
-        ].value = value;
+    if(!current.end){
 
-      }else{
+      showToast(
+        "Um período sem data final precisa ser o último."
+      );
 
-        service.valuePeriods = [{
-          start:dateToInput(new Date()),
-          end:"",
-          value
-        }];
-
-      }
+      return;
 
     }
 
-    showToast("Serviço atualizado!");
+    if(
+      inputToDate(
+        current.end
+      ) >=
+      inputToDate(
+        next.start
+      )
+    ){
+
+      showToast(
+        "Existem períodos de valor sobrepostos."
+      );
+
+      return;
+
+    }
+
+  }
+
+  if(editingServiceId){
+
+    const service =
+      getServiceById(
+        editingServiceId
+      );
+
+    if(!service) return;
+
+    service.name =
+      name;
+
+    service.valuePeriods =
+      JSON.parse(
+        JSON.stringify(
+          temporaryValuePeriods
+        )
+      );
+
+    showToast(
+      "Serviço atualizado!"
+    );
 
   }else{
 
     state.services.push({
 
-      id:uid(),
+      id:
+        uid(),
 
       name,
 
-      valuePeriods:[{
-        start:dateToInput(new Date()),
-        end:"",
-        value
-      }]
+      valuePeriods:
+        JSON.parse(
+          JSON.stringify(
+            temporaryValuePeriods
+          )
+        )
 
     });
 
-    showToast("Serviço cadastrado!");
+    showToast(
+      "Serviço cadastrado!"
+    );
+
   }
 
   saveState();
@@ -2559,6 +4194,7 @@ function saveService(){
   renderServices();
 
   showPage("services");
+
 }
 
 function editService(id){
@@ -2567,15 +4203,25 @@ function editService(id){
     getServiceById(id);
 
   if(service){
-    openServiceModal(service);
+
+    openServiceModal(
+      service
+    );
+
   }
+
 }
 
 function deleteService(id){
 
   const used =
-    state.records.some(r =>
-      r.periods.some(p=>p.serviceId === id)
+    state.records.some(
+      r =>
+        (r.periods || [])
+          .some(
+            p =>
+              p.serviceId === id
+          )
     );
 
   if(used){
@@ -2586,20 +4232,30 @@ function deleteService(id){
     );
 
     return;
+
   }
 
-  if(!confirm("Excluir este serviço?")){
+  if(!confirm(
+    "Excluir este serviço?"
+  )){
+
     return;
+
   }
 
   state.services =
-    state.services.filter(s=>s.id !== id);
+    state.services.filter(
+      s => s.id !== id
+    );
 
   saveState();
 
   renderServices();
 
-  showToast("Serviço excluído.");
+  showToast(
+    "Serviço excluído."
+  );
+
 }
 
 
@@ -2610,37 +4266,67 @@ function deleteService(id){
 function exportBackup(){
 
   const backup = {
-    app:"Meu Banco de Horas",
-    version:"V1",
-    exportedAt:new Date().toISOString(),
-    data:state
+
+    app:
+      "Meu Banco de Horas",
+
+    version:
+      "V1.1",
+
+    exportedAt:
+      new Date().toISOString(),
+
+    data:
+      state
+
   };
 
   const blob =
     new Blob(
-      [JSON.stringify(backup,null,2)],
-      {type:"application/json"}
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+          "application/json"
+      }
     );
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
   const date =
     new Date();
 
-  a.href = url;
+  a.href =
+    url;
 
   a.download =
     `meu-banco-de-horas-backup-${dateToInput(date)}.json`;
 
+  document.body.appendChild(a);
+
   a.click();
+
+  a.remove();
 
   URL.revokeObjectURL(url);
 
-  showToast("Backup exportado!");
+  showToast(
+    "Backup exportado!"
+  );
+
 }
 
 function importBackup(event){
@@ -2653,80 +4339,133 @@ function importBackup(event){
   const reader =
     new FileReader();
 
-  reader.onload = function(){
+  reader.onload =
+    function(){
 
-    try{
+      try{
 
-      const parsed =
-        JSON.parse(reader.result);
+        const parsed =
+          JSON.parse(
+            reader.result
+          );
 
-      const imported =
-        parsed.data || parsed;
+        const imported =
+          parsed.data ||
+          parsed;
 
-      if(
-        !Array.isArray(imported.services) ||
-        !Array.isArray(imported.records)
-      ){
-        throw new Error("Formato inválido");
+        if(
+          !Array.isArray(
+            imported.services
+          ) ||
+          !Array.isArray(
+            imported.records
+          )
+        ){
+
+          throw new Error(
+            "Formato inválido"
+          );
+
+        }
+
+        if(!confirm(
+          "Importar este backup substituirá os dados atuais. Continuar?"
+        )){
+
+          return;
+
+        }
+
+        state =
+          imported;
+
+        state.services.forEach(
+          service=>{
+
+            if(
+              !Array.isArray(
+                service.valuePeriods
+              )
+            ){
+
+              service.valuePeriods =
+                [];
+
+            }
+
+          }
+        );
+
+        saveState();
+
+        renderDashboard();
+
+        renderServices();
+
+        renderHistory();
+
+        renderCalendar();
+
+        showToast(
+          "Backup restaurado!"
+        );
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Não foi possível importar este backup."
+        );
+
       }
 
-      if(!confirm(
-        "Importar este backup substituirá os dados atuais. Continuar?"
-      )){
-        return;
-      }
-
-      state = imported;
-
-      saveState();
-
-      renderDashboard();
-      renderServices();
-      renderHistory();
-      renderCalendar();
-
-      showToast("Backup restaurado!");
-
-    }catch(e){
-
-      alert(
-        "Não foi possível importar este backup."
-      );
-
-      console.error(e);
-    }
-
-  };
+    };
 
   reader.readAsText(file);
 
   event.target.value = "";
+
 }
 
 function clearAllData(){
 
   const confirmation =
     prompt(
-      'Digite APAGAR para confirmar a exclusão de todos os dados.'
+      "Digite APAGAR para confirmar a exclusão de todos os dados."
     );
 
-  if(confirmation !== "APAGAR"){
+  if(
+    confirmation !==
+    "APAGAR"
+  ){
+
     return;
+
   }
 
   state = {
+
     services:[],
+
     records:[]
+
   };
 
   saveState();
 
   renderDashboard();
+
   renderServices();
+
   renderHistory();
+
   renderCalendar();
 
-  showToast("Todos os dados foram apagados.");
+  showToast(
+    "Todos os dados foram apagados."
+  );
+
 }
 
 
@@ -2741,14 +4480,13 @@ function init(){
   updateMonthLabel();
 
   renderDashboard();
+
   renderCalendar();
+
   renderHistory();
+
   renderServices();
 
-  /*
-    Se não houver serviços, o app continua funcionando.
-    O usuário poderá cadastrar os locais pela aba Serviços.
-  */
 }
 
 init();
@@ -2757,3 +4495,4 @@ init();
 
 </body>
 </html>
+```
