@@ -2,49 +2,44 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meu Banco de Horas V1.2</title>
+<meta name="theme-color" content="#111827">
+
+<title>Meu Banco de Horas</title>
 
 <style>
+
 :root{
   --bg:#f3f4f6;
   --card:#ffffff;
   --text:#111827;
   --muted:#6b7280;
-  --border:#e5e7eb;
   --primary:#2563eb;
   --primary-dark:#1d4ed8;
   --green:#16a34a;
-  --green-bg:#dcfce7;
   --red:#dc2626;
-  --red-bg:#fee2e2;
-  --blue-bg:#dbeafe;
-  --yellow:#ca8a04;
-  --yellow-bg:#fef9c3;
-  --shadow:0 4px 18px rgba(0,0,0,.07);
-  --radius:18px;
+  --yellow:#d97706;
+  --border:#e5e7eb;
+  --shadow:0 4px 16px rgba(0,0,0,.07);
+  --radius:16px;
 }
 
 *{
   box-sizing:border-box;
 }
 
-html,
 body{
   margin:0;
-  padding:0;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   background:var(--bg);
   color:var(--text);
-}
-
-body{
-  min-height:100vh;
-  padding-bottom:85px;
 }
 
 button,
@@ -58,52 +53,96 @@ button{
 }
 
 .app{
-  max-width:1200px;
+  min-height:100vh;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header{
+  background:#111827;
+  color:white;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  max-width:1100px;
   margin:auto;
-  padding:18px;
-}
-
-header{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
   gap:15px;
-  margin-bottom:20px;
 }
 
-.brand h1{
-  margin:0;
-  font-size:25px;
-}
-
-.brand p{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:14px;
-}
-
-.month-selector{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:7px 10px;
-}
-
-.month-selector button{
-  border:0;
-  background:transparent;
+.logo{
   font-size:20px;
-  width:30px;
-  height:30px;
+  font-weight:800;
 }
 
-.month-selector span{
-  min-width:110px;
-  text-align:center;
-  font-weight:bold;
+.logo small{
+  display:block;
+  font-size:11px;
+  font-weight:400;
+  opacity:.65;
+  margin-top:2px;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+.nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:73px;
+  z-index:40;
+}
+
+.nav-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  overflow-x:auto;
+}
+
+.nav button{
+  border:0;
+  background:none;
+  padding:14px 18px;
+  color:var(--muted);
+  font-weight:700;
+  white-space:nowrap;
+  border-bottom:3px solid transparent;
+}
+
+.nav button:hover{
+  color:var(--text);
+}
+
+.nav button.active{
+  color:var(--primary);
+  border-bottom-color:var(--primary);
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px 16px 50px;
 }
 
 .page{
@@ -114,45 +153,21 @@ header{
   display:block;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin-bottom:18px;
+.page-title{
+  margin:0 0 6px;
+  font-size:26px;
 }
+
+.page-subtitle{
+  margin:0 0 22px;
+  color:var(--muted);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px;
-  box-shadow:var(--shadow);
-}
-
-.card .label{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:8px;
-}
-
-.card .value{
-  font-size:25px;
-  font-weight:800;
-}
-
-.card.green .value{
-  color:var(--green);
-}
-
-.card.red .value{
-  color:var(--red);
-}
-
-.card.blue .value{
-  color:var(--primary);
-}
-
-.section{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -161,24 +176,68 @@ header{
   margin-bottom:18px;
 }
 
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:15px;
+.card h2,
+.card h3{
+  margin-top:0;
 }
 
-.section-title h2{
-  margin:0;
-  font-size:18px;
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:18px;
 }
+
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.stat-value{
+  font-size:25px;
+  font-weight:800;
+}
+
+.stat-value.green{
+  color:var(--green);
+}
+
+.stat-value.red{
+  color:var(--red);
+}
+
+.stat-value.blue{
+  color:var(--primary);
+}
+
+.dashboard-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .btn{
   border:0;
-  border-radius:12px;
+  border-radius:10px;
   padding:11px 16px;
-  font-weight:bold;
+  font-weight:700;
   transition:.15s;
 }
 
@@ -188,7 +247,7 @@ header{
 
 .btn-primary{
   background:var(--primary);
-  color:#fff;
+  color:white;
 }
 
 .btn-primary:hover{
@@ -196,8 +255,8 @@ header{
 }
 
 .btn-secondary{
-  background:#e5e7eb;
-  color:#111827;
+  background:#eef2f7;
+  color:#374151;
 }
 
 .btn-danger{
@@ -205,19 +264,24 @@ header{
   color:#991b1b;
 }
 
+.btn-success{
+  background:#dcfce7;
+  color:#166534;
+}
+
 .btn-small{
   padding:7px 10px;
   font-size:13px;
 }
 
+/* =========================================================
+   FORMS
+   ========================================================= */
+
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.form-grid.three{
-  grid-template-columns:repeat(3,1fr);
+  gap:16px;
 }
 
 .field{
@@ -226,19 +290,23 @@ header{
   gap:6px;
 }
 
+.field.full{
+  grid-column:1/-1;
+}
+
 .field label{
-  font-size:12px;
-  font-weight:bold;
-  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
 }
 
 .field input,
 .field select{
   width:100%;
-  border:1px solid var(--border);
-  background:#fff;
+  padding:11px 12px;
+  border:1px solid #d1d5db;
   border-radius:10px;
-  padding:10px;
+  background:white;
+  color:var(--text);
   outline:none;
 }
 
@@ -250,75 +318,171 @@ header{
 
 .form-actions{
   display:flex;
+  flex-wrap:wrap;
   gap:10px;
   margin-top:18px;
-  flex-wrap:wrap;
 }
 
-.notice{
-  padding:12px 14px;
-  border-radius:12px;
-  background:var(--blue-bg);
-  color:#1e40af;
-  font-size:13px;
-  margin-bottom:15px;
-}
+/* =========================================================
+   REGISTER
+   ========================================================= */
 
-.notice.warning{
-  background:var(--yellow-bg);
-  color:#854d0e;
+.register-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
 }
 
 .summary-box{
   background:#f9fafb;
-  border-radius:14px;
-  padding:15px;
-  margin-top:15px;
-}
-
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.summary-item{
-  padding:12px;
-  background:#fff;
   border:1px solid var(--border);
   border-radius:12px;
+  padding:14px;
 }
 
-.summary-item small{
-  display:block;
+.summary-label{
   color:var(--muted);
-  margin-bottom:5px;
+  font-size:12px;
 }
 
-.summary-item strong{
-  font-size:18px;
+.summary-value{
+  font-size:20px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.period-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .period-row{
   display:grid;
-  grid-template-columns:1fr 1fr 1.5fr 1fr auto;
+  grid-template-columns:1fr 1fr 1.4fr 1fr auto;
   gap:10px;
   align-items:end;
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
+  padding:14px;
+  background:#f9fafb;
+  border:1px solid var(--border);
+  border-radius:12px;
 }
 
-.period-row:last-child{
-  border-bottom:0;
+.period-row .field{
+  min-width:0;
+}
+
+.period-row-remove{
+  height:43px;
+}
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.service-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.service-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.service-card h3{
+  margin:0 0 14px;
+}
+
+.service-value{
+  font-size:24px;
+  font-weight:800;
+  color:var(--green);
+}
+
+.service-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.service-actions{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   HISTÓRICO
+   ========================================================= */
+
+.history-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.month-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.month-label{
+  min-width:170px;
+  text-align:center;
+  font-weight:800;
+}
+
+.history-groups{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.history-group{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.history-group-header{
+  padding:16px 18px;
+  background:#f9fafb;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.history-group-title{
+  font-size:18px;
+  font-weight:800;
+}
+
+.history-group-summary{
+  color:var(--muted);
+  font-size:13px;
+  text-align:right;
 }
 
 .history-item{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:center;
-  padding:15px 0;
+  padding:15px 18px;
   border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:100px 1fr auto auto;
+  gap:14px;
+  align-items:center;
 }
 
 .history-item:last-child{
@@ -327,303 +491,191 @@ header{
 
 .history-date{
   font-weight:800;
-  min-width:90px;
 }
 
-.history-main{
-  flex:1;
-}
-
-.history-main .services{
+.history-periods{
   color:var(--muted);
   font-size:13px;
   margin-top:4px;
 }
 
-.history-right{
-  text-align:right;
+.history-hours{
+  font-weight:800;
+  white-space:nowrap;
 }
 
-.balance-positive{
+.history-money{
+  font-weight:800;
   color:var(--green);
-  font-weight:bold;
+  white-space:nowrap;
 }
 
-.balance-negative{
-  color:var(--red);
-  font-weight:bold;
-}
-
-.balance-zero{
-  color:var(--muted);
-  font-weight:bold;
-}
-
-.badge{
-  display:inline-block;
-  border-radius:999px;
-  padding:5px 9px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.badge-green{
-  background:var(--green-bg);
-  color:#166534;
-}
-
-.badge-red{
-  background:var(--red-bg);
-  color:#991b1b;
-}
-
-.badge-blue{
-  background:var(--blue-bg);
-  color:#1e40af;
-}
-
-.badge-yellow{
-  background:var(--yellow-bg);
-  color:#854d0e;
-}
-
-.service-list{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.service-card{
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:15px;
-}
-
-.service-card h3{
-  margin:0 0 7px;
-}
-
-.service-card p{
-  margin:4px 0;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.value-period{
-  margin-top:10px;
-  padding:10px;
-  background:#f9fafb;
-  border-radius:10px;
-  font-size:13px;
-  border:1px solid var(--border);
-}
-
-.value-period-actions{
+.history-actions{
   display:flex;
-  justify-content:flex-end;
-  gap:6px;
-  margin-top:8px;
+  gap:5px;
 }
 
-.value-period-form{
-  margin-top:15px;
-  padding:14px;
-  border-radius:14px;
-  background:#f9fafb;
-  border:1px solid var(--border);
-}
-
-.value-period-list{
-  margin-top:12px;
-}
+/* =========================================================
+   CALENDAR
+   ========================================================= */
 
 .calendar{
   display:grid;
   grid-template-columns:repeat(7,1fr);
-  gap:7px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  background:white;
 }
 
 .calendar-head{
+  padding:10px;
   text-align:center;
   font-size:12px;
-  font-weight:bold;
+  font-weight:800;
   color:var(--muted);
-  padding:5px;
-}
-
-.day{
-  min-height:75px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:8px;
-  background:#fff;
-  position:relative;
-}
-
-.day.other{
-  opacity:.35;
-}
-
-.day-number{
-  font-weight:bold;
-  font-size:13px;
-}
-
-.day-status{
-  margin-top:8px;
-  font-size:11px;
-  line-height:1.3;
-}
-
-.day.worked{
-  border-color:#86efac;
-  background:#f0fdf4;
-}
-
-.day.extra{
-  border-color:#93c5fd;
-  background:#eff6ff;
-}
-
-.day.negative{
-  border-color:#fca5a5;
-  background:#fef2f2;
-}
-
-.day.today{
-  outline:2px solid var(--primary);
-}
-
-.kpi-line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:9px 0;
+  background:#f9fafb;
   border-bottom:1px solid var(--border);
 }
 
-.kpi-line:last-child{
-  border-bottom:0;
+.day{
+  min-height:105px;
+  padding:8px;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:.15s;
 }
 
-.empty{
-  color:var(--muted);
-  text-align:center;
-  padding:25px 10px;
+.day:hover{
+  background:#f8fafc;
 }
 
-.danger-zone{
-  border:1px solid #fecaca;
-  background:#fffafa;
+.day.other{
+  background:#f9fafb;
+  color:#c4c8ce;
+  cursor:default;
 }
 
-.file-label{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+.day.today{
+  box-shadow:inset 0 0 0 2px var(--primary);
 }
 
-input[type=file]{
-  display:none;
+.day-number{
+  font-weight:800;
+  font-size:14px;
 }
 
-.bottom-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:50;
-  background:rgba(255,255,255,.97);
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:center;
-  box-shadow:0 -4px 15px rgba(0,0,0,.06);
+.day-status{
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.4;
 }
 
-.nav-inner{
-  width:min(700px,100%);
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
+.badge{
+  display:inline-block;
+  padding:3px 6px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:800;
 }
 
-.nav-btn{
-  border:0;
-  background:transparent;
-  padding:9px 4px 10px;
-  color:var(--muted);
-  font-size:11px;
+.badge-green{
+  background:#dcfce7;
+  color:#166534;
 }
 
-.nav-btn .icon{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px;
+.badge-blue{
+  background:#dbeafe;
+  color:#1d4ed8;
 }
 
-.nav-btn.active{
-  color:var(--primary);
-  font-weight:bold;
+.badge-red{
+  background:#fee2e2;
+  color:#991b1b;
 }
 
-.modal-backdrop{
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:100;
+  background:rgba(0,0,0,.55);
   display:none;
   align-items:center;
   justify-content:center;
   padding:15px;
+  z-index:100;
 }
 
-.modal-backdrop.open{
+.modal.open{
   display:flex;
 }
 
-.modal{
-  width:min(760px,100%);
+.modal-box{
+  background:white;
+  width:min(600px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#fff;
-  border-radius:20px;
-  padding:20px;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .modal-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  margin-bottom:18px;
+  gap:15px;
+  margin-bottom:20px;
 }
 
 .modal-header h2{
   margin:0;
 }
 
-.close{
+.close-btn{
   border:0;
   background:#f3f4f6;
-  border-radius:10px;
-  width:38px;
-  height:38px;
-  font-size:20px;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  font-size:18px;
 }
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty{
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+  background:white;
+  border:1px dashed #d1d5db;
+  border-radius:14px;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 .toast{
   position:fixed;
+  bottom:22px;
   left:50%;
-  bottom:90px;
   transform:translateX(-50%) translateY(20px);
   background:#111827;
-  color:#fff;
+  color:white;
   padding:12px 18px;
-  border-radius:12px;
+  border-radius:10px;
   opacity:0;
   pointer-events:none;
   transition:.25s;
-  z-index:200;
-  font-size:14px;
+  z-index:300;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
   max-width:90%;
   text-align:center;
 }
@@ -633,13 +685,33 @@ input[type=file]{
   transform:translateX(-50%) translateY(0);
 }
 
-@media(max-width:850px){
+/* =========================================================
+   BACKUP
+   ========================================================= */
 
-  .cards{
+.backup-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.backup-box{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .summary-grid{
+  .register-summary{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -648,101 +720,121 @@ input[type=file]{
   }
 
   .period-row .service-field{
-    grid-column:1 / -1;
+    grid-column:1/-1;
+  }
+
+  .period-row-remove{
+    width:100%;
   }
 
   .service-list{
     grid-template-columns:1fr;
   }
 
+  .history-item{
+    grid-template-columns:1fr auto;
+  }
+
+  .history-date{
+    grid-column:1/-1;
+  }
+
+  .history-actions{
+    grid-column:1/-1;
+  }
+
+  .backup-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
-@media(max-width:600px){
+@media(max-width:560px){
 
-  .app{
-    padding:12px;
+  .header{
+    padding:14px;
   }
 
-  header{
-    align-items:flex-start;
+  .logo{
+    font-size:17px;
   }
 
-  .brand h1{
-    font-size:21px;
-  }
-
-  .brand p{
+  .header-actions .btn{
+    padding:8px 10px;
     font-size:12px;
   }
 
-  .month-selector{
-    padding:5px;
+  main{
+    padding:18px 10px 40px;
   }
 
-  .month-selector span{
-    min-width:80px;
-    font-size:13px;
+  .page-title{
+    font-size:22px;
   }
 
-  .cards{
+  .stats{
     grid-template-columns:1fr 1fr;
     gap:9px;
   }
 
-  .card{
+  .stat{
     padding:13px;
   }
 
-  .card .value{
+  .stat-value{
     font-size:19px;
   }
 
-  .form-grid,
-  .form-grid.three{
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .section{
-    padding:15px;
-    border-radius:15px;
+  .field.full{
+    grid-column:auto;
   }
 
-  .history-item{
-    align-items:flex-start;
-    flex-wrap:wrap;
-  }
-
-  .history-date{
-    min-width:75px;
-  }
-
-  .history-right{
-    margin-left:auto;
+  .register-summary{
+    grid-template-columns:1fr 1fr;
   }
 
   .calendar{
-    gap:3px;
+    font-size:11px;
   }
 
   .day{
-    min-height:60px;
+    min-height:75px;
     padding:5px;
   }
 
   .day-status{
     font-size:9px;
-    margin-top:5px;
   }
 
-  .nav-btn{
-    font-size:9px;
+  .calendar-head{
+    padding:7px 2px;
+    font-size:10px;
   }
 
-  .nav-btn .icon{
-    font-size:19px;
+  .history-group-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .history-group-summary{
+    text-align:left;
+  }
+
+  .history-item{
+    padding:13px;
+  }
+
+  .month-label{
+    min-width:120px;
+    font-size:13px;
   }
 
 }
+
 </style>
 </head>
 
@@ -750,202 +842,370 @@ input[type=file]{
 
 <div class="app">
 
-<header>
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
 
-  <div class="brand">
-    <h1>💼 Meu Banco de Horas</h1>
-    <p>Controle de jornada e valores</p>
-  </div>
+<header class="header">
 
-  <div class="month-selector">
-    <button onclick="changeMonth(-1)">‹</button>
-    <span id="currentMonthLabel"></span>
-    <button onclick="changeMonth(1)">›</button>
+  <div class="header-inner">
+
+    <div class="logo">
+      🕐 Meu Banco de Horas
+      <small>Controle de jornadas e serviços</small>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="openRegisterToday()">
+        ➕ Jornada
+      </button>
+
+    </div>
+
   </div>
 
 </header>
 
-<section id="page-dashboard" class="page active">
 
-  <div class="cards">
+<!-- =======================================================
+     NAV
+     ======================================================= -->
 
-    <div class="card blue">
-      <div class="label">⏱️ Horas trabalhadas</div>
-      <div class="value" id="dashWorked">0h</div>
+<nav class="nav">
+
+  <div class="nav-inner">
+
+    <button
+      id="navDashboard"
+      type="button"
+      onclick="showPage('dashboard')">
+      📊 Resumo
+    </button>
+
+    <button
+      id="navRegister"
+      type="button"
+      onclick="openRegisterToday()">
+      ➕ Registrar
+    </button>
+
+    <button
+      id="navHistory"
+      type="button"
+      onclick="showPage('history')">
+      📚 Histórico
+    </button>
+
+    <button
+      id="navCalendar"
+      type="button"
+      onclick="showPage('calendar')">
+      📅 Calendário
+    </button>
+
+    <button
+      id="navServices"
+      type="button"
+      onclick="showPage('services')">
+      🏢 Serviços
+    </button>
+
+    <button
+      id="navBackup"
+      type="button"
+      onclick="showPage('backup')">
+      💾 Dados
+    </button>
+
+  </div>
+
+</nav>
+
+
+<main>
+
+<!-- =======================================================
+     DASHBOARD
+     ======================================================= -->
+
+<section
+  id="page-dashboard"
+  class="page">
+
+  <h1 class="page-title">
+    Resumo
+  </h1>
+
+  <p class="page-subtitle">
+    Acompanhe suas jornadas e seus serviços.
+  </p>
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Horas no mês
+      </div>
+
+      <div
+        id="dashboardWorked"
+        class="stat-value blue">
+        0h
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="label">📋 Horas previstas</div>
-      <div class="value" id="dashExpected">0h</div>
+    <div class="stat">
+
+      <div class="stat-label">
+        Saldo do mês
+      </div>
+
+      <div
+        id="dashboardBalance"
+        class="stat-value">
+        0h
+      </div>
+
     </div>
 
-    <div class="card green" id="balanceCard">
-      <div class="label">🟢 Banco de horas</div>
-      <div class="value" id="dashBalance">0h</div>
+    <div class="stat">
+
+      <div class="stat-label">
+        Valor no mês
+      </div>
+
+      <div
+        id="dashboardMoney"
+        class="stat-value green">
+        R$ 0,00
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="label">💰 Valor acumulado</div>
-      <div class="value" id="dashMoney">R$ 0,00</div>
+    <div class="stat">
+
+      <div class="stat-label">
+        Serviços cadastrados
+      </div>
+
+      <div
+        id="dashboardServices"
+        class="stat-value">
+        0
+      </div>
+
     </div>
 
   </div>
 
-  <div class="section">
 
-    <div class="section-title">
-      <h2>📅 Hoje</h2>
+  <div class="card">
 
-      <button class="btn btn-primary btn-small"
-              onclick="openRegister(new Date())">
-        + Registrar
+    <h2>
+      Começar
+    </h2>
+
+    <p style="color:var(--muted)">
+      Primeiro cadastre seus locais de serviço e informe
+      os valores que você recebe. Depois registre suas jornadas.
+    </p>
+
+    <div class="dashboard-actions">
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="openServiceModal()">
+        🏢 Cadastrar serviço
       </button>
-    </div>
 
-    <div id="todayContent"></div>
-
-  </div>
-
-  <div class="section">
-
-    <div class="section-title">
-      <h2>📊 Resumo do mês</h2>
-    </div>
-
-    <div class="summary-grid">
-
-      <div class="summary-item">
-        <small>Dias registrados</small>
-        <strong id="dashDays">0</strong>
-      </div>
-
-      <div class="summary-item">
-        <small>Média diária</small>
-        <strong id="dashAverage">R$ 0,00</strong>
-      </div>
-
-      <div class="summary-item">
-        <small>Serviços usados</small>
-        <strong id="dashServices">0</strong>
-      </div>
-
-      <div class="summary-item">
-        <small>Horas extras</small>
-        <strong id="dashExtras">0h</strong>
-      </div>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="openRegisterToday()">
+        🕐 Registrar jornada
+      </button>
 
     </div>
 
   </div>
 
-  <div class="section">
 
-    <div class="section-title">
-      <h2>🏢 Valores por serviço</h2>
-    </div>
+  <div class="card">
 
-    <div id="dashboardServices"></div>
+    <h2>
+      Últimas jornadas
+    </h2>
+
+    <div id="dashboardRecent"></div>
 
   </div>
 
 </section>
 
 
-<section id="page-register" class="page">
+<!-- =======================================================
+     REGISTER
+     ======================================================= -->
 
-  <div class="section">
+<section
+  id="page-register"
+  class="page">
 
-    <div class="section-title">
-      <h2 id="registerTitle">➕ Registrar jornada</h2>
-    </div>
+  <h1
+    id="registerTitle"
+    class="page-title">
+    ➕ Registrar jornada
+  </h1>
 
-    <div class="notice">
-      A escala informa somente as horas previstas.
-      Os períodos abaixo representam exclusivamente o que você realmente trabalhou.
-      Você pode registrar horários diferentes da escala e usar serviços diferentes no mesmo dia.
-    </div>
+  <p class="page-subtitle">
+    Informe os horários e o local de cada período trabalhado.
+  </p>
+
+
+  <div class="card">
 
     <div class="form-grid">
 
       <div class="field">
-        <label>Data</label>
 
-        <input type="date"
-               id="registerDate"
-               onchange="updateRegisterPreview()">
-      </div>
+        <label for="registerDate">
+          Data
+        </label>
 
-      <div class="field">
-
-        <label>Horas previstas pela escala</label>
-
-        <input type="text"
-               id="registerExpected"
-               readonly>
+        <input
+          id="registerDate"
+          type="date"
+          onchange="updateRegisterPreview()">
 
       </div>
 
     </div>
 
-    <div style="margin-top:20px">
+  </div>
 
-      <div class="section-title">
 
-        <h2>Períodos realmente trabalhados</h2>
+  <div class="register-summary">
 
-        <button class="btn btn-secondary btn-small"
-                onclick="addPeriodRow()">
-          + Adicionar período
-        </button>
+    <div class="summary-box">
 
+      <div class="summary-label">
+        Horas trabalhadas
       </div>
 
-      <div class="notice warning">
-        💡 Os horários não são preenchidos automaticamente pela escala.
-        Se você trabalhar em outro serviço ou em outro horário, informe aqui exatamente o período realizado.
+      <div
+        id="registerWorked"
+        class="summary-value">
+        0h
       </div>
-
-      <div id="periodRows"></div>
 
     </div>
 
     <div class="summary-box">
 
-      <div class="summary-grid">
+      <div class="summary-label">
+        Saldo
+      </div>
 
-        <div class="summary-item">
-          <small>Realizado</small>
-          <strong id="registerWorked">0h</strong>
-        </div>
-
-        <div class="summary-item">
-          <small>Previsto</small>
-          <strong id="registerExpected2">0h</strong>
-        </div>
-
-        <div class="summary-item">
-          <small>Banco do dia</small>
-          <strong id="registerBalance">0h</strong>
-        </div>
-
-        <div class="summary-item">
-          <small>Valor do dia</small>
-          <strong id="registerMoney">R$ 0,00</strong>
-        </div>
-
+      <div
+        id="registerBalance"
+        class="summary-value">
+        0h
       </div>
 
     </div>
 
+    <div class="summary-box">
+
+      <div class="summary-label">
+        Valor
+      </div>
+
+      <div
+        id="registerMoney"
+        class="summary-value">
+        R$ 0,00
+      </div>
+
+    </div>
+
+    <div class="summary-box">
+
+      <div class="summary-label">
+        Períodos
+      </div>
+
+      <div
+        id="registerPeriods"
+        class="summary-value">
+        0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:15px;
+    ">
+
+      <div>
+
+        <h2 style="margin-bottom:4px">
+          Períodos trabalhados
+        </h2>
+
+        <div style="
+          color:var(--muted);
+          font-size:13px;
+        ">
+          Para fazer intervalo, adicione outro período.
+        </div>
+
+      </div>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="addPeriodRow()">
+        ➕ Período
+      </button>
+
+    </div>
+
+
+    <div
+      id="periodRows"
+      class="period-list">
+    </div>
+
+
     <div class="form-actions">
 
-      <button class="btn btn-primary"
-              onclick="saveRegister()">
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="saveRegister()">
         💾 Salvar jornada
       </button>
 
-      <button class="btn btn-secondary"
-              onclick="showPage('dashboard')">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="showPage('dashboard')">
         Cancelar
       </button>
 
@@ -956,33 +1216,112 @@ input[type=file]{
 </section>
 
 
-<section id="page-calendar" class="page">
+<!-- =======================================================
+     HISTORY
+     ======================================================= -->
 
-  <div class="section">
+<section
+  id="page-history"
+  class="page">
 
-    <div class="section-title">
-      <h2>📅 Calendário</h2>
+  <h1 class="page-title">
+    📚 Histórico
+  </h1>
+
+  <p class="page-subtitle">
+    Suas jornadas agrupadas separadamente por local de serviço.
+  </p>
+
+
+  <div class="history-toolbar">
+
+    <div class="month-controls">
+
+      <button
+        class="btn btn-secondary btn-small"
+        type="button"
+        onclick="changeMonth(-1)">
+        ◀
+      </button>
+
+      <div
+        id="historyMonthLabel"
+        class="month-label">
+      </div>
+
+      <button
+        class="btn btn-secondary btn-small"
+        type="button"
+        onclick="changeMonth(1)">
+        ▶
+      </button>
+
     </div>
 
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px">
+    <button
+      class="btn btn-primary btn-small"
+      type="button"
+      onclick="openRegisterToday()">
+      ➕ Jornada
+    </button>
 
-      <span class="badge badge-green">
-        ● Conforme
-      </span>
+  </div>
 
-      <span class="badge badge-blue">
-        ● Extra
-      </span>
 
-      <span class="badge badge-red">
-        ● Abaixo
-      </span>
+  <div
+    id="historyList"
+    class="history-groups">
+  </div>
 
-      <span class="badge badge-yellow">
-        ● Trabalho em folga
-      </span>
+</section>
+
+
+<!-- =======================================================
+     CALENDAR
+     ======================================================= -->
+
+<section
+  id="page-calendar"
+  class="page">
+
+  <h1 class="page-title">
+    📅 Calendário
+  </h1>
+
+  <p class="page-subtitle">
+    Clique em um dia para registrar ou editar uma jornada.
+  </p>
+
+
+  <div class="card">
+
+    <div class="history-toolbar">
+
+      <div class="month-controls">
+
+        <button
+          class="btn btn-secondary btn-small"
+          type="button"
+          onclick="changeMonth(-1)">
+          ◀
+        </button>
+
+        <div
+          id="calendarMonthLabel"
+          class="month-label">
+        </div>
+
+        <button
+          class="btn btn-secondary btn-small"
+          type="button"
+          onclick="changeMonth(1)">
+          ▶
+        </button>
+
+      </div>
 
     </div>
+
 
     <div id="calendar"></div>
 
@@ -991,150 +1330,128 @@ input[type=file]{
 </section>
 
 
-<section id="page-history" class="page">
+<!-- =======================================================
+     SERVICES
+     ======================================================= -->
 
-  <div class="section">
+<section
+  id="page-services"
+  class="page">
 
-    <div class="section-title">
+  <h1 class="page-title">
+    🏢 Serviços
+  </h1>
 
-      <h2>📋 Histórico</h2>
+  <p class="page-subtitle">
+    Cadastre seus locais de trabalho e os valores que você recebe.
+  </p>
 
-      <button class="btn btn-primary btn-small"
-              onclick="openRegister(new Date())">
-        + Novo
-      </button>
 
-    </div>
+  <div style="margin-bottom:18px">
 
-    <div id="historyList"></div>
+    <button
+      class="btn btn-primary"
+      type="button"
+      onclick="openServiceModal()">
+      ➕ Novo serviço
+    </button>
 
+  </div>
+
+
+  <div
+    id="serviceList"
+    class="service-list">
   </div>
 
 </section>
 
 
-<section id="page-services" class="page">
+<!-- =======================================================
+     BACKUP
+     ======================================================= -->
 
-  <div class="section">
+<section
+  id="page-backup"
+  class="page">
 
-    <div class="section-title">
+  <h1 class="page-title">
+    💾 Dados
+  </h1>
 
-      <h2>🏢 Meus serviços</h2>
+  <p class="page-subtitle">
+    Faça backup para não perder suas informações.
+  </p>
 
-      <button class="btn btn-primary btn-small"
-              onclick="openServiceModal()">
-        + Novo serviço
+
+  <div class="backup-grid">
+
+    <div class="card">
+
+      <h2>
+        Exportar
+      </h2>
+
+      <p style="color:var(--muted)">
+        Salve todos os serviços e jornadas em um arquivo.
+      </p>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="exportBackup()">
+        📥 Exportar backup
       </button>
 
     </div>
 
-    <div class="notice">
-      Cadastre cada local e seus períodos de valor.
-      O aplicativo usará automaticamente o valor correspondente à data da jornada.
-    </div>
 
-    <div id="serviceList" class="service-list"></div>
+    <div class="card">
 
-  </div>
+      <h2>
+        Importar
+      </h2>
 
-</section>
+      <p style="color:var(--muted)">
+        Restaure um backup salvo anteriormente.
+      </p>
 
+      <input
+        id="backupFile"
+        type="file"
+        accept=".json"
+        onchange="importBackup(event)"
+        style="display:none">
 
-<section id="page-settings" class="page">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="
+          document.getElementById('backupFile').click()
+        ">
+        📤 Importar backup
+      </button>
 
-  <div class="section">
-
-    <div class="section-title">
-      <h2>🔄 Escala prevista</h2>
-    </div>
-
-    <div class="notice">
-
-      Sua escala está configurada com segunda, quarta e sexta fixos.
-      Os sábados alternam entre Semana A e Semana B.
-      A data-base é <strong>22/08/2026</strong>.
-
-    </div>
-
-    <div class="kpi-line">
-      <span>Segunda</span>
-      <strong>08:00 → 18:00 • 2h almoço • 8h</strong>
-    </div>
-
-    <div class="kpi-line">
-      <span>Quarta</span>
-      <strong>08:00 → 18:00 • 2h almoço • 8h</strong>
-    </div>
-
-    <div class="kpi-line">
-      <span>Sexta</span>
-      <strong>14:00 → 18:00 • 4h</strong>
-    </div>
-
-    <div class="kpi-line">
-      <span>Sábado A</span>
-      <strong>08:00 → 18:00 • 2h almoço • 8h</strong>
-    </div>
-
-    <div class="kpi-line">
-      <span>Sábado B</span>
-      <strong>08:00 → 12:00 • 4h</strong>
-    </div>
-
-    <div class="kpi-line">
-      <span>Data-base</span>
-      <strong>22/08/2026 = Semana A</strong>
     </div>
 
   </div>
 
 
-  <div class="section">
+  <div class="card">
 
-    <div class="section-title">
-      <h2>💾 Backup</h2>
-    </div>
+    <h2>
+      ⚠️ Zona de exclusão
+    </h2>
 
     <p style="color:var(--muted)">
-      Exporte seus dados regularmente.
-      O backup contém serviços, períodos de valor e jornadas.
+      Apaga todos os serviços e jornadas salvos neste navegador.
+      Esta ação não pode ser desfeita.
     </p>
 
-    <div class="form-actions">
-
-      <button class="btn btn-primary"
-              onclick="exportBackup()">
-        📤 Exportar backup
-      </button>
-
-      <label class="btn btn-secondary file-label">
-
-        📥 Importar backup
-
-        <input type="file"
-               id="importFile"
-               accept=".json"
-               onchange="importBackup(event)">
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <div class="section danger-zone">
-
-    <div class="section-title">
-      <h2>⚠️ Zona de segurança</h2>
-    </div>
-
-    <p style="color:#991b1b">
-      Apagar todos os dados é permanente. Faça um backup antes.
-    </p>
-
-    <button class="btn btn-danger"
-            onclick="clearAllData()">
+    <button
+      class="btn btn-danger"
+      type="button"
+      onclick="clearAllData()">
       🗑️ Apagar todos os dados
     </button>
 
@@ -1142,64 +1459,20 @@ input[type=file]{
 
 </section>
 
+</main>
+
 </div>
 
 
-<nav class="bottom-nav">
+<!-- =======================================================
+     SERVICE MODAL
+     ======================================================= -->
 
-  <div class="nav-inner">
+<div
+  id="serviceModal"
+  class="modal">
 
-    <button class="nav-btn active"
-            data-page="dashboard"
-            onclick="showPage('dashboard')">
-      <span class="icon">🏠</span>
-      Início
-    </button>
-
-    <button class="nav-btn"
-            data-page="register"
-            onclick="openRegister(new Date())">
-      <span class="icon">➕</span>
-      Registrar
-    </button>
-
-    <button class="nav-btn"
-            data-page="calendar"
-            onclick="showPage('calendar')">
-      <span class="icon">📅</span>
-      Calendário
-    </button>
-
-    <button class="nav-btn"
-            data-page="history"
-            onclick="showPage('history')">
-      <span class="icon">📋</span>
-      Histórico
-    </button>
-
-    <button class="nav-btn"
-            data-page="services"
-            onclick="showPage('services')">
-      <span class="icon">🏢</span>
-      Serviços
-    </button>
-
-    <button class="nav-btn"
-            data-page="settings"
-            onclick="showPage('settings')">
-      <span class="icon">⚙️</span>
-      Config.
-    </button>
-
-  </div>
-
-</nav>
-
-
-<div class="modal-backdrop"
-     id="serviceModal">
-
-  <div class="modal">
+  <div class="modal-box">
 
     <div class="modal-header">
 
@@ -1207,96 +1480,132 @@ input[type=file]{
         Novo serviço
       </h2>
 
-      <button class="close"
-              onclick="closeServiceModal()">
-        ×
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeServiceModal()">
+        ✕
       </button>
 
     </div>
 
-    <input type="hidden"
-           id="serviceEditId">
 
-    <div class="form-grid">
+    <div class="field">
 
-      <div class="field">
+      <label for="serviceName">
+        Nome do local / serviço
+      </label>
 
-        <label>Nome do serviço/local</label>
-
-        <input id="serviceName"
-               placeholder="Ex.: Clínica A">
-
-      </div>
+      <input
+        id="serviceName"
+        type="text"
+        placeholder="Ex.: Clínica, Hospital, Plantão..."
+        autocomplete="off">
 
     </div>
 
-    <div class="value-period-form">
 
-      <div class="section-title">
+    <div
+      class="card"
+      style="
+        margin-top:18px;
+        margin-bottom:0;
+        box-shadow:none;
+        background:#f9fafb;
+      ">
 
-        <h2 style="font-size:16px">
-          💰 Período de valor
-        </h2>
+      <h3>
+        💰 Valor por hora
+      </h3>
+
+      <p style="
+        color:var(--muted);
+        font-size:13px;
+      ">
+        Você pode cadastrar valores diferentes para períodos
+        diferentes. Por exemplo, se o valor mudar no futuro.
+      </p>
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label for="periodStart">
+            Valor válido a partir de
+          </label>
+
+          <input
+            id="periodStart"
+            type="date">
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="periodEnd">
+            Até
+          </label>
+
+          <input
+            id="periodEnd"
+            type="date">
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="periodValue">
+            Valor por hora
+          </label>
+
+          <input
+            id="periodValue"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0,00">
+
+        </div>
 
       </div>
 
-      <div class="form-grid three">
-
-        <div class="field">
-
-          <label>Data inicial</label>
-
-          <input type="date"
-                 id="periodStart">
-
-        </div>
-
-        <div class="field">
-
-          <label>Data final</label>
-
-          <input type="date"
-                 id="periodEnd">
-
-        </div>
-
-        <div class="field">
-
-          <label>Valor da hora</label>
-
-          <input type="number"
-                 id="periodValue"
-                 min="0"
-                 step="0.01"
-                 placeholder="20.00">
-
-        </div>
-
-      </div>
 
       <div class="form-actions">
 
-        <button class="btn btn-secondary btn-small"
-                onclick="addValuePeriod()">
-          + Adicionar período
+        <button
+          class="btn btn-secondary btn-small"
+          type="button"
+          onclick="addValuePeriod()">
+          ➕ Adicionar valor
         </button>
 
       </div>
 
-      <div id="modalValuePeriods"
-           class="value-period-list"></div>
+
+      <div
+        id="modalValuePeriods"
+        style="margin-top:15px">
+      </div>
 
     </div>
 
+
     <div class="form-actions">
 
-      <button class="btn btn-primary"
-              onclick="saveService()">
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="saveService()">
         💾 Salvar serviço
       </button>
 
-      <button class="btn btn-secondary"
-              onclick="closeServiceModal()">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="closeServiceModal()">
         Cancelar
       </button>
 
@@ -1307,180 +1616,242 @@ input[type=file]{
 </div>
 
 
-<div class="toast" id="toast"></div>
+<!-- =======================================================
+     TOAST
+     ======================================================= -->
+
+<div
+  id="toast"
+  class="toast">
+</div>
 
 
 <script>
 
-/* ============================================================
+/* =========================================================
    CONFIGURAÇÃO
-   ============================================================ */
+   ========================================================= */
 
-const STORAGE_KEY = "meuBancoHorasV1";
+const STORAGE_KEY =
+  "meuBancoDeHoras_zero_v1";
 
-const SCALE_BASE = new Date(2026,7,22);
-
-
-/* ============================================================
-   ESTADO
-   ============================================================ */
 
 let state = {
   services: [],
   records: []
 };
 
-let currentMonth = new Date();
-
-currentMonth.setDate(1);
 
 let editingRecordId = null;
-
 let editingServiceId = null;
 
 let temporaryValuePeriods = [];
 
+let currentMonth =
+  new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    1
+  );
 
-/* ============================================================
-   UTILITÁRIOS
-   ============================================================ */
+
+/* =========================================================
+   UTILIDADES
+   ========================================================= */
 
 function uid(){
 
-  return Date.now().toString(36) +
-         Math.random().toString(36).slice(2);
+  return (
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .substring(2,9)
+  );
 
 }
 
-function pad(n){
 
-  return String(n).padStart(2,"0");
+function todayInput(){
+
+  const d = new Date();
+
+  return dateToInput(d);
 
 }
+
 
 function dateToInput(date){
 
-  return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+  const d = new Date(date);
+
+  const year =
+    d.getFullYear();
+
+  const month =
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      d.getDate()
+    ).padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
 
 }
+
 
 function inputToDate(value){
 
-  const [y,m,d] =
+  if(!value) return null;
+
+  const parts =
     value.split("-").map(Number);
 
-  return new Date(y,m-1,d);
+  return new Date(
+    parts[0],
+    parts[1]-1,
+    parts[2]
+  );
 
 }
+
+
+function sameDay(a,b){
+
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+
+}
+
 
 function formatDate(date){
 
-  return date.toLocaleDateString("pt-BR");
+  if(!date) return "";
 
-}
-
-function formatMoney(value){
-
-  return Number(value || 0).toLocaleString(
+  return date.toLocaleDateString(
     "pt-BR",
     {
-      style:"currency",
-      currency:"BRL"
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric"
     }
   );
 
 }
 
-function minutesToText(minutes){
 
-  minutes = Math.round(minutes || 0);
+function formatMonth(date){
 
-  const sign =
-    minutes < 0 ? "-" : "";
-
-  const abs =
-    Math.abs(minutes);
-
-  const h =
-    Math.floor(abs / 60);
-
-  const m =
-    abs % 60;
-
-  if(m === 0){
-
-    return `${sign}${h}h`;
-
-  }
-
-  return `${sign}${h}h ${m}min`;
+  return date.toLocaleDateString(
+    "pt-BR",
+    {
+      month:"long",
+      year:"numeric"
+    }
+  ).replace(
+    /^./,
+    c => c.toUpperCase()
+  );
 
 }
+
+
+function formatMoney(value){
+
+  return Number(value || 0)
+    .toLocaleString(
+      "pt-BR",
+      {
+        style:"currency",
+        currency:"BRL"
+      }
+    );
+
+}
+
+
+function minutesToText(minutes){
+
+  const negative =
+    minutes < 0;
+
+  let value =
+    Math.abs(
+      Math.round(minutes || 0)
+    );
+
+  const hours =
+    Math.floor(value / 60);
+
+  const mins =
+    value % 60;
+
+  let text =
+    `${hours}h`;
+
+  if(mins){
+    text += ` ${mins}min`;
+  }
+
+  return negative
+    ? "-" + text
+    : text;
+
+}
+
 
 function timeToMinutes(time){
 
-  if(!time) return 0;
+  if(!time) return null;
 
-  const [h,m] =
+  const parts =
     time.split(":").map(Number);
 
-  return h * 60 + m;
+  return (
+    parts[0] * 60 +
+    parts[1]
+  );
 
 }
+
 
 function periodMinutes(start,end){
 
-  let s =
+  let a =
     timeToMinutes(start);
 
-  let e =
+  let b =
     timeToMinutes(end);
 
-  if(e < s){
-
-    e += 24 * 60;
-
+  if(
+    a === null ||
+    b === null
+  ){
+    return 0;
   }
 
-  return e - s;
+  /*
+    Permite período atravessando meia-noite.
+    Ex.: 22:00 → 06:00
+  */
 
-}
+  if(b <= a){
+    b += 24 * 60;
+  }
 
-function monthKey(date){
-
-  return `${date.getFullYear()}-${pad(date.getMonth()+1)}`;
-
-}
-
-function sameDay(a,b){
-
-  return dateToInput(a) ===
-         dateToInput(b);
-
-}
-
-function showToast(message){
-
-  const toast =
-    document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer =
-    setTimeout(()=>{
-      toast.classList.remove("show");
-    },2500);
+  return b - a;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    STORAGE
-   ============================================================ */
+   ========================================================= */
 
 function saveState(){
 
@@ -1491,259 +1862,164 @@ function saveState(){
 
 }
 
+
 function loadState(){
 
   try{
 
     const saved =
-      localStorage.getItem(STORAGE_KEY);
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
-    if(saved){
+    if(!saved){
 
-      state =
-        JSON.parse(saved);
+      state = {
+        services:[],
+        records:[]
+      };
+
+      return;
 
     }
+
+    const parsed =
+      JSON.parse(saved);
+
+    state = {
+
+      services:
+        Array.isArray(parsed.services)
+          ? parsed.services
+          : [],
+
+      records:
+        Array.isArray(parsed.records)
+          ? parsed.records
+          : []
+
+    };
+
+    state.services.forEach(
+      service=>{
+
+        if(
+          !Array.isArray(
+            service.valuePeriods
+          )
+        ){
+
+          service.valuePeriods = [];
+
+        }
+
+      }
+    );
 
   }catch(error){
 
-    console.error(error);
-
-  }
-
-  if(!Array.isArray(state.services)){
-
-    state.services = [];
-
-  }
-
-  if(!Array.isArray(state.records)){
-
-    state.records = [];
-
-  }
-
-  state.services.forEach(service=>{
-
-    if(!Array.isArray(service.valuePeriods)){
-
-      service.valuePeriods = [];
-
-    }
-
-  });
-
-}
-
-
-/* ============================================================
-   ESCALA
-   ============================================================ */
-
-function saturdayType(date){
-
-  const diffMs =
-    date - SCALE_BASE;
-
-  const diffDays =
-    Math.round(
-      diffMs / 86400000
+    console.error(
+      "Erro ao carregar dados:",
+      error
     );
 
-  const weeks =
-    Math.floor(diffDays / 7);
-
-  const normalized =
-    ((weeks % 2) + 2) % 2;
-
-  return normalized === 0
-    ? "A"
-    : "B";
-
-}
-
-function getExpectedMinutes(date){
-
-  const day =
-    date.getDay();
-
-  if(day === 0) return 0;
-
-  if(day === 1) return 8 * 60;
-
-  if(day === 2) return 0;
-
-  if(day === 3) return 8 * 60;
-
-  if(day === 4) return 0;
-
-  if(day === 5) return 4 * 60;
-
-  if(day === 6){
-
-    return saturdayType(date) === "A"
-      ? 8 * 60
-      : 4 * 60;
+    state = {
+      services:[],
+      records:[]
+    };
 
   }
-
-  return 0;
-
-}
-
-function getScaleDescription(date){
-
-  const day =
-    date.getDay();
-
-  if(day === 1){
-
-    return "08:00–18:00 • 2h almoço";
-
-  }
-
-  if(day === 3){
-
-    return "08:00–18:00 • 2h almoço";
-
-  }
-
-  if(day === 5){
-
-    return "14:00–18:00";
-
-  }
-
-  if(day === 6){
-
-    return saturdayType(date) === "A"
-      ? "Sábado A • 08:00–18:00 • 2h almoço"
-      : "Sábado B • 08:00–12:00";
-
-  }
-
-  return "Folga";
 
 }
 
 
-/* ============================================================
-   SERVIÇOS
-   ============================================================ */
+/* =========================================================
+   TOAST
+   ========================================================= */
 
-function getServiceById(id){
+let toastTimer = null;
 
-  return state.services.find(
-    s => s.id === id
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
   );
 
-}
+  clearTimeout(
+    toastTimer
+  );
 
-function getMatchingValuePeriod(
-  serviceOrId,
-  dateString
-){
-
-  const service =
-    getServiceById(
-      serviceOrId?.id ||
-      serviceOrId
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      2800
     );
 
-  if(!service){
-
-    return null;
-
-  }
-
-  const date =
-    inputToDate(dateString);
-
-  const periods =
-    Array.isArray(service.valuePeriods)
-      ? service.valuePeriods
-      : [];
-
-  const matching =
-    periods
-      .filter(p=>{
-
-        if(!p.start) return false;
-
-        const start =
-          inputToDate(p.start);
-
-        const end =
-          p.end
-            ? inputToDate(p.end)
-            : null;
-
-        return date >= start &&
-               (!end || date <= end);
-
-      })
-      .sort((a,b)=>{
-
-        return inputToDate(b.start) -
-               inputToDate(a.start);
-
-      });
-
-  return matching.length
-    ? matching[0]
-    : null;
-
-}
-
-function getServiceValue(
-  serviceOrId,
-  dateString
-){
-
-  const period =
-    getMatchingValuePeriod(
-      serviceOrId,
-      dateString
-    );
-
-  return period
-    ? Number(period.value || 0)
-    : 0;
-
 }
 
 
-/* ============================================================
+/* =========================================================
    NAVEGAÇÃO
-   ============================================================ */
+   ========================================================= */
 
 function showPage(page){
 
-  document.querySelectorAll(".page")
-    .forEach(p=>{
-      p.classList.remove("active");
-    });
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      el =>
+        el.classList.remove(
+          "active"
+        )
+    );
 
   const target =
     document.getElementById(
-      "page-" + page
+      `page-${page}`
     );
 
-  if(target){
+  if(!target) return;
 
-    target.classList.add("active");
+  target.classList.add(
+    "active"
+  );
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(
+      el =>
+        el.classList.remove(
+          "active"
+        )
+    );
+
+
+  const navButton =
+    document.getElementById(
+      `nav${page.charAt(0).toUpperCase()}${page.slice(1)}`
+    );
+
+  if(navButton){
+
+    navButton.classList.add(
+      "active"
+    );
 
   }
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(btn=>{
-
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
-
-    });
 
   if(page === "dashboard"){
 
@@ -1751,15 +2027,15 @@ function showPage(page){
 
   }
 
-  if(page === "calendar"){
-
-    renderCalendar();
-
-  }
-
   if(page === "history"){
 
     renderHistory();
+
+  }
+
+  if(page === "calendar"){
+
+    renderCalendar();
 
   }
 
@@ -1772,1847 +2048,102 @@ function showPage(page){
 }
 
 
-/* ============================================================
-   MÊS
-   ============================================================ */
-
-function updateMonthLabel(){
-
-  const text =
-    currentMonth.toLocaleDateString(
-      "pt-BR",
-      {
-        month:"long",
-        year:"numeric"
-      }
-    );
-
-  document.getElementById(
-    "currentMonthLabel"
-  ).textContent =
-    text.charAt(0).toUpperCase() +
-    text.slice(1);
-
-}
-
-function changeMonth(delta){
-
-  currentMonth.setMonth(
-    currentMonth.getMonth() +
-    delta
-  );
-
-  updateMonthLabel();
-
-  renderDashboard();
-
-  renderCalendar();
-
-  renderHistory();
-
-}
-
-
-/* ============================================================
-   CÁLCULO DOS REGISTROS
-   ============================================================ */
-
-function calculateRecord(record){
-
-  let worked = 0;
-
-  let money = 0;
-
-  for(const p of record.periods || []){
-
-    const mins =
-      periodMinutes(
-        p.start,
-        p.end
-      );
-
-    worked += mins;
-
-    const value =
-      Number(
-        p.valueAtTime ??
-        p.value ??
-        0
-      );
-
-    money +=
-      mins / 60 * value;
-
-  }
-
-  const expected =
-    getExpectedMinutes(
-      inputToDate(record.date)
-    );
-
-  return {
-
-    worked,
-
-    expected,
-
-    balance:
-      worked - expected,
-
-    money
-
-  };
-
-}
-
-function getRecordsForMonth(date){
-
-  const key =
-    monthKey(date);
-
-  return state.records.filter(
-    r => r.date.startsWith(key)
-  );
-
-}
-
-function getMonthlyStats(date){
-
-  const records =
-    getRecordsForMonth(date);
-
-  let worked = 0;
-  let expected = 0;
-  let balance = 0;
-  let money = 0;
-
-  const serviceIds =
-    new Set();
-
-  records.forEach(r=>{
-
-    const c =
-      calculateRecord(r);
-
-    worked += c.worked;
-
-    expected += c.expected;
-
-    balance += c.balance;
-
-    money += c.money;
-
-    (r.periods || []).forEach(p=>{
-
-      if(p.serviceId){
-
-        serviceIds.add(
-          p.serviceId
-        );
-
-      }
-
-    });
-
-  });
-
-  return {
-
-    records,
-    worked,
-    expected,
-    balance,
-    money,
-    extra:
-      Math.max(0,balance),
-    serviceCount:
-      serviceIds.size
-
-  };
-
-}
-
-
-/* ============================================================
-   DASHBOARD
-   ============================================================ */
-
-function renderDashboard(){
-
-  updateMonthLabel();
-
-  const stats =
-    getMonthlyStats(
-      currentMonth
-    );
-
-  document.getElementById(
-    "dashWorked"
-  ).textContent =
-    minutesToText(
-      stats.worked
-    );
-
-  document.getElementById(
-    "dashExpected"
-  ).textContent =
-    minutesToText(
-      stats.expected
-    );
-
-  const balanceEl =
-    document.getElementById(
-      "dashBalance"
-    );
-
-  balanceEl.textContent =
-    (stats.balance >= 0 ? "+" : "") +
-    minutesToText(
-      stats.balance
-    );
-
-  document.getElementById(
-    "dashMoney"
-  ).textContent =
-    formatMoney(
-      stats.money
-    );
-
-  document.getElementById(
-    "dashDays"
-  ).textContent =
-    stats.records.length;
-
-  document.getElementById(
-    "dashAverage"
-  ).textContent =
-    formatMoney(
-      stats.records.length
-        ? stats.money /
-          stats.records.length
-        : 0
-    );
-
-  document.getElementById(
-    "dashServices"
-  ).textContent =
-    stats.serviceCount;
-
-  document.getElementById(
-    "dashExtras"
-  ).textContent =
-    minutesToText(
-      stats.extra
-    );
-
-  const balanceCard =
-    document.getElementById(
-      "balanceCard"
-    );
-
-  balanceCard.classList.remove(
-    "green",
-    "red"
-  );
-
-  balanceCard.classList.add(
-    stats.balance >= 0
-      ? "green"
-      : "red"
-  );
-
-  renderToday();
-
-  renderDashboardServices();
-
-}
-
-function renderToday(){
-
-  const container =
-    document.getElementById(
-      "todayContent"
-    );
-
-  const today =
-    new Date();
-
-  const todayString =
-    dateToInput(today);
-
-  const record =
-    state.records.find(
-      r => r.date === todayString
-    );
-
-  const expected =
-    getExpectedMinutes(today);
-
-  if(!record){
-
-    container.innerHTML = `
-
-      <div class="today-empty">
-
-        <div style="margin-bottom:10px">
-          <strong>
-            Hoje, ${formatDate(today)}
-          </strong>
-        </div>
-
-        <div style="margin-bottom:8px">
-          📋 Previsto:
-          <strong>
-            ${minutesToText(expected)}
-          </strong>
-        </div>
-
-        <div style="color:var(--muted)">
-          ${getScaleDescription(today)}
-        </div>
-
-        <div style="margin-top:15px">
-
-          <button class="btn btn-primary btn-small"
-                  onclick="openRegister(new Date())">
-            ➕ Registrar jornada de hoje
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  const calc =
-    calculateRecord(record);
-
-  const serviceNames = [
-    ...new Set(
-      (record.periods || [])
-        .map(p =>
-          getServiceById(
-            p.serviceId
-          )?.name ||
-          "Serviço"
-        )
-    )
-  ];
-
-  container.innerHTML = `
-
-    <div style="margin-bottom:12px">
-
-      <strong>
-        ${formatDate(today)}
-      </strong>
-
-      <span class="badge ${
-        calc.balance >= 0
-          ? "badge-green"
-          : "badge-red"
-      }">
-
-        ${calc.balance >= 0 ? "+" : ""}
-        ${minutesToText(calc.balance)}
-
-      </span>
-
-    </div>
-
-    ${(record.periods || [])
-      .map(p=>{
-
-        const mins =
-          periodMinutes(
-            p.start,
-            p.end
-          );
-
-        const value =
-          Number(
-            p.valueAtTime ?? 0
-          );
-
-        const money =
-          mins / 60 * value;
-
-        const service =
-          getServiceById(
-            p.serviceId
-          );
-
-        return `
-
-          <div class="kpi-line">
-
-            <span>
-
-              ${p.start} → ${p.end}
-
-              <small style="
-                display:block;
-                color:var(--muted)
-              ">
-
-                ${
-                  service?.name ||
-                  "Serviço"
-                }
-
-              </small>
-
-            </span>
-
-            <strong>
-
-              ${minutesToText(mins)}
-              •
-              ${formatMoney(money)}
-
-            </strong>
-
-          </div>
-
-        `;
-
-      }).join("")}
-
-    <div style="
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px
-    ">
-
-      Previsto:
-      ${minutesToText(calc.expected)}
-
-      • Realizado:
-      ${minutesToText(calc.worked)}
-
-      • Serviços:
-      ${serviceNames.join(", ")}
-
-    </div>
-
-    <div class="form-actions">
-
-      <button class="btn btn-secondary btn-small"
-              onclick="editRecord('${record.id}')">
-        ✏️ Editar
-      </button>
-
-      <button class="btn btn-danger btn-small"
-              onclick="deleteRecord('${record.id}')">
-        🗑️ Excluir
-      </button>
-
-    </div>
-
-  `;
-
-}
-
-function renderDashboardServices(){
-
-  const container =
-    document.getElementById(
-      "dashboardServices"
-    );
-
-  const records =
-    getRecordsForMonth(
-      currentMonth
-    );
-
-  const totals = {};
-
-  records.forEach(r=>{
-
-    (r.periods || []).forEach(p=>{
-
-      const service =
-        getServiceById(
-          p.serviceId
-        );
-
-      if(!service) return;
-
-      if(!totals[service.id]){
-
-        totals[service.id] = {
-
-          name:
-            service.name,
-
-          minutes:0,
-
-          money:0
-
-        };
-
-      }
-
-      const mins =
-        periodMinutes(
-          p.start,
-          p.end
-        );
-
-      totals[service.id].minutes +=
-        mins;
-
-      totals[service.id].money +=
-        mins / 60 *
-        Number(
-          p.valueAtTime ?? 0
-        );
-
-    });
-
-  });
-
-  const values =
-    Object.values(totals);
-
-  if(!values.length){
-
-    container.innerHTML =
-      `<div class="empty">
-        Nenhum serviço registrado neste mês.
-      </div>`;
-
-    return;
-
-  }
-
-  container.innerHTML =
-    values.map(item=>`
-
-      <div class="kpi-line">
-
-        <span>
-
-          🏢 ${item.name}
-
-          <small style="
-            display:block;
-            color:var(--muted)
-          ">
-
-            ${minutesToText(item.minutes)}
-
-          </small>
-
-        </span>
-
-        <strong>
-          ${formatMoney(item.money)}
-        </strong>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* ============================================================
-   REGISTRO
-   ============================================================ */
-
-function openRegister(date){
-
-  showPage("register");
-
-  editingRecordId = null;
-
-  document.getElementById(
-    "registerTitle"
-  ).textContent =
-    "➕ Registrar jornada";
-
-  document.getElementById(
-    "registerDate"
-  ).value =
-    dateToInput(date);
-
-  document.getElementById(
-    "periodRows"
-  ).innerHTML = "";
-
-  addPeriodRow();
-
-  updateRegisterPreview();
-
-}
-
-function addPeriodRow(data = {}){
-
-  const container =
-    document.getElementById(
-      "periodRows"
-    );
-
-  const row =
-    document.createElement("div");
-
-  row.className =
-    "period-row";
-
-  row.innerHTML = `
-
-    <div class="field">
-
-      <label>Entrada</label>
-
-      <input type="time"
-             class="period-start"
-             value="${data.start || ""}"
-             onchange="updateRegisterPreview()">
-
-    </div>
-
-    <div class="field">
-
-      <label>Saída</label>
-
-      <input type="time"
-             class="period-end"
-             value="${data.end || ""}"
-             onchange="updateRegisterPreview()">
-
-    </div>
-
-    <div class="field service-field">
-
-      <label>Serviço</label>
-
-      <select class="period-service"
-              onchange="serviceSelectionChanged(this)">
-
-        <option value="">
-          Selecione...
-        </option>
-
-        ${state.services.map(s=>`
-
-          <option value="${s.id}"
-            ${s.id === data.serviceId
-              ? "selected"
-              : ""}>
-
-            ${s.name}
-
-          </option>
-
-        `).join("")}
-
-      </select>
-
-    </div>
-
-    <div class="field">
-
-      <label>Valor/h</label>
-
-      <input type="number"
-             class="period-value"
-             min="0"
-             step="0.01"
-             value="${
-               data.valueAtTime ??
-               ""
-             }"
-             placeholder="Automático"
-             onchange="markValueManual(this)">
-
-    </div>
-
-    <button class="btn btn-danger btn-small"
-            onclick="
-              this.closest('.period-row').remove();
-              updateRegisterPreview();
-            ">
-      🗑️
-    </button>
-
-  `;
-
-  container.appendChild(row);
-
-  if(data.valueAtTime !== undefined){
-
-    const valueInput =
-      row.querySelector(
-        ".period-value"
-      );
-
-    valueInput.dataset.manual =
-      "true";
-
-  }
-
-  if(
-    data.serviceId &&
-    data.valueAtTime === undefined
-  ){
-
-    const date =
-      document.getElementById(
-        "registerDate"
-      ).value;
-
-    const value =
-      getServiceValue(
-        data.serviceId,
-        date
-      );
-
-    const valueInput =
-      row.querySelector(
-        ".period-value"
-      );
-
-    valueInput.value =
-      value || "";
-
-    valueInput.dataset.manual =
-      "false";
-
-  }
-
-  updateRegisterPreview();
-
-}
-
-function markValueManual(input){
-
-  input.dataset.manual =
-    "true";
-
-  updateRegisterPreview();
-
-}
-
-function serviceSelectionChanged(select){
-
-  const row =
-    select.closest(
-      ".period-row"
-    );
-
-  const date =
-    document.getElementById(
-      "registerDate"
-    ).value;
-
-  const valueInput =
-    row.querySelector(
-      ".period-value"
-    );
-
-  if(!select.value){
-
-    valueInput.value = "";
-
-    valueInput.dataset.manual =
-      "false";
-
-    updateRegisterPreview();
-
-    return;
-
-  }
-
-  if(!date){
-
-    updateRegisterPreview();
-
-    return;
-
-  }
-
-  const value =
-    getServiceValue(
-      select.value,
-      date
-    );
-
-  valueInput.value =
-    value || "";
-
-  valueInput.dataset.manual =
-    "false";
-
-  updateRegisterPreview();
-
-}
-
-function updateRegisterPreview(){
-
-  const dateValue =
-    document.getElementById(
-      "registerDate"
-    ).value;
-
-  if(!dateValue) return;
-
-  const date =
-    inputToDate(dateValue);
-
-  const expected =
-    getExpectedMinutes(date);
-
-  document.getElementById(
-    "registerExpected"
-  ).value =
-    minutesToText(expected);
-
-  document.getElementById(
-    "registerExpected2"
-  ).textContent =
-    minutesToText(expected);
-
-  let worked = 0;
-
-  let money = 0;
-
-  document.querySelectorAll(
-    ".period-row"
-  ).forEach(row=>{
-
-    const start =
-      row.querySelector(
-        ".period-start"
-      ).value;
-
-    const end =
-      row.querySelector(
-        ".period-end"
-      ).value;
-
-    const serviceId =
-      row.querySelector(
-        ".period-service"
-      ).value;
-
-    const valueInput =
-      row.querySelector(
-        ".period-value"
-      );
-
-    if(start && end){
-
-      const mins =
-        periodMinutes(
-          start,
-          end
-        );
-
-      worked += mins;
-
-      if(
-        serviceId &&
-        valueInput.dataset.manual !== "true"
-      ){
-
-        const autoValue =
-          getServiceValue(
-            serviceId,
-            dateValue
-          );
-
-        valueInput.value =
-          autoValue
-            ? autoValue
-            : "";
-
-      }
-
-      const value =
-        Number(
-          valueInput.value || 0
-        );
-
-      money +=
-        mins / 60 * value;
-
-    }
-
-  });
-
-  const balance =
-    worked - expected;
-
-  document.getElementById(
-    "registerWorked"
-  ).textContent =
-    minutesToText(worked);
-
-  const balanceEl =
-    document.getElementById(
-      "registerBalance"
-    );
-
-  balanceEl.textContent =
-    (balance >= 0 ? "+" : "") +
-    minutesToText(balance);
-
-  balanceEl.style.color =
-    balance > 0
-      ? "var(--green)"
-      : balance < 0
-        ? "var(--red)"
-        : "var(--muted)";
-
-  document.getElementById(
-    "registerMoney"
-  ).textContent =
-    formatMoney(money);
-
-}
-
-
-/* ============================================================
-   SALVAR REGISTRO
-   ============================================================ */
-
-function saveRegister(){
-
-  const date =
-    document.getElementById(
-      "registerDate"
-    ).value;
-
-  if(!date){
-
-    showToast(
-      "Informe a data."
-    );
-
-    return;
-
-  }
-
-  const periods = [];
-
-  let validationError = "";
-
-  document.querySelectorAll(
-    ".period-row"
-  ).forEach(row=>{
-
-    if(validationError) return;
-
-    const start =
-      row.querySelector(
-        ".period-start"
-      ).value;
-
-    const end =
-      row.querySelector(
-        ".period-end"
-      ).value;
-
-    const serviceId =
-      row.querySelector(
-        ".period-service"
-      ).value;
-
-    const valueInput =
-      row.querySelector(
-        ".period-value"
-      );
-
-    if(!start && !end && !serviceId){
-
-      return;
-
-    }
-
-    if(!start || !end){
-
-      validationError =
-        "Preencha entrada e saída de todos os períodos.";
-
-      return;
-
-    }
-
-    if(!serviceId){
-
-      validationError =
-        "Selecione o serviço de todos os períodos.";
-
-      return;
-
-    }
-
-    let value =
-      Number(
-        valueInput.value || 0
-      );
-
-    if(
-      valueInput.dataset.manual !== "true"
-    ){
-
-      value =
-        getServiceValue(
-          serviceId,
-          date
-        );
-
-    }
-
-    if(value <= 0){
-
-      validationError =
-        "O serviço selecionado não possui valor/hora definido para esta data.";
-
-      return;
-
-    }
-
-    periods.push({
-
-      start,
-
-      end,
-
-      serviceId,
-
-      valueAtTime:value
-
-    });
-
-  });
-
-  if(validationError){
-
-    showToast(validationError);
-
-    return;
-
-  }
-
-  if(!periods.length){
-
-    showToast(
-      "Adicione pelo menos um período."
-    );
-
-    return;
-
-  }
-
-  const record = {
-
-    id:
-      editingRecordId ||
-      uid(),
-
-    date,
-
-    periods,
-
-    updatedAt:
-      new Date().toISOString()
-
-  };
-
-  const existingIndex =
-    state.records.findIndex(
-      r => r.id === record.id
-    );
-
-  if(existingIndex >= 0){
-
-    state.records[
-      existingIndex
-    ] = record;
-
-    showToast(
-      "Jornada atualizada!"
-    );
-
-  }else{
-
-    state.records.push(
-      record
-    );
-
-    showToast(
-      "Jornada salva!"
-    );
-
-  }
-
-  state.records.sort(
-    (a,b)=>
-      a.date.localeCompare(
-        b.date
-      )
-  );
-
-  saveState();
-
-  editingRecordId = null;
-
-  renderDashboard();
-
-  renderHistory();
-
-  renderCalendar();
-
-  showPage("dashboard");
-
-}
-
-
-/* ============================================================
-   EDITAR / EXCLUIR REGISTRO
-   ============================================================ */
-
-function editRecord(id){
-
-  const record =
-    state.records.find(
-      r => r.id === id
-    );
-
-  if(!record) return;
-
-  editingRecordId =
-    id;
-
-  showPage("register");
-
-  document.getElementById(
-    "registerTitle"
-  ).textContent =
-    "✏️ Editar jornada";
-
-  document.getElementById(
-    "registerDate"
-  ).value =
-    record.date;
-
-  document.getElementById(
-    "periodRows"
-  ).innerHTML = "";
-
-  record.periods.forEach(p=>{
-
-    addPeriodRow(p);
-
-  });
-
-  updateRegisterPreview();
-
-}
-
-function deleteRecord(id){
-
-  if(!confirm(
-    "Excluir esta jornada?"
-  )){
-
-    return;
-
-  }
-
-  state.records =
-    state.records.filter(
-      r => r.id !== id
-    );
-
-  saveState();
-
-  renderDashboard();
-
-  renderHistory();
-
-  renderCalendar();
-
-  showToast(
-    "Jornada excluída."
+/* =========================================================
+   SERVIÇOS
+   ========================================================= */
+
+function getServiceById(id){
+
+  return state.services.find(
+    service =>
+      service.id === id
   );
 
 }
 
 
-/* ============================================================
-   HISTÓRICO
-   ============================================================ */
-
-function renderHistory(){
-
-  const container =
-    document.getElementById(
-      "historyList"
-    );
-
-  const records =
-    getRecordsForMonth(
-      currentMonth
-    )
-      .slice()
-      .sort(
-        (a,b)=>
-          b.date.localeCompare(
-            a.date
-          )
-      );
-
-  if(!records.length){
-
-    container.innerHTML =
-      `<div class="empty">
-        Nenhum registro neste mês.
-      </div>`;
-
-    return;
-
-  }
-
-  container.innerHTML =
-    records.map(record=>{
-
-      const calc =
-        calculateRecord(
-          record
-        );
-
-      const services = [
-        ...new Set(
-          record.periods.map(
-            p =>
-              getServiceById(
-                p.serviceId
-              )?.name ||
-              "Serviço"
-          )
-        )
-      ];
-
-      const balanceClass =
-        calc.balance > 0
-          ? "balance-positive"
-          : calc.balance < 0
-            ? "balance-negative"
-            : "balance-zero";
-
-      return `
-
-        <div class="history-item">
-
-          <div class="history-date">
-
-            ${formatDate(
-              inputToDate(
-                record.date
-              )
-            )}
-
-          </div>
-
-          <div class="history-main">
-
-            <strong>
-              ${minutesToText(
-                calc.worked
-              )}
-            </strong>
-
-            <div class="services">
-              ${services.join(" • ")}
-            </div>
-
-          </div>
-
-          <div class="history-right">
-
-            <div class="${balanceClass}">
-
-              ${
-                calc.balance >= 0
-                  ? "+"
-                  : ""
-              }
-
-              ${minutesToText(
-                calc.balance
-              )}
-
-            </div>
-
-            <strong>
-              ${formatMoney(
-                calc.money
-              )}
-            </strong>
-
-          </div>
-
-          <div style="
-            display:flex;
-            gap:5px
-          ">
-
-            <button class="btn btn-secondary btn-small"
-                    onclick="
-                      editRecord('${record.id}')
-                    ">
-              ✏️
-            </button>
-
-            <button class="btn btn-danger btn-small"
-                    onclick="
-                      deleteRecord('${record.id}')
-                    ">
-              🗑️
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* ============================================================
-   CALENDÁRIO
-   ============================================================ */
-
-function renderCalendar(){
-
-  const container =
-    document.getElementById(
-      "calendar"
-    );
-
-  const year =
-    currentMonth.getFullYear();
-
-  const month =
-    currentMonth.getMonth();
-
-  const firstDay =
-    new Date(
-      year,
-      month,
-      1
-    );
-
-  const lastDay =
-    new Date(
-      year,
-      month + 1,
-      0
-    );
-
-  const startWeekDay =
-    firstDay.getDay();
-
-  let html =
-    `<div class="calendar">`;
-
-  const names = [
-    "Dom",
-    "Seg",
-    "Ter",
-    "Qua",
-    "Qui",
-    "Sex",
-    "Sáb"
-  ];
-
-  names.forEach(name=>{
-
-    html += `
-      <div class="calendar-head">
-        ${name}
-      </div>
-    `;
-
-  });
-
-  for(
-    let i=0;
-    i<startWeekDay;
-    i++
-  ){
-
-    const previous =
-      new Date(
-        year,
-        month,
-        1
-      );
-
-    previous.setDate(
-      previous.getDate() -
-      (startWeekDay-i)
-    );
-
-    html += `
-      <div class="day other">
-
-        <div class="day-number">
-          ${previous.getDate()}
-        </div>
-
-      </div>
-    `;
-
-  }
-
-  const today =
-    new Date();
-
-  for(
-    let day=1;
-    day<=lastDay.getDate();
-    day++
-  ){
-
-    const date =
-      new Date(
-        year,
-        month,
-        day
-      );
-
-    const dateString =
-      dateToInput(date);
-
-    const record =
-      state.records.find(
-        r => r.date === dateString
-      );
-
-    const expected =
-      getExpectedMinutes(
-        date
-      );
-
-    let cls =
-      "day";
-
-    let status = "";
-
-    if(sameDay(date,today)){
-
-      cls += " today";
-
-    }
-
-    if(record){
-
-      const calc =
-        calculateRecord(
-          record
-        );
-
-      if(
-        expected === 0 &&
-        calc.worked > 0
-      ){
-
-        cls += " extra";
-
-        status = `
-
-          <span class="badge badge-yellow">
-            Extra
-          </span>
-
-          <br>
-
-          ${minutesToText(
-            calc.worked
-          )}
-
-        `;
-
-      }else if(
-        calc.balance > 0
-      ){
-
-        cls += " worked";
-
-        status = `
-
-          <span class="badge badge-blue">
-            +${minutesToText(
-              calc.balance
-            )}
-          </span>
-
-          <br>
-
-          ${minutesToText(
-            calc.worked
-          )}
-
-        `;
-
-      }else if(
-        calc.balance < 0
-      ){
-
-        cls += " negative";
-
-        status = `
-
-          <span class="badge badge-red">
-            ${minutesToText(
-              calc.balance
-            )}
-          </span>
-
-          <br>
-
-          ${minutesToText(
-            calc.worked
-          )}
-
-        `;
-
-      }else{
-
-        cls += " worked";
-
-        status = `
-
-          <span class="badge badge-green">
-            OK
-          </span>
-
-          <br>
-
-          ${minutesToText(
-            calc.worked
-          )}
-
-        `;
-
-      }
-
-    }else if(expected > 0){
-
-      status = `
-
-        <span style="
-          color:var(--muted)
-        ">
-
-          Prev.
-          ${minutesToText(
-            expected
-          )}
-
-        </span>
-
-      `;
-
-    }else{
-
-      status = `
-
-        <span style="
-          color:var(--muted)
-        ">
-
-          Folga
-
-        </span>
-
-      `;
-
-    }
-
-    html += `
-
-      <div class="${cls}"
-           onclick="
-             calendarDayClick(
-               '${dateString}'
-             )
-           "
-           style="cursor:pointer">
-
-        <div class="day-number">
-          ${day}
-        </div>
-
-        <div class="day-status">
-          ${status}
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  const totalCells =
-    startWeekDay +
-    lastDay.getDate();
-
-  const remaining =
-    (7 - (totalCells % 7)) % 7;
-
-  for(
-    let i=1;
-    i<=remaining;
-    i++
-  ){
-
-    html += `
-
-      <div class="day other">
-
-        <div class="day-number">
-          ${i}
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  html +=
-    `</div>`;
-
-  container.innerHTML =
-    html;
-
-}
-
-function calendarDayClick(
+function getServiceValue(
+  serviceId,
   dateString
 ){
 
-  const record =
-    state.records.find(
-      r => r.date === dateString
+  const service =
+    getServiceById(
+      serviceId
     );
 
-  if(record){
+  if(!service) return 0;
 
-    editRecord(
-      record.id
+  const periods =
+    Array.isArray(
+      service.valuePeriods
+    )
+      ? service.valuePeriods
+      : [];
+
+  if(!periods.length) return 0;
+
+  const date =
+    inputToDate(
+      dateString
     );
 
-  }else{
+  if(!date) return 0;
 
-    openRegister(
-      inputToDate(
-        dateString
+
+  const matching =
+    periods
+      .filter(
+        period=>{
+
+          const start =
+            inputToDate(
+              period.start
+            );
+
+          const end =
+            period.end
+              ? inputToDate(
+                  period.end
+                )
+              : null;
+
+          if(
+            date < start
+          ){
+
+            return false;
+
+          }
+
+          if(
+            end &&
+            date > end
+          ){
+
+            return false;
+
+          }
+
+          return true;
+
+        }
       )
-    );
+      .sort(
+        (a,b)=>
+          inputToDate(b.start) -
+          inputToDate(a.start)
+      );
 
-  }
 
-}
-
-
-/* ============================================================
-   SERVIÇOS
-   ============================================================ */
-
-function renderServices(){
-
-  const container =
-    document.getElementById(
-      "serviceList"
-    );
-
-  if(!state.services.length){
-
-    container.innerHTML = `
-
-      <div class="empty"
-           style="grid-column:1/-1">
-
-        Nenhum serviço cadastrado.<br>
-
-        Cadastre seu primeiro local
-        para começar.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  container.innerHTML =
-    state.services.map(
-      service=>{
-
-        const periods =
-          service.valuePeriods || [];
-
-        return `
-
-          <div class="service-card">
-
-            <h3>
-              🏢 ${service.name}
-            </h3>
-
-            ${
-              periods.length
-                ? periods
-                    .slice()
-                    .sort(
-                      (a,b)=>
-                        inputToDate(
-                          b.start
-                        ) -
-                        inputToDate(
-                          a.start
-                        )
-                    )
-                    .map(
-                      (p,index)=>`
-
-                        <div class="value-period">
-
-                          <strong>
-
-                            ${formatMoney(
-                              p.value
-                            )}/h
-
-                          </strong>
-
-                          <div style="
-                            color:var(--muted);
-                            margin-top:4px
-                          ">
-
-                            ${formatDate(
-                              inputToDate(
-                                p.start
-                              )
-                            )}
-
-                            →
-
-                            ${
-                              p.end
-                                ? formatDate(
-                                    inputToDate(
-                                      p.end
-                                    )
-                                  )
-                                : "atual"
-                            }
-
-                          </div>
-
-                          <div class="value-period-actions">
-
-                            <button class="
-                              btn
-                              btn-secondary
-                              btn-small
-                            "
-                            onclick="
-                              editValuePeriod(
-                                '${service.id}',
-                                '${p.id}'
-                              )
-                            ">
-                              ✏️
-                            </button>
-
-                            <button class="
-                              btn
-                              btn-danger
-                              btn-small
-                            "
-                            onclick="
-                              deleteValuePeriod(
-                                '${service.id}',
-                                '${p.id}'
-                              )
-                            ">
-                              🗑️
-                            </button>
-
-                          </div>
-
-                        </div>
-
-                      `
-                    )
-                    .join("")
-                : `
-                    <p>
-                      Nenhum período de valor cadastrado.
-                    </p>
-                  `
-            }
-
-            <div class="form-actions">
-
-              <button class="
-                btn
-                btn-secondary
-                btn-small
-              "
-              onclick="
-                editService(
-                  '${service.id}'
-                )
-              ">
-                ✏️ Editar
-              </button>
-
-              <button class="
-                btn
-                btn-danger
-                btn-small
-              "
-              onclick="
-                deleteService(
-                  '${service.id}'
-                )
-              ">
-                🗑️ Excluir
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
+  return matching.length
+    ? Number(
+        matching[0].value || 0
+      )
+    : 0;
 
 }
 
-
-/* ============================================================
-   MODAL DE SERVIÇO
-   ============================================================ */
 
 function openServiceModal(
   service = null
@@ -3620,6 +2151,7 @@ function openServiceModal(
 
   editingServiceId =
     service?.id || null;
+
 
   temporaryValuePeriods =
     service
@@ -3630,81 +2162,106 @@ function openServiceModal(
         )
       : [];
 
-  document.getElementById(
-    "serviceModal"
-  ).classList.add("open");
 
-  document.getElementById(
-    "serviceEditId"
-  ).value =
-    service?.id || "";
+  document
+    .getElementById(
+      "serviceModal"
+    )
+    .classList.add(
+      "open"
+    );
 
-  document.getElementById(
-    "serviceName"
-  ).value =
-    service?.name || "";
+
+  document
+    .getElementById(
+      "serviceModalTitle"
+    )
+    .textContent =
+      service
+        ? "Editar serviço"
+        : "Novo serviço";
+
+
+  document
+    .getElementById(
+      "serviceName"
+    )
+    .value =
+      service?.name || "";
+
 
   clearValuePeriodInputs();
-
-  document.getElementById(
-    "serviceModalTitle"
-  ).textContent =
-    service
-      ? "Editar serviço"
-      : "Novo serviço";
 
   renderTemporaryValuePeriods();
 
 }
 
+
 function closeServiceModal(){
 
-  document.getElementById(
-    "serviceModal"
-  ).classList.remove("open");
+  document
+    .getElementById(
+      "serviceModal"
+    )
+    .classList.remove(
+      "open"
+    );
 
-  editingServiceId =
-    null;
+  editingServiceId = null;
 
-  temporaryValuePeriods =
-    [];
+  temporaryValuePeriods = [];
 
 }
+
 
 function clearValuePeriodInputs(){
 
-  document.getElementById(
-    "periodStart"
-  ).value = "";
+  document
+    .getElementById(
+      "periodStart"
+    )
+    .value = "";
 
-  document.getElementById(
-    "periodEnd"
-  ).value = "";
+  document
+    .getElementById(
+      "periodEnd"
+    )
+    .value = "";
 
-  document.getElementById(
-    "periodValue"
-  ).value = "";
+  document
+    .getElementById(
+      "periodValue"
+    )
+    .value = "";
 
 }
+
 
 function addValuePeriod(){
 
   const start =
-    document.getElementById(
-      "periodStart"
-    ).value;
+    document
+      .getElementById(
+        "periodStart"
+      )
+      .value;
 
   const end =
-    document.getElementById(
-      "periodEnd"
-    ).value;
+    document
+      .getElementById(
+        "periodEnd"
+      )
+      .value;
 
   const value =
     Number(
-      document.getElementById(
-        "periodValue"
-      ).value || 0
+      document
+        .getElementById(
+          "periodValue"
+        )
+        .value || 0
     );
+
 
   if(!start){
 
@@ -3716,9 +2273,12 @@ function addValuePeriod(){
 
   }
 
-  if(end &&
-     inputToDate(end) <
-     inputToDate(start)){
+
+  if(
+    end &&
+    inputToDate(end) <
+    inputToDate(start)
+  ){
 
     showToast(
       "A data final não pode ser anterior à inicial."
@@ -3728,20 +2288,24 @@ function addValuePeriod(){
 
   }
 
+
   if(value <= 0){
 
     showToast(
-      "Informe um valor/hora válido."
+      "Informe um valor por hora válido."
     );
 
     return;
 
   }
 
+
   const existingIndex =
     temporaryValuePeriods.findIndex(
-      p => p.start === start
+      period =>
+        period.start === start
     );
+
 
   const newPeriod = {
 
@@ -3753,18 +2317,18 @@ function addValuePeriod(){
         : uid(),
 
     start,
-
     end,
-
     value
 
   };
+
 
   if(existingIndex >= 0){
 
     temporaryValuePeriods[
       existingIndex
-    ] = newPeriod;
+    ] =
+      newPeriod;
 
   }else{
 
@@ -3774,21 +2338,20 @@ function addValuePeriod(){
 
   }
 
+
   temporaryValuePeriods.sort(
     (a,b)=>
       inputToDate(a.start) -
       inputToDate(b.start)
   );
 
+
   clearValuePeriodInputs();
 
   renderTemporaryValuePeriods();
 
-  showToast(
-    "Período adicionado."
-  );
-
 }
+
 
 function renderTemporaryValuePeriods(){
 
@@ -3797,22 +2360,19 @@ function renderTemporaryValuePeriods(){
       "modalValuePeriods"
     );
 
+
   if(!temporaryValuePeriods.length){
 
     container.innerHTML = `
-
-      <div class="empty"
-           style="padding:15px">
-
-        Nenhum período adicionado ainda.
-
+      <div class="empty">
+        Nenhum valor cadastrado ainda.
       </div>
-
     `;
 
     return;
 
   }
+
 
   container.innerHTML =
     temporaryValuePeriods
@@ -3823,66 +2383,77 @@ function renderTemporaryValuePeriods(){
           inputToDate(b.start)
       )
       .map(
-        p=>`
+        period=>`
 
-          <div class="value-period">
+          <div style="
+            background:white;
+            border:1px solid var(--border);
+            border-radius:10px;
+            padding:12px;
+            margin-bottom:8px;
+          ">
 
-            <strong>
-              ${formatMoney(p.value)}/h
-            </strong>
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:10px;
+              align-items:center;
+            ">
+
+              <strong>
+                ${formatMoney(period.value)}/h
+              </strong>
+
+              <div style="
+                display:flex;
+                gap:5px;
+              ">
+
+                <button
+                  class="btn btn-secondary btn-small"
+                  type="button"
+                  onclick="
+                    loadTemporaryPeriod('${period.id}')
+                  ">
+                  ✏️
+                </button>
+
+                <button
+                  class="btn btn-danger btn-small"
+                  type="button"
+                  onclick="
+                    removeTemporaryPeriod('${period.id}')
+                  ">
+                  🗑️
+                </button>
+
+              </div>
+
+            </div>
 
             <div style="
               color:var(--muted);
-              margin-top:4px
+              font-size:13px;
+              margin-top:5px;
             ">
 
               ${formatDate(
                 inputToDate(
-                  p.start
+                  period.start
                 )
               )}
 
               →
 
               ${
-                p.end
+                period.end
                   ? formatDate(
                       inputToDate(
-                        p.end
+                        period.end
                       )
                     )
                   : "atual"
               }
-
-            </div>
-
-            <div class="value-period-actions">
-
-              <button class="
-                btn
-                btn-secondary
-                btn-small
-              "
-              onclick="
-                loadTemporaryPeriod(
-                  '${p.id}'
-                )
-              ">
-                ✏️ Editar
-              </button>
-
-              <button class="
-                btn
-                btn-danger
-                btn-small
-              "
-              onclick="
-                removeTemporaryPeriod(
-                  '${p.id}'
-                )
-              ">
-                🗑️ Remover
-              </button>
 
             </div>
 
@@ -3894,6 +2465,7 @@ function renderTemporaryValuePeriods(){
 
 }
 
+
 function loadTemporaryPeriod(id){
 
   const period =
@@ -3903,29 +2475,41 @@ function loadTemporaryPeriod(id){
 
   if(!period) return;
 
-  document.getElementById(
-    "periodStart"
-  ).value =
-    period.start;
 
-  document.getElementById(
-    "periodEnd"
-  ).value =
-    period.end || "";
+  document
+    .getElementById(
+      "periodStart"
+    )
+    .value =
+      period.start;
 
-  document.getElementById(
-    "periodValue"
-  ).value =
-    period.value;
+
+  document
+    .getElementById(
+      "periodEnd"
+    )
+    .value =
+      period.end || "";
+
+
+  document
+    .getElementById(
+      "periodValue"
+    )
+    .value =
+      period.value;
+
 
   temporaryValuePeriods =
     temporaryValuePeriods.filter(
       p => p.id !== id
     );
 
+
   renderTemporaryValuePeriods();
 
 }
+
 
 function removeTemporaryPeriod(id){
 
@@ -3938,99 +2522,17 @@ function removeTemporaryPeriod(id){
 
 }
 
-function editValuePeriod(
-  serviceId,
-  periodId
-){
-
-  const service =
-    getServiceById(
-      serviceId
-    );
-
-  if(!service) return;
-
-  openServiceModal(
-    service
-  );
-
-  setTimeout(()=>{
-
-    const period =
-      temporaryValuePeriods.find(
-        p => p.id === periodId
-      );
-
-    if(!period) return;
-
-    temporaryValuePeriods =
-      temporaryValuePeriods.filter(
-        p => p.id !== periodId
-      );
-
-    document.getElementById(
-      "periodStart"
-    ).value =
-      period.start;
-
-    document.getElementById(
-      "periodEnd"
-    ).value =
-      period.end || "";
-
-    document.getElementById(
-      "periodValue"
-    ).value =
-      period.value;
-
-    renderTemporaryValuePeriods();
-
-  },50);
-
-}
-
-function deleteValuePeriod(
-  serviceId,
-  periodId
-){
-
-  const service =
-    getServiceById(
-      serviceId
-    );
-
-  if(!service) return;
-
-  if(!confirm(
-    "Excluir este período de valor?"
-  )){
-
-    return;
-
-  }
-
-  service.valuePeriods =
-    (service.valuePeriods || [])
-      .filter(
-        p => p.id !== periodId
-      );
-
-  saveState();
-
-  renderServices();
-
-  showToast(
-    "Período de valor excluído."
-  );
-
-}
 
 function saveService(){
 
   const name =
-    document.getElementById(
-      "serviceName"
-    ).value.trim();
+    document
+      .getElementById(
+        "serviceName"
+      )
+      .value
+      .trim();
+
 
   if(!name){
 
@@ -4042,15 +2544,17 @@ function saveService(){
 
   }
 
+
   if(!temporaryValuePeriods.length){
 
     showToast(
-      "Adicione pelo menos um período de valor."
+      "Adicione pelo menos um valor por hora."
     );
 
     return;
 
   }
+
 
   const sorted =
     temporaryValuePeriods
@@ -4061,19 +2565,21 @@ function saveService(){
           inputToDate(b.start)
       );
 
+
   for(
     let i=0;
-    i<sorted.length-1;
+    i<sorted.length;
     i++
   ){
 
     const current =
       sorted[i];
 
-    const next =
-      sorted[i+1];
 
-    if(!current.end){
+    if(
+      !current.end &&
+      i !== sorted.length - 1
+    ){
 
       showToast(
         "Um período sem data final precisa ser o último."
@@ -4083,24 +2589,36 @@ function saveService(){
 
     }
 
+
     if(
-      inputToDate(
-        current.end
-      ) >=
-      inputToDate(
-        next.start
-      )
+      current.end &&
+      i < sorted.length - 1
     ){
 
-      showToast(
-        "Existem períodos de valor sobrepostos."
-      );
+      const next =
+        sorted[i+1];
 
-      return;
+      if(
+        inputToDate(
+          current.end
+        ) >=
+        inputToDate(
+          next.start
+        )
+      ){
+
+        showToast(
+          "Existem períodos de valor sobrepostos."
+        );
+
+        return;
+
+      }
 
     }
 
   }
+
 
   if(editingServiceId){
 
@@ -4111,8 +2629,10 @@ function saveService(){
 
     if(!service) return;
 
+
     service.name =
       name;
+
 
     service.valuePeriods =
       JSON.parse(
@@ -4120,6 +2640,7 @@ function saveService(){
           temporaryValuePeriods
         )
       );
+
 
     showToast(
       "Serviço atualizado!"
@@ -4143,11 +2664,13 @@ function saveService(){
 
     });
 
+
     showToast(
       "Serviço cadastrado!"
     );
 
   }
+
 
   saveState();
 
@@ -4155,9 +2678,10 @@ function saveService(){
 
   renderServices();
 
-  showPage("services");
+  renderDashboard();
 
 }
+
 
 function editService(id){
 
@@ -4174,17 +2698,19 @@ function editService(id){
 
 }
 
+
 function deleteService(id){
 
   const used =
     state.records.some(
-      r =>
-        (r.periods || [])
+      record =>
+        (record.periods || [])
           .some(
-            p =>
-              p.serviceId === id
+            period =>
+              period.serviceId === id
           )
     );
+
 
   if(used){
 
@@ -4197,6 +2723,7 @@ function deleteService(id){
 
   }
 
+
   if(!confirm(
     "Excluir este serviço?"
   )){
@@ -4205,14 +2732,19 @@ function deleteService(id){
 
   }
 
+
   state.services =
     state.services.filter(
-      s => s.id !== id
+      service =>
+        service.id !== id
     );
+
 
   saveState();
 
   renderServices();
+
+  renderDashboard();
 
   showToast(
     "Serviço excluído."
@@ -4221,9 +2753,1951 @@ function deleteService(id){
 }
 
 
-/* ============================================================
+/* =========================================================
+   RENDER SERVICES
+   ========================================================= */
+
+function renderServices(){
+
+  const container =
+    document.getElementById(
+      "serviceList"
+    );
+
+
+  if(!state.services.length){
+
+    container.innerHTML = `
+      <div
+        class="empty"
+        style="grid-column:1/-1">
+
+        🏢 Nenhum serviço cadastrado.
+
+        <br><br>
+
+        Clique em
+        <strong>“Novo serviço”</strong>
+        para cadastrar seu primeiro local.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    state.services
+      .map(
+        service=>{
+
+          const periods =
+            (service.valuePeriods || [])
+              .slice()
+              .sort(
+                (a,b)=>
+                  inputToDate(b.start) -
+                  inputToDate(a.start)
+              );
+
+
+          return `
+
+            <div class="service-card">
+
+              <h3>
+                🏢 ${escapeHtml(
+                  service.name
+                )}
+              </h3>
+
+              ${
+                periods.length
+                  ? `
+
+                    <div>
+
+                      <div class="service-label">
+                        Valores cadastrados
+                      </div>
+
+                      ${periods.map(
+                        period=>`
+
+                          <div style="
+                            margin-top:12px;
+                            padding:10px;
+                            border:1px solid var(--border);
+                            border-radius:9px;
+                          ">
+
+                            <div class="service-value">
+                              ${formatMoney(
+                                period.value
+                              )}/h
+                            </div>
+
+                            <div class="service-label">
+                              ${formatDate(
+                                inputToDate(
+                                  period.start
+                                )
+                              )}
+
+                              →
+
+                              ${
+                                period.end
+                                  ? formatDate(
+                                      inputToDate(
+                                        period.end
+                                      )
+                                    )
+                                  : "atual"
+                              }
+                            </div>
+
+                          </div>
+
+                        `
+                      ).join("")}
+
+                    </div>
+
+                  `
+                  : `
+                    <p style="color:var(--muted)">
+                      Nenhum valor cadastrado.
+                    </p>
+                  `
+              }
+
+
+              <div class="service-actions">
+
+                <button
+                  class="btn btn-secondary btn-small"
+                  type="button"
+                  onclick="
+                    editService('${service.id}')
+                  ">
+                  ✏️ Editar
+                </button>
+
+                <button
+                  class="btn btn-danger btn-small"
+                  type="button"
+                  onclick="
+                    deleteService('${service.id}')
+                  ">
+                  🗑️ Excluir
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   REGISTRO
+   ========================================================= */
+
+function openRegisterToday(){
+
+  openRegister(
+    todayInput()
+  );
+
+}
+
+
+function openRegister(dateString){
+
+  editingRecordId = null;
+
+
+  showPage(
+    "register"
+  );
+
+
+  document
+    .getElementById(
+      "registerTitle"
+    )
+    .textContent =
+      "➕ Registrar jornada";
+
+
+  document
+    .getElementById(
+      "registerDate"
+    )
+    .value =
+      typeof dateString === "string"
+        ? dateString
+        : dateToInput(
+            dateString
+          );
+
+
+  document
+    .getElementById(
+      "periodRows"
+    )
+    .innerHTML = "";
+
+
+  addPeriodRow();
+
+  updateRegisterPreview();
+
+}
+
+
+function addPeriodRow(data = {}){
+
+  const container =
+    document.getElementById(
+      "periodRows"
+    );
+
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "period-row";
+
+
+  row.innerHTML = `
+
+    <div class="field">
+
+      <label>
+        Entrada
+      </label>
+
+      <input
+        type="time"
+        class="period-start"
+        value="${data.start || ""}">
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Saída
+      </label>
+
+      <input
+        type="time"
+        class="period-end"
+        value="${data.end || ""}">
+
+    </div>
+
+
+    <div class="field service-field">
+
+      <label>
+        Local / serviço
+      </label>
+
+      <select
+        class="period-service">
+
+        <option value="">
+          Selecione...
+        </option>
+
+        ${state.services
+          .map(
+            service=>`
+
+              <option
+                value="${service.id}"
+                ${
+                  service.id ===
+                  data.serviceId
+                    ? "selected"
+                    : ""
+                }>
+
+                ${escapeHtml(
+                  service.name
+                )}
+
+              </option>
+
+            `
+          )
+          .join("")}
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Valor/h
+      </label>
+
+      <input
+        type="number"
+        class="period-value"
+        min="0"
+        step="0.01"
+        value="${
+          data.valueAtTime ??
+          ""
+        }"
+        placeholder="Automático">
+
+    </div>
+
+
+    <button
+      class="
+        btn
+        btn-danger
+        period-row-remove
+      "
+      type="button">
+
+      🗑️
+
+    </button>
+
+  `;
+
+
+  container.appendChild(
+    row
+  );
+
+
+  const serviceSelect =
+    row.querySelector(
+      ".period-service"
+    );
+
+
+  const valueInput =
+    row.querySelector(
+      ".period-value"
+    );
+
+
+  const startInput =
+    row.querySelector(
+      ".period-start"
+    );
+
+
+  const endInput =
+    row.querySelector(
+      ".period-end"
+    );
+
+
+  serviceSelect.addEventListener(
+    "change",
+    ()=>{
+      updatePeriodAutomaticValue(
+        row
+      );
+    }
+  );
+
+
+  startInput.addEventListener(
+    "change",
+    ()=>{
+      updatePeriodAutomaticValue(
+        row
+      );
+      updateRegisterPreview();
+    }
+  );
+
+
+  endInput.addEventListener(
+    "change",
+    ()=>{
+      updateRegisterPreview();
+    }
+  );
+
+
+  valueInput.addEventListener(
+    "input",
+    ()=>{
+      valueInput.dataset.manual =
+        "true";
+
+      updateRegisterPreview();
+    }
+  );
+
+
+  row
+    .querySelector(
+      ".period-row-remove"
+    )
+    .addEventListener(
+      "click",
+      ()=>{
+
+        row.remove();
+
+        updateRegisterPreview();
+
+      }
+    );
+
+
+  if(
+    data.valueAtTime !== undefined
+  ){
+
+    valueInput.dataset.manual =
+      "true";
+
+  }else{
+
+    valueInput.dataset.manual =
+      "false";
+
+    updatePeriodAutomaticValue(
+      row
+    );
+
+  }
+
+
+  updateRegisterPreview();
+
+}
+
+
+function updatePeriodAutomaticValue(row){
+
+  const select =
+    row.querySelector(
+      ".period-service"
+    );
+
+  const valueInput =
+    row.querySelector(
+      ".period-value"
+    );
+
+  if(
+    !select.value
+  ){
+
+    valueInput.value = "";
+
+    valueInput.dataset.manual =
+      "false";
+
+    updateRegisterPreview();
+
+    return;
+
+  }
+
+
+  if(
+    valueInput.dataset.manual ===
+    "true"
+  ){
+
+    return;
+
+  }
+
+
+  const date =
+    document
+      .getElementById(
+        "registerDate"
+      )
+      .value;
+
+
+  if(!date){
+
+    return;
+
+  }
+
+
+  const value =
+    getServiceValue(
+      select.value,
+      date
+    );
+
+
+  valueInput.value =
+    value || "";
+
+
+  valueInput.dataset.manual =
+    "false";
+
+
+  updateRegisterPreview();
+
+}
+
+
+function updateRegisterPreview(){
+
+  const date =
+    document
+      .getElementById(
+        "registerDate"
+      )
+      .value;
+
+
+  let worked = 0;
+
+  let money = 0;
+
+  let periods = 0;
+
+
+  document
+    .querySelectorAll(
+      "#periodRows .period-row"
+    )
+    .forEach(
+      row=>{
+
+        const start =
+          row.querySelector(
+            ".period-start"
+          ).value;
+
+        const end =
+          row.querySelector(
+            ".period-end"
+          ).value;
+
+        const value =
+          Number(
+            row.querySelector(
+              ".period-value"
+            ).value || 0
+          );
+
+
+        if(
+          start &&
+          end
+        ){
+
+          const mins =
+            periodMinutes(
+              start,
+              end
+            );
+
+
+          worked += mins;
+
+          money +=
+            mins / 60 *
+            value;
+
+        }
+
+
+        if(
+          start ||
+          end ||
+          row.querySelector(
+            ".period-service"
+          ).value
+        ){
+
+          periods++;
+
+        }
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "registerWorked"
+    )
+    .textContent =
+      minutesToText(
+        worked
+      );
+
+
+  document
+    .getElementById(
+      "registerMoney"
+    )
+    .textContent =
+      formatMoney(
+        money
+      );
+
+
+  document
+    .getElementById(
+      "registerPeriods"
+    )
+    .textContent =
+      periods;
+
+
+  /*
+    Nesta versão não existe carga horária
+    pré-programada.
+
+    Portanto o saldo de uma jornada
+    é sempre 0 até que futuramente
+    você decida cadastrar uma regra
+    de jornada esperada.
+  */
+
+  const balance = 0;
+
+
+  const balanceEl =
+    document
+      .getElementById(
+        "registerBalance"
+      );
+
+
+  balanceEl.textContent =
+    minutesToText(
+      balance
+    );
+
+
+  balanceEl.style.color =
+    "var(--muted)";
+
+}
+
+
+function saveRegister(){
+
+  const date =
+    document
+      .getElementById(
+        "registerDate"
+      )
+      .value;
+
+
+  if(!date){
+
+    showToast(
+      "Informe a data."
+    );
+
+    return;
+
+  }
+
+
+  const periods = [];
+
+  let error = "";
+
+
+  document
+    .querySelectorAll(
+      "#periodRows .period-row"
+    )
+    .forEach(
+      row=>{
+
+        if(error) return;
+
+
+        const start =
+          row.querySelector(
+            ".period-start"
+          ).value;
+
+        const end =
+          row.querySelector(
+            ".period-end"
+          ).value;
+
+        const serviceId =
+          row.querySelector(
+            ".period-service"
+          ).value;
+
+        const valueInput =
+          row.querySelector(
+            ".period-value"
+          );
+
+
+        const empty =
+          !start &&
+          !end &&
+          !serviceId &&
+          !valueInput.value;
+
+
+        if(empty){
+
+          return;
+
+        }
+
+
+        if(!start || !end){
+
+          error =
+            "Preencha entrada e saída de todos os períodos.";
+
+          return;
+
+        }
+
+
+        if(!serviceId){
+
+          error =
+            "Selecione o local de serviço.";
+
+          return;
+
+        }
+
+
+        const value =
+          Number(
+            valueInput.value || 0
+          );
+
+
+        if(value <= 0){
+
+          error =
+            "Informe um valor/hora válido para todos os períodos.";
+
+          return;
+
+        }
+
+
+        periods.push({
+
+          start,
+          end,
+          serviceId,
+          valueAtTime:value
+
+        });
+
+      }
+    );
+
+
+  if(error){
+
+    showToast(
+      error
+    );
+
+    return;
+
+  }
+
+
+  if(!periods.length){
+
+    showToast(
+      "Adicione pelo menos um período."
+    );
+
+    return;
+
+  }
+
+
+  const record = {
+
+    id:
+      editingRecordId ||
+      uid(),
+
+    date,
+
+    periods,
+
+    updatedAt:
+      new Date().toISOString()
+
+  };
+
+
+  const existingIndex =
+    state.records.findIndex(
+      record =>
+        record.id ===
+        record.id
+    );
+
+
+  /*
+    Corrige a procura de edição:
+    usamos editingRecordId diretamente.
+  */
+
+  const realIndex =
+    state.records.findIndex(
+      r =>
+        r.id ===
+        record.id
+    );
+
+
+  if(realIndex >= 0){
+
+    state.records[
+      realIndex
+    ] =
+      record;
+
+    showToast(
+      "Jornada atualizada!"
+    );
+
+  }else{
+
+    state.records.push(
+      record
+    );
+
+    showToast(
+      "Jornada salva!"
+    );
+
+  }
+
+
+  state.records.sort(
+    (a,b)=>
+      a.date.localeCompare(
+        b.date
+      )
+  );
+
+
+  saveState();
+
+
+  editingRecordId = null;
+
+
+  renderDashboard();
+
+  renderHistory();
+
+  renderCalendar();
+
+
+  showPage(
+    "dashboard"
+  );
+
+}
+
+
+/* =========================================================
+   EDITAR / EXCLUIR
+   ========================================================= */
+
+function editRecord(id){
+
+  const record =
+    state.records.find(
+      r =>
+        r.id === id
+    );
+
+
+  if(!record) return;
+
+
+  editingRecordId =
+    id;
+
+
+  showPage(
+    "register"
+  );
+
+
+  document
+    .getElementById(
+      "registerTitle"
+    )
+    .textContent =
+      "✏️ Editar jornada";
+
+
+  document
+    .getElementById(
+      "registerDate"
+    )
+    .value =
+      record.date;
+
+
+  document
+    .getElementById(
+      "periodRows"
+    )
+    .innerHTML = "";
+
+
+  record.periods.forEach(
+    period =>
+      addPeriodRow(
+        period
+      )
+  );
+
+
+  updateRegisterPreview();
+
+}
+
+
+function deleteRecord(id){
+
+  if(!confirm(
+    "Excluir esta jornada?"
+  )){
+
+    return;
+
+  }
+
+
+  state.records =
+    state.records.filter(
+      r =>
+        r.id !== id
+    );
+
+
+  saveState();
+
+
+  renderDashboard();
+
+  renderHistory();
+
+  renderCalendar();
+
+
+  showToast(
+    "Jornada excluída."
+  );
+
+}
+
+
+/* =========================================================
+   HISTÓRICO
+   ========================================================= */
+
+function getRecordsForCurrentMonth(){
+
+  const year =
+    currentMonth.getFullYear();
+
+  const month =
+    currentMonth.getMonth();
+
+
+  return state.records.filter(
+    record=>{
+
+      const date =
+        inputToDate(
+          record.date
+        );
+
+      return (
+        date.getFullYear() === year &&
+        date.getMonth() === month
+      );
+
+    }
+  );
+
+}
+
+
+function calculateRecord(record){
+
+  let worked = 0;
+
+  let money = 0;
+
+
+  (record.periods || [])
+    .forEach(
+      period=>{
+
+        const mins =
+          periodMinutes(
+            period.start,
+            period.end
+          );
+
+
+        worked += mins;
+
+
+        const value =
+          Number(
+            period.valueAtTime || 0
+          );
+
+
+        money +=
+          mins / 60 *
+          value;
+
+      }
+    );
+
+
+  return {
+
+    worked,
+
+    money,
+
+    balance:0
+
+  };
+
+}
+
+
+function renderHistory(){
+
+  const container =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  document
+    .getElementById(
+      "historyMonthLabel"
+    )
+    .textContent =
+      formatMonth(
+        currentMonth
+      );
+
+
+  const records =
+    getRecordsForCurrentMonth()
+      .slice()
+      .sort(
+        (a,b)=>
+          b.date.localeCompare(
+            a.date
+          )
+      );
+
+
+  if(!records.length){
+
+    container.innerHTML = `
+      <div class="empty">
+
+        📚 Nenhuma jornada registrada
+        neste mês.
+
+        <br><br>
+
+        <button
+          class="btn btn-primary"
+          type="button"
+          onclick="openRegisterToday()">
+
+          ➕ Registrar jornada
+
+        </button>
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  /*
+    =======================================================
+    AGRUPAMENTO POR LOCAL DE SERVIÇO
+    =======================================================
+  */
+
+
+  const groups = {};
+
+
+  records.forEach(
+    record=>{
+
+      (record.periods || [])
+        .forEach(
+          period=>{
+
+            const service =
+              getServiceById(
+                period.serviceId
+              );
+
+
+            const serviceName =
+              service
+                ? service.name
+                : "Serviço não encontrado";
+
+
+            if(!groups[
+              period.serviceId
+            ]){
+
+              groups[
+                period.serviceId
+              ] = {
+
+                serviceId:
+                  period.serviceId,
+
+                serviceName,
+
+                items:[]
+
+              };
+
+            }
+
+
+            /*
+              Se uma jornada possui dois períodos
+              no mesmo serviço, eles entram juntos
+              dentro daquela jornada.
+            */
+
+            let item =
+              groups[
+                period.serviceId
+              ].items.find(
+                x =>
+                  x.recordId ===
+                  record.id
+              );
+
+
+            if(!item){
+
+              item = {
+
+                recordId:
+                  record.id,
+
+                date:
+                  record.date,
+
+                periods:[],
+
+                worked:0,
+
+                money:0
+
+              };
+
+
+              groups[
+                period.serviceId
+              ].items.push(
+                item
+              );
+
+            }
+
+
+            item.periods.push(
+              period
+            );
+
+
+            const mins =
+              periodMinutes(
+                period.start,
+                period.end
+              );
+
+
+            item.worked += mins;
+
+
+            item.money +=
+              mins / 60 *
+              Number(
+                period.valueAtTime || 0
+              );
+
+          }
+        );
+
+    }
+  );
+
+
+  const sortedGroups =
+    Object.values(groups)
+      .sort(
+        (a,b)=>
+          a.serviceName.localeCompare(
+            b.serviceName
+          )
+      );
+
+
+  container.innerHTML =
+    sortedGroups
+      .map(
+        group=>{
+
+          const totalWorked =
+            group.items.reduce(
+              (sum,item)=>
+                sum + item.worked,
+              0
+            );
+
+
+          const totalMoney =
+            group.items.reduce(
+              (sum,item)=>
+                sum + item.money,
+              0
+            );
+
+
+          group.items.sort(
+            (a,b)=>
+              b.date.localeCompare(
+                a.date
+              )
+          );
+
+
+          return `
+
+            <div class="history-group">
+
+              <div class="history-group-header">
+
+                <div class="history-group-title">
+
+                  🏢 ${escapeHtml(
+                    group.serviceName
+                  )}
+
+                </div>
+
+                <div class="history-group-summary">
+
+                  ${group.items.length}
+                  ${
+                    group.items.length === 1
+                      ? "jornada"
+                      : "jornadas"
+                  }
+
+                  •
+                  ${minutesToText(
+                    totalWorked
+                  )}
+
+                  •
+                  ${formatMoney(
+                    totalMoney
+                  )}
+
+                </div>
+
+              </div>
+
+
+              ${group.items
+                .map(
+                  item=>`
+
+                    <div class="history-item">
+
+                      <div class="history-date">
+
+                        ${formatDate(
+                          inputToDate(
+                            item.date
+                          )
+                        )}
+
+                      </div>
+
+
+                      <div>
+
+                        <strong>
+                          ${item.periods
+                            .map(
+                              p =>
+                                `${p.start} → ${p.end}`
+                            )
+                            .join(" • ")
+                          }
+                        </strong>
+
+                        <div class="history-periods">
+
+                          ${
+                            item.periods.length
+                          }
+                          ${
+                            item.periods.length === 1
+                              ? "período"
+                              : "períodos"
+                          }
+
+                        </div>
+
+                      </div>
+
+
+                      <div class="history-hours">
+
+                        ${minutesToText(
+                          item.worked
+                        )}
+
+                      </div>
+
+
+                      <div class="history-money">
+
+                        ${formatMoney(
+                          item.money
+                        )}
+
+                      </div>
+
+
+                      <div class="history-actions">
+
+                        <button
+                          class="btn btn-secondary btn-small"
+                          type="button"
+                          onclick="
+                            editRecord('${item.recordId}')
+                          ">
+                          ✏️
+                        </button>
+
+                        <button
+                          class="btn btn-danger btn-small"
+                          type="button"
+                          onclick="
+                            deleteRecord('${item.recordId}')
+                          ">
+                          🗑️
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  `
+                )
+                .join("")}
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   CALENDÁRIO
+   ========================================================= */
+
+function renderCalendar(){
+
+  const container =
+    document.getElementById(
+      "calendar"
+    );
+
+
+  document
+    .getElementById(
+      "calendarMonthLabel"
+    )
+    .textContent =
+      formatMonth(
+        currentMonth
+      );
+
+
+  const year =
+    currentMonth.getFullYear();
+
+  const month =
+    currentMonth.getMonth();
+
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+
+  const lastDay =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+
+  const startWeekDay =
+    firstDay.getDay();
+
+
+  const names = [
+    "Dom",
+    "Seg",
+    "Ter",
+    "Qua",
+    "Qui",
+    "Sex",
+    "Sáb"
+  ];
+
+
+  let html =
+    `<div class="calendar">`;
+
+
+  names.forEach(
+    name=>{
+
+      html += `
+        <div class="calendar-head">
+          ${name}
+        </div>
+      `;
+
+    }
+  );
+
+
+  for(
+    let i=0;
+    i<startWeekDay;
+    i++
+  ){
+
+    const previous =
+      new Date(
+        year,
+        month,
+        1
+      );
+
+
+    previous.setDate(
+      previous.getDate() -
+      (startWeekDay-i)
+    );
+
+
+    html += `
+
+      <div class="day other">
+
+        <div class="day-number">
+          ${previous.getDate()}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const today =
+    new Date();
+
+
+  for(
+    let day=1;
+    day<=lastDay.getDate();
+    day++
+  ){
+
+    const date =
+      new Date(
+        year,
+        month,
+        day
+      );
+
+
+    const dateString =
+      dateToInput(
+        date
+      );
+
+
+    const record =
+      state.records.find(
+        r =>
+          r.date ===
+          dateString
+      );
+
+
+    let status = "";
+
+
+    if(record){
+
+      const calc =
+        calculateRecord(
+          record
+        );
+
+
+      status = `
+
+        <span class="badge badge-green">
+          Registrado
+        </span>
+
+        <br>
+
+        ${minutesToText(
+          calc.worked
+        )}
+
+        <br>
+
+        ${formatMoney(
+          calc.money
+        )}
+
+      `;
+
+    }else{
+
+      status = `
+
+        <span style="
+          color:var(--muted)
+        ">
+          Sem registro
+        </span>
+
+      `;
+
+    }
+
+
+    const todayClass =
+      sameDay(
+        date,
+        today
+      )
+        ? " today"
+        : "";
+
+
+    html += `
+
+      <div
+        class="day${todayClass}"
+        onclick="
+          calendarDayClick('${dateString}')
+        ">
+
+        <div class="day-number">
+          ${day}
+        </div>
+
+        <div class="day-status">
+          ${status}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const totalCells =
+    startWeekDay +
+    lastDay.getDate();
+
+
+  const remaining =
+    (7 -
+      (totalCells % 7)
+    ) % 7;
+
+
+  for(
+    let i=1;
+    i<=remaining;
+    i++
+  ){
+
+    html += `
+
+      <div class="day other">
+
+        <div class="day-number">
+          ${i}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  html +=
+    `</div>`;
+
+
+  container.innerHTML =
+    html;
+
+}
+
+
+function calendarDayClick(
+  dateString
+){
+
+  const record =
+    state.records.find(
+      r =>
+        r.date ===
+        dateString
+    );
+
+
+  if(record){
+
+    editRecord(
+      record.id
+    );
+
+  }else{
+
+    openRegister(
+      dateString
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MÊS
+   ========================================================= */
+
+function changeMonth(delta){
+
+  currentMonth =
+    new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + delta,
+      1
+    );
+
+
+  renderHistory();
+
+  renderCalendar();
+
+  renderDashboard();
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+function renderDashboard(){
+
+  const records =
+    getRecordsForCurrentMonth();
+
+
+  let worked = 0;
+
+  let money = 0;
+
+
+  records.forEach(
+    record=>{
+
+      const calc =
+        calculateRecord(
+          record
+        );
+
+
+      worked +=
+        calc.worked;
+
+      money +=
+        calc.money;
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "dashboardWorked"
+    )
+    .textContent =
+      minutesToText(
+        worked
+      );
+
+
+  const balanceEl =
+    document
+      .getElementById(
+        "dashboardBalance"
+      );
+
+
+  balanceEl.textContent =
+    "0h";
+
+
+  balanceEl.className =
+    "stat-value";
+
+
+  document
+    .getElementById(
+      "dashboardMoney"
+    )
+    .textContent =
+      formatMoney(
+        money
+      );
+
+
+  document
+    .getElementById(
+      "dashboardServices"
+    )
+    .textContent =
+      state.services.length;
+
+
+  const recent =
+    state.records
+      .slice()
+      .sort(
+        (a,b)=>
+          b.date.localeCompare(
+            a.date
+          )
+      )
+      .slice(
+        0,
+        5
+      );
+
+
+  const container =
+    document.getElementById(
+      "dashboardRecent"
+    );
+
+
+  if(!recent.length){
+
+    container.innerHTML = `
+      <div class="empty">
+        Nenhuma jornada registrada ainda.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    recent
+      .map(
+        record=>{
+
+          const calc =
+            calculateRecord(
+              record
+            );
+
+
+          const services =
+            [
+              ...new Set(
+                record.periods.map(
+                  period =>
+                    getServiceById(
+                      period.serviceId
+                    )?.name ||
+                    "Serviço"
+                )
+              )
+            ];
+
+
+          return `
+
+            <div style="
+              padding:12px 0;
+              border-bottom:1px solid var(--border);
+              display:flex;
+              justify-content:space-between;
+              gap:15px;
+              align-items:center;
+            ">
+
+              <div>
+
+                <strong>
+                  ${formatDate(
+                    inputToDate(
+                      record.date
+                    )
+                  )}
+                </strong>
+
+                <div style="
+                  color:var(--muted);
+                  font-size:13px;
+                  margin-top:4px;
+                ">
+
+                  ${services.join(
+                    " • "
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div style="
+                text-align:right;
+              ">
+
+                <strong>
+                  ${minutesToText(
+                    calc.worked
+                  )}
+                </strong>
+
+                <div style="
+                  color:var(--green);
+                  font-size:13px;
+                ">
+
+                  ${formatMoney(
+                    calc.money
+                  )}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
    BACKUP
-   ============================================================ */
+   ========================================================= */
 
 function exportBackup(){
 
@@ -4233,7 +4707,7 @@ function exportBackup(){
       "Meu Banco de Horas",
 
     version:
-      "V1.2",
+      "2.0",
 
     exportedAt:
       new Date().toISOString(),
@@ -4242,6 +4716,7 @@ function exportBackup(){
       state
 
   };
+
 
   const blob =
     new Blob(
@@ -4258,32 +4733,43 @@ function exportBackup(){
       }
     );
 
+
   const url =
     URL.createObjectURL(
       blob
     );
+
 
   const a =
     document.createElement(
       "a"
     );
 
-  const date =
-    new Date();
 
   a.href =
     url;
 
-  a.download =
-    `meu-banco-de-horas-backup-${dateToInput(date)}.json`;
 
-  document.body.appendChild(a);
+  a.download =
+    `meu-banco-de-horas-${todayInput()}.json`;
+
+
+  document
+    .body
+    .appendChild(
+      a
+    );
+
 
   a.click();
 
   a.remove();
 
-  URL.revokeObjectURL(url);
+
+  URL.revokeObjectURL(
+    url
+  );
+
 
   showToast(
     "Backup exportado!"
@@ -4291,15 +4777,19 @@ function exportBackup(){
 
 }
 
+
 function importBackup(event){
 
   const file =
     event.target.files[0];
 
+
   if(!file) return;
+
 
   const reader =
     new FileReader();
+
 
   reader.onload =
     function(){
@@ -4311,9 +4801,11 @@ function importBackup(event){
             reader.result
           );
 
+
         const imported =
           parsed.data ||
           parsed;
+
 
         if(
           !Array.isArray(
@@ -4330,16 +4822,26 @@ function importBackup(event){
 
         }
 
+
         if(!confirm(
-          "Importar este backup substituirá os dados atuais. Continuar?"
+          "Importar este backup substituirá todos os dados atuais. Continuar?"
         )){
 
           return;
 
         }
 
-        state =
-          imported;
+
+        state = {
+
+          services:
+            imported.services,
+
+          records:
+            imported.records
+
+        };
+
 
         state.services.forEach(
           service=>{
@@ -4358,7 +4860,9 @@ function importBackup(event){
           }
         );
 
+
         saveState();
+
 
         renderDashboard();
 
@@ -4368,13 +4872,18 @@ function importBackup(event){
 
         renderCalendar();
 
+
         showToast(
           "Backup restaurado!"
         );
 
+
       }catch(error){
 
-        console.error(error);
+        console.error(
+          error
+        );
+
 
         alert(
           "Não foi possível importar este backup."
@@ -4384,18 +4893,24 @@ function importBackup(event){
 
     };
 
-  reader.readAsText(file);
+
+  reader.readAsText(
+    file
+  );
+
 
   event.target.value = "";
 
 }
 
+
 function clearAllData(){
 
   const confirmation =
     prompt(
-      "Digite APAGAR para confirmar a exclusão de todos os dados."
+      "Digite APAGAR para confirmar."
     );
+
 
   if(
     confirmation !==
@@ -4406,6 +4921,7 @@ function clearAllData(){
 
   }
 
+
   state = {
 
     services:[],
@@ -4414,7 +4930,9 @@ function clearAllData(){
 
   };
 
+
   saveState();
+
 
   renderDashboard();
 
@@ -4423,6 +4941,7 @@ function clearAllData(){
   renderHistory();
 
   renderCalendar();
+
 
   showToast(
     "Todos os dados foram apagados."
@@ -4431,27 +4950,107 @@ function clearAllData(){
 }
 
 
-/* ============================================================
+/* =========================================================
+   SEGURANÇA HTML
+   ========================================================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   FECHAR MODAL CLICANDO FORA
+   ========================================================= */
+
+document
+  .getElementById(
+    "serviceModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target ===
+        this
+      ){
+
+        closeServiceModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
    INICIALIZAÇÃO
-   ============================================================ */
+   ========================================================= */
 
 function init(){
 
   loadState();
 
-  updateMonthLabel();
+  showPage(
+    "dashboard"
+  );
 
   renderDashboard();
 
-  renderCalendar();
+  renderServices();
 
   renderHistory();
 
-  renderServices();
+  renderCalendar();
 
 }
 
-init();
+
+/*
+  Executa somente depois que
+  o HTML inteiro estiver carregado.
+*/
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    init
+  );
+
+}else{
+
+  init();
+
+}
 
 </script>
 
