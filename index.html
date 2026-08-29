@@ -102,37 +102,69 @@ button{
    ========================================================= */
 
 .nav{
-  background:white;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:73px;
-  z-index:40;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  top:auto;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid var(--border);
+  border-bottom:0;
+  z-index:200;
+  box-shadow:0 -4px 18px rgba(0,0,0,.10);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
 
 .nav-inner{
-  max-width:1100px;
+  max-width:700px;
+  height:68px;
   margin:auto;
-  display:flex;
-  overflow-x:auto;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  align-items:stretch;
 }
 
 .nav button{
+  position:relative;
   border:0;
   background:none;
-  padding:14px 18px;
+  padding:8px 4px;
   color:var(--muted);
   font-weight:700;
-  white-space:nowrap;
-  border-bottom:3px solid transparent;
+  font-size:25px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  transition:.15s;
 }
 
 .nav button:hover{
   color:var(--text);
+  background:#f8fafc;
 }
 
 .nav button.active{
   color:var(--primary);
-  border-bottom-color:var(--primary);
+  background:#eff6ff;
+}
+
+.nav button.active::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:28%;
+  right:28%;
+  height:3px;
+  border-radius:3px 3px 0 0;
+  background:var(--primary);
+}
+
+.nav button:focus-visible{
+  outline:3px solid rgba(37,99,235,.25);
+  outline-offset:-3px;
 }
 
 /* =========================================================
@@ -142,7 +174,7 @@ button{
 main{
   max-width:1100px;
   margin:auto;
-  padding:24px 16px 50px;
+  padding:24px 16px 100px;
 }
 
 .page{
@@ -751,6 +783,20 @@ main{
 
 @media(max-width:560px){
 
+  .nav-inner{
+    height:64px;
+  }
+
+  .nav button{
+    font-size:23px;
+    padding:7px 2px;
+  }
+
+  .nav button.active::after{
+    left:24%;
+    right:24%;
+  }
+
   .header{
     padding:14px;
   }
@@ -882,43 +928,55 @@ main{
     <button
       id="navDashboard"
       type="button"
+      aria-label="Resumo"
+      title="Resumo"
       onclick="showPage('dashboard')">
-      📊 Resumo
+      📊
     </button>
 
     <button
       id="navRegister"
       type="button"
+      aria-label="Registrar jornada"
+      title="Registrar jornada"
       onclick="openRegisterToday()">
-      ➕ Registrar
+      ➕
     </button>
 
     <button
       id="navHistory"
       type="button"
+      aria-label="Histórico"
+      title="Histórico"
       onclick="showPage('history')">
-      📚 Histórico
+      📚
     </button>
 
     <button
       id="navCalendar"
       type="button"
+      aria-label="Calendário"
+      title="Calendário"
       onclick="showPage('calendar')">
-      📅 Calendário
+      📅
     </button>
 
     <button
       id="navServices"
       type="button"
+      aria-label="Serviços"
+      title="Serviços"
       onclick="showPage('services')">
-      🏢 Serviços
+      🏢
     </button>
 
     <button
       id="navBackup"
       type="button"
+      aria-label="Dados e backup"
+      title="Dados e backup"
       onclick="showPage('backup')">
-      💾 Dados
+      💾
     </button>
 
   </div>
